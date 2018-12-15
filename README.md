@@ -31,4 +31,12 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 https://github.com/lingonsaft/React-FirebaseUi-Authentication/tree/master/src
 
+### Google Documentation para JS
+
+###### Animação dos markers
+https://developers.google.com/maps/documentation/javascript/examples/marker-animations?hl=ko
+
+###### Texto dos markers
+https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko
+
 
