@@ -14,7 +14,7 @@ class MapaGoogle extends Component {
       dest:'', 
       distanceText:'testing the distance text'
     };
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    // this.handleFormSubmit = this.handleFormSubmit.bind(this);
 
     this.onChange = (address) => this.setState({ address });
     this.changeDest = (dest) => this.setState({dest});
@@ -90,5 +90,5 @@ class MapaGoogle extends Component {
 
 export default GoogleApiWrapper({
     apiKey: ("AIzaSyA-n2fBJ53lOniucCtAEkxQrtOTH6EE5tM")
-  })(GoogleMap)
+  })(MapaGoogle)
 

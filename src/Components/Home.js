@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import firebase from "firebase";
 import Login from './Login';
-import GoogleMap from './GoogleMap';
 import GeoLocation from './GeoLocation';
-import Yandex from './Yandex';
+import Distance from './Distance';
 
 class Home extends Component {
     constructor(props) {
@@ -13,10 +12,6 @@ class Home extends Component {
         }
     }
 
-
-    // logout() {
-    //     firebase.auth().signOut();
-    // }
 
 
   componentDidMount = () => {
@@ -54,9 +49,12 @@ class Home extends Component {
             </span>
             
             <GeoLocation />
-            
-
-            <Yandex />
+            <Distance
+                currentLatitude={41.200046} 
+                currentLongitude={-8.508542}
+                destinationLatitude={41.149600}
+                destinationLongitude={-8.611000}
+            />
 
 
 
