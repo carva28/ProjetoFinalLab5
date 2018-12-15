@@ -30,3 +30,22 @@
     transform: rotate(360deg);
   }
 }
+
+.App {
+  display: flex;
+}
+.todo {
+  width: 15%;
+}
+#map {
+  height: 100vh;
+}
+
+@media only screen and (max-width: 992px) {
+  #map {
+    width: 100%;
+  }
+  .todo {
+    width: 0%;
+  }
+}

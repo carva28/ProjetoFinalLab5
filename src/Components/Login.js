@@ -1,6 +1,8 @@
-/*import React, { Component } from 'react';
+import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
-import fire from './Fire';
+import firebase from "firebase";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+
 
 class Login extends Component {
   constructor(props) {
@@ -20,7 +22,7 @@ class Login extends Component {
 
   login(e) {
     e.preventDefault();
-    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
     }).catch((error) => {
         console.log(error);
       });
@@ -28,33 +30,48 @@ class Login extends Component {
 
   signup(e){
     e.preventDefault();
-    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
     }).then((u)=>{console.log(u)})
     .catch((error) => {
         console.log(error);
       })
   }
+
+  uiConfig = {
+    signInFlow: "popup",
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    ],
+    callbacks: {
+      signInSuccess: () => false
+    }
+  }
+
   render() {
     return (
        <div className="col-md-6">
        <form>
       <div className="form-group">
-       <label htmlFor="exampleInputEmail1">Email address</label>
+      Email
        <input value={this.state.email} onChange={this.handleChange} type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-       <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
        <div className="form-group">
-      <label for="exampleInputPassword1">Password</label>
+       Password
       <input value={this.state.password} onChange={this.handleChange} type="password" name="password" className
       ="form-control" id="exampleInputPassword1" placeholder="Password" />
       </div>
       <button type="submit" onClick={this.login} className="btn btn-primary">Login</button>
-      <button onClick={this.signup} style={{marginLeft: '25px'}} className="btn btn-success">Signup</button>
+      <button onClick={this.signup} style={{marginLeft: '25px'}} className="btn btn-success">Registar</button>
       
+      <StyledFirebaseAuth
+              uiConfig={this.uiConfig}
+              firebaseAuth={firebase.auth()}
+            />
  </form>
  
  </div>
     );
   }
 }
-export default Login;*/
+export default Login;
