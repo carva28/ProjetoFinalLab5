@@ -32,13 +32,3 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 https://github.com/lingonsaft/React-FirebaseUi-Authentication/tree/master/src
 
 
-### Complemento ao Mapa
-
-https://tech.yandex.com/maps/doc/jsapi/2.1/quick-start/index-docpage/
-
-
-## O que falta:
-
-+ Pegar nas coordenadas que vem da GeoLocation.js e colocar no Yandex.js
-+ No Yandex.js poder só fazer uma vez a distancia e mostrar logo o ponto da loja
-+ Falta investigar para perceber se esta API mostra o tempo que demora a chegar (google Maps seria melhor) [Tenta ver]
