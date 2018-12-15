@@ -1,44 +1,20 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
-In the project directory, you can run:
+First of all, do the followint commands:
 
 ### `npm start`
+So you can install all the node modules.
 
-Runs the app in the development mode.<br>
+### `npm start`
+If you want to see it working. This runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### Ler bem 
 
 https://github.com/lingonsaft/React-FirebaseUi-Authentication/tree/master/src
 
 
-### Complemento ao Mapa
-
-https://tech.yandex.com/maps/doc/jsapi/2.1/quick-start/index-docpage/
-
-
-## O que falta:
-
-+ Pegar nas coordenadas que vem da GeoLocation.js e colocar no Yandex.js
-+ No Yandex.js poder só fazer uma vez a distancia e mostrar logo o ponto da loja
-+ Falta investigar para perceber se esta API mostra o tempo que demora a chegar (google Maps seria melhor) [Tenta ver]
+## In progress:
++ Design implementation
