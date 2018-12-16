@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import firebase from "firebase";
 import Login from './Login';
-import GeoLocation from './GeoLocation';
 import Distance from './Distance';
 
-class Home extends Component {
+export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,64 +11,49 @@ class Home extends Component {
         }
     }
 
-
-
-  componentDidMount = () => {
-
-    firebase.auth().onAuthStateChanged((user) => {
-      
-      if(user){
-        this.setState({user});
-        //localStorage.setItem('user',user.uid);
-        this.setState({ isSignedIn: !!user })
-        console.log("user", user) 
-        console.log("email", user.email)
-      }else{
-        this.setState({user:null});
-        //localStorage.removeItem('user');
-      }
-      
-    })
-    
-  }
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({ user });
+                this.setState({ isSignedIn: !!user })
+                console.log("user", user)
+                console.log("email", user.email)
+            } else {
+                this.setState({ user: null });
+            }
+        })
+    }
 
 
     render() {
-
         if (this.state.isSignedIn === true) {
-        
-        return (
+            return (
+                <div id="Home">
+                    <h1>Lavandarias próximas</h1>
+                    <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
 
-        <div>
-            <h1>Bem-vindo ao Wash </h1>
-            <span>
-              <div>Signed In!</div>
-              <button onClick={() => this.signOut()}>Sair</button>
-              <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
-            </span>
-            
-            <GeoLocation />
-            <Distance
-                currentLatitude={41.200046} 
-                currentLongitude={-8.508542}
-                destinationLatitude={41.149600}
-                destinationLongitude={-8.611000}
-            />
+                    {/*Botão de Sair*/}
+                    <span>
+                        <button onClick={() => this.signOut()}>Sair</button>
+                    </span>
 
+                    <Distance
+                        currentLatitude={41.200046}
+                        currentLongitude={-8.508542}
+                        destinationLatitude={41.149600}
+                        destinationLongitude={-8.611000}
+                    />
 
-
-        </div>
-        );
-    } else {
-
-        return(
-            <div>
-                <Login />
-            </div>
-        );
-    }
-
-    
+                    <button>Reserve agora</button>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <Login />
+                </div>
+            );
+        }
     }
 
     signOut = () => {
@@ -80,5 +64,3 @@ class Home extends Component {
     }
 
 }
-
-export default Home;
