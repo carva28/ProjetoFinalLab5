@@ -1,5 +1,14 @@
 import * as React from 'react';
 import * as scriptjs from 'scriptjs';
+import autocaravana from './Images/autocaravana.png';
+
+var beaches = [
+    ['Lavandaria Wash Club', 41.061134, -8.653998, 4,"Lavandaria Wash Club - Miramar"],
+    ['Lavandaria Wash Club', 41.119489, -8.646283, 5, "Lavandaria Wash Club - Canidelo"],
+    ['Lavandaria Wash Club', 41.141714, -8.624456, 3, "Lavandaria Wash Club - Cais de Gaia"],
+    ['Lavandaria Wash Club', 41.161025, -8.647326, 2, "Lavandaria Wash Club - Boavista"],
+    ['Lavandaria Wash Club', 41.159010, -8.662774, 1, "Lavandaria Wash Club - Gomes da Costa"]
+  ];
 
 export default class Distance extends React.Component {
 
@@ -19,6 +28,8 @@ componentDidMount() {
         }
         
     });
+
+    
 }
 
 createMap() {
@@ -27,7 +38,7 @@ createMap() {
     let currentLatLong = new window.google.maps.LatLng(this.props.currentLatitude, this.props.currentLongitude);
 
     let options = {
-        zoom: 13,
+        zoom: 12,
         center: currentLatLong,
         mapTypeControl: true,
         mapTypeId: window.google.maps.MapTypeId.ROADMAP,
@@ -38,25 +49,71 @@ createMap() {
         }
        
     };
-    let map = new window.google.maps.Map(this.divMap,options,beachMarker);
-    //Cria um Marker e devemos de adicioná-lo no beachMarker
-    var image = 'https://dl1.cbsistatic.com/i/r/2017/01/31/abd667bf-09fa-4e54-a813-151d657fa2e1/thumbnail/32x32/5e805607808f6856d13635f9c32f3740/fmimg4182085322769200688.png';
-    var beachMarker = new window.google.maps.Marker({
-          position: {lat: 41.139700, lng: -8.609351},
+    let map = new window.google.maps.Map(this.divMap,options,marker);
+    
+    //Cria VÁRIOS Markers e devemos de adicioná-lo no beachMarker    
+
+    var image = {
+        url: autocaravana,
+        // This marker is 20 pixels wide by 32 pixels high.
+        size: new window.google.maps.Size(32, 32),
+        // The origin for this image is (0, 0).
+        origin: new window.google.maps.Point(0, 0),
+        // The anchor for this image is the base of the flagpole at (0, 32).
+        anchor: new window.google.maps.Point(0, 0)
+      };
+      // Shapes define the clickable region of the icon. The type defines an HTML
+      // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+      // The final coordinate closes the poly by connecting to the first coordinate.
+      var shape = {
+        coords: [1, 1, 1, 20, 18, 20, 18, 1],
+        type: 'poly'
+      };
+      for (let i = 0; i < beaches.length; i++) {
+        var beach = beaches[i];
+        var marker = new window.google.maps.Marker({
+          position: {lat: beach[1], lng: beach[2]},
           map: map,
           icon: image,
-          title: "Pontinha"
+          shape: shape,
+          title: beach[0],
+          zIndex: beach[3]
         });
-        console.log("Coordenadas do Ponto"+beachMarker.position);
+        //faz o balaão de cima a explicar o que é
+        var infowindow = new window.google.maps.InfoWindow({
+            content: beach[5]
+        });
 
-    //faz o balaão de cima a explicar o que é
-    var infowindow = new window.google.maps.InfoWindow({
-            content: "Hi there"
-    });
-    //faz o balaão de cima a explicar o que é -> ADICIONA EVENTO
-    beachMarker.addListener('click', function() {
-        infowindow.open(map, beachMarker);
-      });
+        
+      }
+
+      for (let i = 0; i < beaches.length; i++) {
+        marker.onClick = function() {
+            infowindow.open(map, marker);
+        }
+    }
+
+    //Cria UM Marker e devemos de adicioná-lo no beachMarker    
+
+    // var beachMarker = new window.google.maps.Marker({
+    //       position: {lat: 41.139700, lng: -8.609351},
+    //       map: map,
+    //       icon: autocaravana,
+    //       title: "Wash Club - Porto"
+    //     });
+    //     console.log("Coordenadas do Ponto"+beachMarker.position);
+
+    // //faz o balaão de cima a explicar o que é
+    // var infowindow = new window.google.maps.InfoWindow({
+    //         content: "Lavandaria Wash Club - Porto"
+    // });
+    // //faz o balaão de cima a explicar o que é -> ADICIONA EVENTO
+    // beachMarker.addListener('click', function() {
+    //     infowindow.open(map, beachMarker);
+    //   });
+
+    var trafficLayer = new window.google.maps.TrafficLayer();
+        trafficLayer.setMap(map);
 
     this.directionsDisplay.setMap(map);
 
