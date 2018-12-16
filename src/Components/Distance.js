@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as scriptjs from 'scriptjs';
 import autocaravana from './Images/autocaravana.png';
 
-var beaches = [
+var lavandarias = [
     ['Lavandaria Wash Club', 41.061134, -8.653998, 4,"Lavandaria Wash Club - Miramar"],
     ['Lavandaria Wash Club', 41.119489, -8.646283, 5, "Lavandaria Wash Club - Canidelo"],
     ['Lavandaria Wash Club', 41.141714, -8.624456, 3, "Lavandaria Wash Club - Cais de Gaia"],
@@ -65,17 +65,13 @@ createMap() {
       // Shapes define the clickable region of the icon. The type defines an HTML
       // <area> element 'poly' which traces out a polygon as a series of X,Y points.
       // The final coordinate closes the poly by connecting to the first coordinate.
-      var shape = {
-        coords: [1, 1, 1, 20, 18, 20, 18, 1],
-        type: 'poly'
-      };
-      for (let i = 0; i < beaches.length; i++) {
-        var beach = beaches[i];
+      
+      for (let i = 0; i < lavandarias.length; i++) {
+        var beach = lavandarias[i];
         var marker = new window.google.maps.Marker({
           position: {lat: beach[1], lng: beach[2]},
           map: map,
           icon: image,
-          shape: shape,
           title: beach[0],
           zIndex: beach[3]
         });
@@ -87,7 +83,7 @@ createMap() {
         
       }
 
-      for (let i = 0; i < beaches.length; i++) {
+      for (let i = 0; i < lavandarias.length; i++) {
         marker.onClick = function() {
             infowindow.open(map, marker);
         }
