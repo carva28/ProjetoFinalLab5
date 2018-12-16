@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-//import { Link } from 'react-router-dom';
+import React from 'react';
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import homeImg from '../imgs/homeImg.png';
 
 
-class Login extends Component {
+export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
@@ -22,17 +22,17 @@ class Login extends Component {
 
   login(e) {
     e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
     }).catch((error) => {
-        console.log(error);
-      });
+      console.log(error);
+    });
   }
 
-  signup(e){
+  signup(e) {
     e.preventDefault();
-    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-    }).then((u)=>{console.log(u)})
-    .catch((error) => {
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+    }).then((u) => { console.log(u) })
+      .catch((error) => {
         console.log(error);
       })
   }
@@ -50,28 +50,40 @@ class Login extends Component {
 
   render() {
     return (
-       <div className="col-md-6">
-       <form>
-      <div className="form-group">
-      Email
-       <input value={this.state.email} onChange={this.handleChange} type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+      <div id="Login">
+
+        <img src={homeImg} alt="ImagemHome" id="ImagemLogin" />
+
+        <h3>Faça registo/login:</h3>
+
+        <form id="LoginForm">
+          <input
+            value={this.state.email} onChange={this.handleChange}
+            type="email" name="email" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="E-mail" />
+          <br />
+          <input
+            value={this.state.password} onChange={this.handleChange}
+            type="password" name="password" id="exampleInputPassword1"
+            placeholder="Password" />
+
+          <div id="BotoesForm">
+            <button onClick={this.signup} className="btn btn-success">Registar</button>
+            <br />
+            <button type="submit" onClick={this.login} className="btn btn-primary">Login</button>
+          </div>
+
+          <hr />
+
+          <h3>Ou conecte-se com o:</h3>
+
+          <StyledFirebaseAuth
+            uiConfig={this.uiConfig}
+            firebaseAuth={firebase.auth()}
+          />
+        </form>
+
       </div>
-       <div className="form-group">
-       Password
-      <input value={this.state.password} onChange={this.handleChange} type="password" name="password" className
-      ="form-control" id="exampleInputPassword1" placeholder="Password" />
-      </div>
-      <button type="submit" onClick={this.login} className="btn btn-primary">Login</button>
-      <button onClick={this.signup} style={{marginLeft: '25px'}} className="btn btn-success">Registar</button>
-      
-      <StyledFirebaseAuth
-              uiConfig={this.uiConfig}
-              firebaseAuth={firebase.auth()}
-            />
- </form>
- 
- </div>
     );
   }
 }
-export default Login;

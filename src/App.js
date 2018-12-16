@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from 'react';
+import './styles.css';
 import Login from './Components/Login';
 import Home from './Components/Home';
 import firebase from "firebase";
@@ -10,19 +10,15 @@ firebase.initializeApp({
   authDomain: "projeto-4a0db.firebaseapp.com"
 })
 
-class App extends Component {
+export default class App extends React.Component {
 
-  
   constructor(props){
     super(props);
     this.state = {
       user: {},
       IssignIn:false,
     }
-   
   }
-
-  
 
   render() { 
 
@@ -34,5 +30,3 @@ class App extends Component {
   
   }
 }
-
-export default App;

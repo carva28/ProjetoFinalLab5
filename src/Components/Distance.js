@@ -62,19 +62,12 @@ calculateRoute() {
 }
 
 render() {
-    //CHANGE AND PUT YOUR STYLES
-    let style = {
-        width: window.innerWidth - 25,
-        height: window.innerHeight- 30,
-        overflow: 'scroll'
-    }
     return (
         <div>
-            <div 
-                style={style} 
-                ref={divMap =>  this.divMap = divMap}></div>
-            <div 
-                style={style} 
+            <div id="MapaGoogle"
+                ref={divMap =>  this.divMap = divMap}>
+                </div>
+            <div id="Direcoes"
                 ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
         </div>
     );

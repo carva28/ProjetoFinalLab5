@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}  
+@font-face {
+  font-family: NossaFonte;
+  src: url(./fonts/bahnschrift.ttf);
+}
+
+body {  
+  font-family: NossaFonte;
+}
+
+p {
+  color: #2D2D2D;
+  font-weight: 200;
+}
+
+/* DESKTOP */
+
+#Desktop {
+  width: 100%;
+  margin: auto;
+}
+
+#Desktop img {
+  margin: 80px auto 0 auto;
+  display: block;
+}
+
+#Desktop p {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 2rem;
+}
+
+
+/* MOBILE */
+
+/* ---- LOGIN.JS ---- */
+#Login {
+  margin: auto;
+  width: 85%;
+}
+
+#ImagemLogin {
+  width: 250px;
+  margin: 30px auto;
+  display: block;
+}
+
+#Login h3 {
+  font-size: 1.6rem;
+  text-align: center;
+  color: #A4A4A4;
+  margin-bottom: 20px;
+}
+
+#Login input {
+  width: 100%;
+  padding: 14px 0;
+  text-align: center;
+  background-color: #F2F2F2;
+  margin-bottom: 10px;
+  color: #2D2D2D;
+  border-radius: 15px;
+  /*não sei pq mas a box-shadow não dá em mobile*/
+  box-shadow: 5px 5px 20px 1px rgb(45, 45, 45, 0.2);
+  -webkit-box-shadow: 5px 5px 20px 1px rgb(45, 45, 45, 0.2);
+  -moz-box-shadow: 5px 5px 20px 1px rgb(45, 45, 45, 0.2);
+}
+
+#Login input::placeholder {
+  color: #2D2D2D;
+  font-weight: 100;
+}
+
+#Login input:last-of-type {
+  margin-bottom: 25px;
+}
+
+#BotoesForm button {
+  margin: auto;
+  display: block;
+}
+
+
+/* ---- HOME.JS ---- */
+#Home {
+  width: 90%;
+  margin: auto;
+}
+
+#Home h1 {
+  color: #0A355C;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
+#Home button {
+  padding: 20px 42px;
+  background-color: #2D2D2D;
+  color: white;
+  border-radius: 15px;
+  font-size: 1.6rem;
+  margin: auto;
+  display: block;
+}
+
+#MapaGoogle {
+  width: 90%;
+  height: 450px;
+  overflow: scroll;
+  margin: auto;
+}
+
+#Direcoes {
+  width: 90%;
+  font-family: NossaFonte;
+  margin: auto;
+}

@@ -12,23 +12,22 @@ export default class GeoLocation extends Component {
     }
 
     render() {
-
         var lat;
         var long;
 
         return (
             <Geolocation
-                render = {({
+                render={({
                     fetchingPosition,
                     position: {
                         coords: {
                             latitude, longitude
-                        } = { } } = {},
+                        } = {} } = {},
                     error,
                     getCurrentPosition
                 }) =>
-                <div>
-                    <button onClick={getCurrentPosition}>Get Position</button>
+                    <div>
+                        <button onClick={getCurrentPosition}>Get Position</button>
                         {error &&
                             <div>
                                 {error.message}
@@ -38,25 +37,22 @@ export default class GeoLocation extends Component {
                             latitude: {lat = latitude}
                             longitude: {long = longitude}
                         </pre>
-
-                        <button onClick={(lat,long) => this.coord(lat,long)}>Passa lá isso</button>
                     </div>
-    
-                    }
+                }
             />
-    );
-}
+        );
+    }
 
 
-coord = (lats, longs) => {
-    this.setState({
-        lat: lats,
-        long: longs
-    })
-    //está certo, tem coordenadas
-    let { lat, long } = this.state;
+    coord = (lats, longs) => {
+        this.setState({
+            lat: lats,
+            long: longs
+        })
+        //está certo, tem coordenadas
+        let { lat, long } = this.state;
 
-    this.props.callbackFromParent(lat, long);
-}
+        this.props.callbackFromParent(lat, long);
+    }
 
 }
