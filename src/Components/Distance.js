@@ -1,7 +1,9 @@
+
 import * as React from 'react';
 import * as scriptjs from 'scriptjs';
 import autocaravana from '../imgs/autocaravana.png';
-import List from './List';
+//import List from './List';
+import firebase from 'firebase';
 
 var lavandarias = [
     ['Lavandaria Wash Club', 41.061134, -8.653998, 4, "Lavandaria Wash Club - Miramar"],
@@ -11,11 +13,28 @@ var lavandarias = [
     ['Lavandaria Wash Club', 41.159010, -8.662774, 1, "Lavandaria Wash Club - Gomes da Costa"]
 ];
 
+var fire
+
 export default class Distance extends React.Component {
 
     divMap;
     divDirectionsPanel;
     directionsDisplay;
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            destLatitude: this.props.destinationLatitude,
+            destLongitude: this.props.destinationLongitude
+        }
+    }
+
+    renderiza = () => {
+        this.setState({
+            destLatitude: this.props.destinationLatitude,
+            destLongitude: this.props.destinationLongitude
+        })
+    }
 
     componentDidMount() {
         scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
@@ -27,6 +46,8 @@ export default class Distance extends React.Component {
                     this.createPanel();
                 }
             });
+
+            firebase.database().ref('Coordenadas').once('value', (data) =>{ console.log(data.toJSON()); })
     }
 
     createMap() {
@@ -67,9 +88,6 @@ export default class Distance extends React.Component {
                 zIndex: lavandarias[i][3]
             });
 
-            
-            
-
             var content = "<h5>" + lavandarias[i][4] + "</h5>";
 
             var infowindow = new window.google.maps.InfoWindow();
@@ -79,19 +97,15 @@ export default class Distance extends React.Component {
             window.google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
                 return function () {
                     infowindow.setContent(content);
-                    /*infowindow.open(map, marker);*/
 
-                    if (currentInfoWindow != null) { 
-                        currentInfoWindow.close(); 
-                    } 
-                    infowindow.open(map, marker); 
-                    currentInfoWindow = infowindow; 
+                    if (currentInfoWindow != null) {
+                        currentInfoWindow.close();
+                    }
+                    infowindow.open(map, marker);
+                    currentInfoWindow = infowindow;
 
                 };
             })(marker, content, infowindow));
-
-
-            
         }
 
         var trafficLayer = new window.google.maps.TrafficLayer();
@@ -107,9 +121,7 @@ export default class Distance extends React.Component {
     calculateRoute() {
         let directionsService = new window.google.maps.DirectionsService();
         let start = new window.google.maps.LatLng(this.props.currentLatitude, this.props.currentLongitude);
-        let end = new window.google.maps.LatLng(this.props.destinationLatitude, this.props.destinationLongitude);
-
-       
+        let end = new window.google.maps.LatLng(this.state.destLatitude, this.state.destLongitude);
 
         let request = {
             origin: start,
@@ -117,25 +129,25 @@ export default class Distance extends React.Component {
             travelMode: window.google.maps.DirectionsTravelMode.DRIVING
         };
 
-        directionsService.route(
-            request, 
-            (response, status) => {
+        directionsService.route(request, (response, status) => {
             if (status === window.google.maps.DirectionsStatus.OK) {
                 this.directionsDisplay.setDirections(response);
             }
         });
-
     }
 
     render() {
+        console.log('prop lat: ' + this.props.destinationLatitude);
+
+        console.log('Distance.js - Atual Lat: ' + this.props.currentLatitude);
+        console.log('Distance.js - Destino Lat: ' + this.state.destLatitude);
+
         return (
-            
             <div>
-                <div id="MapaGoogle"
-                    ref={divMap => this.divMap = divMap}>
-                </div>
-                <div id="Direcoes"
-                    ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
+                <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
+                <div id="Direcoes" ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
+
+                <button onClick={() => this.renderiza()}>Re render component</button>
             </div>
         );
     }

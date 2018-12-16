@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import firebase from "firebase";
 import Login from './Login';
-import Distance from './Distance';
 import GeoLocation from './GeoLocation';
 import List from './List';
+
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -25,7 +25,6 @@ export default class Home extends Component {
         })
     }
 
-
     render() {
         if (this.state.isSignedIn === true) {
             return (
@@ -40,14 +39,13 @@ export default class Home extends Component {
                     
                     <GeoLocation/>
                     <List />
-                    {/* <Distance
+                    
+                    {/*<Distance
                         currentLatitude={41.200046}
                         currentLongitude={-8.508542}
                         destinationLatitude={41.149600}
                         destinationLongitude={-8.611000}
-               
                     /> */}
-                    
                     <button>Reserve agora</button>
                 </div>
             );
