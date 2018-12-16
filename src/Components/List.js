@@ -1,62 +1,56 @@
 import React, { Component } from 'react';
 import Distance from './Distance';
 
-var destiLat,destiLong;
-
-
 export default class List extends Component {
-    
-    submit = (event) => {
-        console.log('Selected value:', event.target.value);
-        if(event.target.value=="Lavandaria Wash Club - Miramar"){
-            // <Distance 
-            // destinationLatitude={41.061134}
-            // destinationLongitude={-8.653998} 
 
-            // />
-            destiLat = 41.061134;
-            destiLong = -8.653998;
-            console.log("Miramar"+destiLat);
-            
-        }else if(event.target.value=="Lavandaria Wash Club - Canidelo"){
-            // <Distance 
-            //     destinationLatitude={41.119489}
-            //     destinationLongitude={-8.646283} 
-            // />
-            destiLat = 41.119489;
-            destiLong = -8.64628;
-            console.log("Canidelo"+destiLat);
+    constructor(props) {
+        super(props);
+        this.state = {
+            LatDestino: null,
+            LongDestino: null 
         }
+    }
 
-      }
-    render(){
-        
-        console.log("vai aqui"+destiLat);
+    submit = (event) => {
+        if (event.target.value == "Lavandaria Wash Club - Miramar") {
+            this.setState({
+                LatDestino: 41.061134,
+                LongDestino: -8.653998
+            });
 
-        return(
-            
+        } else if (event.target.value == "Lavandaria Wash Club - Canidelo") {
+            this.setState({
+                LatDestino: 41.119489,
+                LongDestino: -8.64628
+            });
+        }
+    }
+
+
+    render() {
+
+        console.log('List.js - Latitude destino: ' + this.state.LatDestino);
+
+        return (
+
             <div>
-                <b>Start: </b>
-                <select onChange={this.submit}>
+                <b>Partida: </b>
+                <select onChange={(e) => this.submit(e)}>
                     <option value="Lavandaria Wash Club - Miramar">Lavandaria Wash Club - Miramar</option>
                     <option value="Lavandaria Wash Club - Canidelo">Lavandaria Wash Club - Canidelo</option>
                     <option value="joplin, mo">Joplin, MO</option>
                     <option value="oklahoma city, ok">Oklahoma City</option>
                     <option value="oklahoma city, ok">Oklahoma City</option>
                 </select>
-                <Distance 
-                    currentLatitude={41.200046}
-                    currentLongitude={-8.508542}
-                    destinationLatitude={destiLat}
-                    destinationLongitude={destiLong} 
-                    
+                
+                <Distance
+                    currentLatitude={41.200629}
+                    currentLongitude={-8.508277}
+                    destinationLatitude={this.state.LatDestino}
+                    destinationLongitude={this.state.LongDestino}
                 />
-                
             </div>
-                
-
         );
-        
     }
-    
+
 }
