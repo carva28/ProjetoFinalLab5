@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as scriptjs from 'scriptjs';
 import autocaravana from '../imgs/autocaravana.png';
+import List from './List';
 
 var lavandarias = [
     ['Lavandaria Wash Club', 41.061134, -8.653998, 4, "Lavandaria Wash Club - Miramar"],
@@ -66,6 +67,9 @@ export default class Distance extends React.Component {
                 zIndex: lavandarias[i][3]
             });
 
+            
+            
+
             var content = "<h5>" + lavandarias[i][4] + "</h5>";
 
             var infowindow = new window.google.maps.InfoWindow();
@@ -86,6 +90,8 @@ export default class Distance extends React.Component {
                 };
             })(marker, content, infowindow));
 
+
+            
         }
 
         var trafficLayer = new window.google.maps.TrafficLayer();
@@ -103,13 +109,17 @@ export default class Distance extends React.Component {
         let start = new window.google.maps.LatLng(this.props.currentLatitude, this.props.currentLongitude);
         let end = new window.google.maps.LatLng(this.props.destinationLatitude, this.props.destinationLongitude);
 
+       
+
         let request = {
             origin: start,
             destination: end,
             travelMode: window.google.maps.DirectionsTravelMode.DRIVING
         };
 
-        directionsService.route(request, (response, status) => {
+        directionsService.route(
+            request, 
+            (response, status) => {
             if (status === window.google.maps.DirectionsStatus.OK) {
                 this.directionsDisplay.setDirections(response);
             }
@@ -119,6 +129,7 @@ export default class Distance extends React.Component {
 
     render() {
         return (
+            
             <div>
                 <div id="MapaGoogle"
                     ref={divMap => this.divMap = divMap}>
