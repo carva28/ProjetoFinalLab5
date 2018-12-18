@@ -1,7 +1,6 @@
 import React from 'react';
 import Distance from './Distance';
 import List from './List';
-import Localizacao from './Localizacao';
 
 export default class Mapa extends React.Component {
 
@@ -15,7 +14,6 @@ export default class Mapa extends React.Component {
         }
 
         this.distanceRef = React.createRef();
-        this.geoLocalRef = React.createRef();
     }
 
     componentDidMount() {
@@ -49,28 +47,7 @@ export default class Mapa extends React.Component {
         });
     }
 
-    getLocation = () => {
-        let btn = document.getElementById('btn');
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.showPosition);
-          } else { 
-            btn.innerHTML = "Geolocation is not supported by this browser.";
-          }
-    }
-
-    showPosition = (position) => { 
-        let btn = document.getElementById('btn');     
-        this.setState({
-            currentLat: position.coords.latitude,
-            currentLong: position.coords.longitude
-        })
-       btn.innerHTML = position.coords.latitude + "<br/>" + position.coords.longitude;
-    }
-
     render() {
-        
-        console.log('localizacao: ' + this.getLocation);
-
         return (
             <div>
                 <List onChange={(e) => this.submit(e)} />
@@ -81,7 +58,6 @@ export default class Mapa extends React.Component {
                     destinationLatitude={this.state.destLatitude}
                     destinationLongitude={this.state.destLongitude} />
                 <p id="btn"></p>
-                <Localizacao ola={()=>this.getLocation()}/>
             </div>
         );
     }
