@@ -9,21 +9,28 @@ export default class List extends Component {
             LatDestino: null,
             LongDestino: null 
         }
+
+        this.distanceRef = React.createRef();
     }
 
     submit = (event) => {
+        let destino;
         if (event.target.value == "Lavandaria Wash Club - Miramar") {
-            this.setState({
+            destino = {
                 LatDestino: 41.061134,
                 LongDestino: -8.653998
-            });
+            };
 
         } else if (event.target.value == "Lavandaria Wash Club - Canidelo") {
-            this.setState({
+            destino= {
                 LatDestino: 41.119489,
                 LongDestino: -8.64628
-            });
+            };
         }
+
+        this.setState(destino, ()=>{
+            this.distanceRef.current.renderiza();
+        });
     }
 
 
@@ -44,6 +51,7 @@ export default class List extends Component {
                 </select>
                 
                 <Distance
+                    ref={this.distanceRef}
                     currentLatitude={41.200629}
                     currentLongitude={-8.508277}
                     destinationLatitude={this.state.LatDestino}

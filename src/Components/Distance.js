@@ -32,9 +32,10 @@ export default class Distance extends React.Component {
         this.setState({
             destLatitude: this.props.destinationLatitude,
             destLongitude: this.props.destinationLongitude
+        }, () => {
+            this.calculateRoute(this.state.destLatitude,this.state.destLongitude);
         })
 
-        this.calculateRoute(this.state.destLatitude,this.state.destLongitude);
     }
 
     componentDidMount() {
