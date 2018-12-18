@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import firebase from "firebase";
 import Login from './Login';
-import GeoLocation from './GeoLocation';
-import List from './List';
+import Mapa from './Mapa';
 
 export default class Home extends Component {
     constructor(props) {
@@ -36,16 +35,9 @@ export default class Home extends Component {
                     <span>
                         <button onClick={() => this.signOut()}>Sair</button>
                     </span>
-                    
-                    <GeoLocation/>
-                    <List />
-                    
-                    {/*<Distance
-                        currentLatitude={41.200046}
-                        currentLongitude={-8.508542}
-                        destinationLatitude={41.149600}
-                        destinationLongitude={-8.611000}
-                    /> */}
+
+                    <Mapa />
+
                     <button>Reserve agora</button>
                 </div>
             );

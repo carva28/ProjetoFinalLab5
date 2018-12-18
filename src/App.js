@@ -6,7 +6,9 @@ import firebase from "firebase";
 
 firebase.initializeApp({
   apiKey: "AIzaSyAtYRTVptt8VHYLxUOe8wrztdw3Pud9Ruw",
-  authDomain: "projeto-4a0db.firebaseapp.com"
+  authDomain: "projeto-4a0db.firebaseapp.com",
+  databaseURL: "https://projeto-4a0db.firebaseio.com",
+  projectId: "projeto-4a0db"
 })
 
 export default class App extends React.Component {

@@ -1,7 +1,8 @@
+
 import * as React from 'react';
 import * as scriptjs from 'scriptjs';
 import autocaravana from '../imgs/autocaravana.png';
-//import List from './List';
+import firebase from 'firebase';
 
 var lavandarias = [
     ['Lavandaria Wash Club', 41.061134, -8.653998, 4, "Lavandaria Wash Club - Miramar"],
@@ -25,10 +26,12 @@ export default class Distance extends React.Component {
         }
     }
 
-    renderiza = () => {
+   renderiza = () => {
         this.setState({
             destLatitude: this.props.destinationLatitude,
             destLongitude: this.props.destinationLongitude
+        }, () => {
+            this.calculateRoute(this.state.destLatitude,this.state.destLongitude);
         })
     }
 
@@ -42,6 +45,10 @@ export default class Distance extends React.Component {
                     this.createPanel();
                 }
             });
+
+            firebase.database().ref('Coordenadas').on('value', (data) =>{ 
+                console.log(data.toJSON());
+            })
     }
 
     createMap() {
@@ -112,10 +119,10 @@ export default class Distance extends React.Component {
         this.directionsDisplay.setPanel(this.divDirectionsPanel);
     }
 
-    calculateRoute() {
+    calculateRoute(lat1,long1) {
         let directionsService = new window.google.maps.DirectionsService();
         let start = new window.google.maps.LatLng(this.props.currentLatitude, this.props.currentLongitude);
-        let end = new window.google.maps.LatLng(this.state.destLatitude, this.state.destLongitude);
+        let end = new window.google.maps.LatLng(lat1, long1);
 
         let request = {
             origin: start,
@@ -131,17 +138,13 @@ export default class Distance extends React.Component {
     }
 
     render() {
-        console.log('prop lat: ' + this.props.destinationLatitude);
 
         console.log('Distance.js - Atual Lat: ' + this.props.currentLatitude);
-        console.log('Distance.js - Destino Lat: ' + this.state.destLatitude);
 
         return (
             <div>
                 <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
                 <div id="Direcoes" ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
-
-                <button onClick={() => this.renderiza()}>Re render component</button>
             </div>
         );
     }
