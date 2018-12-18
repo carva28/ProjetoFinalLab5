@@ -4,10 +4,10 @@ import App from './App';
 import Desktop from './Desktop';
 import * as serviceWorker from './serviceWorker';
 
-if (window.innerWidth <= 500) {
+/* if (window.innerWidth <= 500) { */
     ReactDOM.render(<App />, document.getElementById('root'));
-} else if (window.innerWidth > 500) {
+/* } else if (window.innerWidth > 500) {
     ReactDOM.render(<Desktop />, document.getElementById('root'));
-}
+} */
 
 serviceWorker.unregister();
