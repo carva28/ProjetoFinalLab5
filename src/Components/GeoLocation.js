@@ -1,6 +1,5 @@
 import Geolocation from "react-geolocation";
 import React, { Component } from 'react';
-import Distance from './Distance';
 
 export default class GeoLocation extends Component {
 

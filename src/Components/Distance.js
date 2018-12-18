@@ -1,5 +1,4 @@
-
-import * as React from 'react';
+import React from 'react';
 import * as scriptjs from 'scriptjs';
 import autocaravana from '../imgs/autocaravana.png';
 import firebase from 'firebase';
@@ -26,12 +25,12 @@ export default class Distance extends React.Component {
         }
     }
 
-   renderiza = () => {
+    renderiza = () => {
         this.setState({
             destLatitude: this.props.destinationLatitude,
             destLongitude: this.props.destinationLongitude
         }, () => {
-            this.calculateRoute(this.state.destLatitude,this.state.destLongitude);
+            this.calculateRoute(this.state.destLatitude, this.state.destLongitude);
         })
     }
 
@@ -46,9 +45,9 @@ export default class Distance extends React.Component {
                 }
             });
 
-            firebase.database().ref('Coordenadas').on('value', (data) =>{ 
-                console.log(data.toJSON());
-            })
+        firebase.database().ref('Coordenadas').on('value', (data) => {
+            console.log(data.toJSON());
+        })
     }
 
     createMap() {
@@ -104,7 +103,6 @@ export default class Distance extends React.Component {
                     }
                     infowindow.open(map, marker);
                     currentInfoWindow = infowindow;
-
                 };
             })(marker, content, infowindow));
         }
@@ -119,7 +117,7 @@ export default class Distance extends React.Component {
         this.directionsDisplay.setPanel(this.divDirectionsPanel);
     }
 
-    calculateRoute(lat1,long1) {
+    calculateRoute(lat1, long1) {
         let directionsService = new window.google.maps.DirectionsService();
         let start = new window.google.maps.LatLng(this.props.currentLatitude, this.props.currentLongitude);
         let end = new window.google.maps.LatLng(lat1, long1);
@@ -143,8 +141,10 @@ export default class Distance extends React.Component {
 
         return (
             <div>
-                <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
-                <div id="Direcoes" ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
+                <div id="MapaGoogle" ref={divMap => this.divMap = divMap}>
+                </div>
+                <div id="Direcoes"
+                    ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
             </div>
         );
     }

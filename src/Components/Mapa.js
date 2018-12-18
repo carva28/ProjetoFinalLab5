@@ -9,11 +9,24 @@ export default class Mapa extends React.Component {
         super(props);
         this.state = {
             destLatitude: null,
-            destLongitude: null
+            destLongitude: null,
+            currentLat: null,
+            currentLong: null
         }
 
         this.distanceRef = React.createRef();
         this.geoLocalRef = React.createRef();
+    }
+
+    componentDidMount() {
+        fetch('https://api.ipdata.co/?api-key=test').then(
+            response => response.json()
+        ).then(
+            data => this.setState({
+                currentLat: data.latitude,
+                currentLong: data.longitude
+            })
+        );
     }
 
     submit = (event) => {
@@ -36,6 +49,24 @@ export default class Mapa extends React.Component {
         });
     }
 
+    getLocation = () => {
+        let btn = document.getElementById('btn');
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.showPosition);
+          } else { 
+            btn.innerHTML = "Geolocation is not supported by this browser.";
+          }
+    }
+
+    showPosition = (position) => { 
+        let btn = document.getElementById('btn');     
+        this.setState({
+            currentLat: position.coords.latitude,
+            currentLong: position.coords.longitude
+        })
+       btn.innerHTML = position.coords.latitude + "<br/>" + position.coords.longitude;
+    }
+
     render() {
         
         console.log('localizacao: ' + this.getLocation);
@@ -45,11 +76,12 @@ export default class Mapa extends React.Component {
                 <List onChange={(e) => this.submit(e)} />
                 <Distance
                     ref={this.distanceRef}
-                    currentLatitude={41.200629}
-                    currentLongitude={-8.508277} 
+                    currentLatitude={this.state.currentLat}
+                    currentLongitude={this.state.currentLong} 
                     destinationLatitude={this.state.destLatitude}
                     destinationLongitude={this.state.destLongitude} />
                 <p id="btn"></p>
+                <Localizacao ola={()=>this.getLocation()}/>
             </div>
         );
     }
