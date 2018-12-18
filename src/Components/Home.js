@@ -3,6 +3,9 @@ import firebase from "firebase";
 import Login from './Login';
 import GeoLocation from './GeoLocation';
 import List from './List';
+import Distance from './Distance';
+
+
 
 export default class Home extends Component {
     constructor(props) {
@@ -40,7 +43,7 @@ export default class Home extends Component {
                     <GeoLocation/>
                     <List />
                     
-                    {/*<Distance
+                    {/* <Distance
                         currentLatitude={41.200046}
                         currentLongitude={-8.508542}
                         destinationLatitude={41.149600}

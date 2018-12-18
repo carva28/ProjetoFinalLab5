@@ -13,7 +13,6 @@ var lavandarias = [
     ['Lavandaria Wash Club', 41.159010, -8.662774, 1, "Lavandaria Wash Club - Gomes da Costa"]
 ];
 
-var fire
 
 export default class Distance extends React.Component {
 
@@ -34,6 +33,8 @@ export default class Distance extends React.Component {
             destLatitude: this.props.destinationLatitude,
             destLongitude: this.props.destinationLongitude
         })
+
+        this.calculateRoute(this.state.destLatitude,this.state.destLongitude);
     }
 
     componentDidMount() {
@@ -47,7 +48,9 @@ export default class Distance extends React.Component {
                 }
             });
 
-            firebase.database().ref('Coordenadas').once('value', (data) =>{ console.log(data.toJSON()); })
+            firebase.database().ref('Coordenadas').once('value', (data) =>{ 
+                console.log(data.toJSON()); 
+            })
     }
 
     createMap() {
@@ -118,10 +121,11 @@ export default class Distance extends React.Component {
         this.directionsDisplay.setPanel(this.divDirectionsPanel);
     }
 
-    calculateRoute() {
+    calculateRoute(lat1,long1) {
         let directionsService = new window.google.maps.DirectionsService();
         let start = new window.google.maps.LatLng(this.props.currentLatitude, this.props.currentLongitude);
-        let end = new window.google.maps.LatLng(this.state.destLatitude, this.state.destLongitude);
+        //let end = new window.google.maps.LatLng(this.state.destLatitude, this.state.destLongitude);
+        let end = new window.google.maps.LatLng(lat1, long1);
 
         let request = {
             origin: start,
@@ -137,7 +141,6 @@ export default class Distance extends React.Component {
     }
 
     render() {
-        console.log('prop lat: ' + this.props.destinationLatitude);
 
         console.log('Distance.js - Atual Lat: ' + this.props.currentLatitude);
         console.log('Distance.js - Destino Lat: ' + this.state.destLatitude);
