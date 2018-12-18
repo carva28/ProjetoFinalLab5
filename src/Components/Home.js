@@ -26,6 +26,9 @@ export default class Home extends Component {
                 this.setState({ user: null });
             }
         })
+        firebase.database().ref('Users').once('value', (data) =>{ 
+            console.log(data.toJSON()); 
+        })
     }
 
     render() {
@@ -34,7 +37,7 @@ export default class Home extends Component {
                 <div id="Home">
                     <h1>Lavandarias próximas</h1>
                     <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
-
+                    
                     {/*Botão de Sair*/}
                     <span>
                         <button onClick={() => this.signOut()}>Sair</button>

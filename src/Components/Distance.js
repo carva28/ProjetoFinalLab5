@@ -49,8 +49,8 @@ export default class Distance extends React.Component {
                 }
             });
 
-            firebase.database().ref('Coordenadas').once('value', (data) =>{ 
-                console.log(data.toJSON()); 
+            firebase.database().ref('Coordenadas').on('value', (data) =>{ 
+                console.log(data.toJSON());
             })
     }
 
