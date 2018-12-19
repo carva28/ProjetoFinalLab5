@@ -1,9 +1,8 @@
 import React from 'react';
 import Distance from './Distance';
 import List from './List';
-import {geolocated} from 'react-geolocated';
 
-class Mapa extends React.Component {
+export default class Mapa extends React.Component {
 
     constructor(props) {
         super(props);
@@ -49,17 +48,14 @@ class Mapa extends React.Component {
     }
 
     render() {
-        console.log(this.props.isGeolocationAvailable);
-        console.log(this.props.isGeolocationEnabled)
-        console.log(this.props)
 
         return (
             <div>
                 <List onChange={(e) => this.submit(e)} />
                 <Distance
                     ref={this.distanceRef}
-                    currentLatitude={this.props.coords && this.props.coords.latitude}
-                    currentLongitude={this.props.coords && this.props.coords.longitude}
+                    currentLatitude={this.props.LatAtual}
+                    currentLongitude={this.props.LongAtual}
                     destinationLatitude={this.state.destLatitude}
                     destinationLongitude={this.state.destLongitude} />
                 <p id="btn"></p>
@@ -68,10 +64,3 @@ class Mapa extends React.Component {
     }
 
 }
-
-export default geolocated({
-    positionOptions: {
-      enableHighAccuracy: true,
-    },
-    userDecisionTimeout: 5000,
-  })(Mapa);
