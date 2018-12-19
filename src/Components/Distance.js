@@ -42,7 +42,7 @@ export default class Distance extends React.Component {
                 this.createMap();
                 this.calculateRoute();
 
-                if (!this.props.disablePanel) {
+                 if (!this.props.disablePanel) {
                     this.createPanel();
                 }
             });
