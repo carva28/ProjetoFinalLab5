@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import firebase from "firebase";
 import Login from './Login';
-import GeoLocation from './GeoLocation';
-import List from './List';
-import Distance from './Distance';
+import Mapa from './Mapa';
+import {geolocated} from 'react-geolocated';
+import Reserva from './Reserva';
+import { askForPermissioToReceiveNotifications } from '../push-notifcation';
 
-
-
-export default class Home extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,35 +25,47 @@ export default class Home extends Component {
                 this.setState({ user: null });
             }
         })
-        firebase.database().ref('Users').once('value', (data) =>{ 
-            console.log(data.toJSON()); 
-        })
     }
 
     render() {
         if (this.state.isSignedIn === true) {
-            return (
-                <div id="Home">
-                    <h1>Lavandarias próximas</h1>
-                    <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
-                    
-                    {/*Botão de Sair*/}
-                    <span>
-                        <button onClick={() => this.signOut()}>Sair</button>
-                    </span>
-                    
-                    <GeoLocation/>
-                    <List />
-                    
-                    {/* <Distance
-                        currentLatitude={41.200046}
-                        currentLongitude={-8.508542}
-                        destinationLatitude={41.149600}
-                        destinationLongitude={-8.611000}
-                    /> */}
-                    <button>Reserve agora</button>
-                </div>
-            );
+            if (this.props.coords != null) {
+                return (
+                    <div id="Home">
+                        <h1>Lavandarias próximas</h1>
+                        <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
+    
+                        {/*Botão de Sair*/}
+                        <span>
+                            <button onClick={() => this.signOut()}>Sair</button>
+                        </span>
+    
+                        <Mapa
+                            LatAtual={this.props.coords.latitude}
+                            LongAtual={this.props.coords.longitude} />
+    
+                        <button>Reserve agora</button>
+                    </div>
+                );
+            } else {
+                return (
+                    <div id="Home">
+                        <h1>Lavandarias próximas</h1>
+                        <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
+    
+                        {/*Botão de Sair*/}
+                        <span>
+                            <button onClick={() => this.signOut()}>Sair</button>
+                        </span>
+    
+                        <Mapa />
+    
+                        <Reserva ref={this.reserva}/>
+                        <button onClick={() => this.btnClicked()}>Alert test</button>
+                        <button onClick={() => this.roupa()}>Reserve agora</button>
+                    </div>
+                );
+            }
         } else {
             return (
                 <div>
@@ -71,4 +82,20 @@ export default class Home extends Component {
         firebase.auth().signOut();
     }
 
+    roupa = () => {
+        this.reserva.current.fazReserva();
+    }
+ 
+    btnClicked(){
+        window.prompt();
+        askForPermissioToReceiveNotifications();
+      }
+
 }
+
+export default geolocated({
+    positionOptions: {
+      enableHighAccuracy: true,
+    },
+    userDecisionTimeout: 5000,
+  })(Home);

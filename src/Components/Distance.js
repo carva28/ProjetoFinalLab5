@@ -1,8 +1,8 @@
 
-import * as React from 'react';
+import React from 'react';
 import * as scriptjs from 'scriptjs';
 import autocaravana from '../imgs/autocaravana.png';
-//import List from './List';
+import user_carrinha from '../imgs/homeImg.png';
 import firebase from 'firebase';
 
 var lavandarias = [
@@ -12,7 +12,6 @@ var lavandarias = [
     ['Lavandaria Wash Club', 41.161025, -8.647326, 2, "Lavandaria Wash Club - Boavista"],
     ['Lavandaria Wash Club', 41.159010, -8.662774, 1, "Lavandaria Wash Club - Gomes da Costa"]
 ];
-
 
 export default class Distance extends React.Component {
 
@@ -33,13 +32,12 @@ export default class Distance extends React.Component {
             destLatitude: this.props.destinationLatitude,
             destLongitude: this.props.destinationLongitude
         }, () => {
-            this.calculateRoute(this.state.destLatitude,this.state.destLongitude);
+            this.calculateRoute(this.state.destLatitude, this.state.destLongitude);
         })
-
     }
 
     componentDidMount() {
-        scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
+        scriptjs('https://maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
             () => {
                 this.createMap();
                 this.calculateRoute();
@@ -49,9 +47,9 @@ export default class Distance extends React.Component {
                 }
             });
 
-            firebase.database().ref('Coordenadas').on('value', (data) =>{ 
-                console.log(data.toJSON());
-            })
+        firebase.database().ref('Coordenadas').on('value', (data) => {
+            console.log(data.toJSON());
+        })
     }
 
     createMap() {
@@ -70,7 +68,16 @@ export default class Distance extends React.Component {
             }
         };
 
+        //let map = new window.google.maps.Map(this.divMap, options, marker,pontodoUser);
         let map = new window.google.maps.Map(this.divMap, options, marker);
+        
+        console.log('lat'+ this.props.currentLatitude, 'lng'+ this.props.currentLongitude)
+
+        // var pontodoUser = new window.google.maps.Marker({
+        //   position: {lat: this.props.currentLatitude, lng: this.props.currentLongitude},
+        //   map: map,
+        //   icon: user_carrinha
+        // });
 
         //Cria vários markers
         var image = {
@@ -107,7 +114,6 @@ export default class Distance extends React.Component {
                     }
                     infowindow.open(map, marker);
                     currentInfoWindow = infowindow;
-
                 };
             })(marker, content, infowindow));
         }
@@ -122,10 +128,9 @@ export default class Distance extends React.Component {
         this.directionsDisplay.setPanel(this.divDirectionsPanel);
     }
 
-    calculateRoute(lat1,long1) {
+    calculateRoute(lat1, long1) {
         let directionsService = new window.google.maps.DirectionsService();
         let start = new window.google.maps.LatLng(this.props.currentLatitude, this.props.currentLongitude);
-        //let end = new window.google.maps.LatLng(this.state.destLatitude, this.state.destLongitude);
         let end = new window.google.maps.LatLng(lat1, long1);
 
         let request = {
@@ -144,14 +149,13 @@ export default class Distance extends React.Component {
     render() {
 
         console.log('Distance.js - Atual Lat: ' + this.props.currentLatitude);
-        console.log('Distance.js - Destino Lat: ' + this.state.destLatitude);
 
         return (
             <div>
-                <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
-                <div id="Direcoes" ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
-
-                <button onClick={() => this.renderiza()}>Re render component</button>
+                <div id="MapaGoogle" ref={divMap => this.divMap = divMap}>
+                </div>
+                <div id="Direcoes"
+                    ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
             </div>
         );
     }

@@ -2,14 +2,7 @@ import React from 'react';
 import './styles.css';
 import Login from './Components/Login';
 import Home from './Components/Home';
-import firebase from "firebase";
 
-firebase.initializeApp({
-  apiKey: "AIzaSyAtYRTVptt8VHYLxUOe8wrztdw3Pud9Ruw",
-  authDomain: "projeto-4a0db.firebaseapp.com",
-  databaseURL: "https://projeto-4a0db.firebaseio.com",
-  projectId: "projeto-4a0db"
-})
 
 export default class App extends React.Component {
 
@@ -20,13 +13,18 @@ export default class App extends React.Component {
       IssignIn:false,
     }
   }
+  
 
   render() { 
 
       return(
-        <div className="App">
-          {this.state.user ? (<Home />) : (<Login />)}
+        <div>
+        
+          {this.state.user ? (<Home />)  : (<Login />)}
+          
+
         </div>
+
       );
   
   }
