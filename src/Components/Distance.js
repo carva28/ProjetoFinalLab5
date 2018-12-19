@@ -37,6 +37,8 @@ export default class Distance extends React.Component {
     }
 
     componentDidMount() {
+        
+        
         scriptjs('https://maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
             () => {
                 this.createMap();
@@ -50,6 +52,8 @@ export default class Distance extends React.Component {
         firebase.database().ref('Coordenadas').on('value', (data) => {
             console.log(data.toJSON());
         })
+
+        
     }
 
     createMap() {
