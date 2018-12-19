@@ -78,7 +78,7 @@ export default class Distance extends React.Component {
         //   map: map,
         //   icon: user_carrinha
         // });
-
+             
         //Cria vários markers
         var image = {
             url: autocaravana,
