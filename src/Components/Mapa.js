@@ -47,11 +47,15 @@ export default class Mapa extends React.Component {
         });
     }
 
+    
+
     render() {
 
         return (
             <div>
-                <List onChange={(e) => this.submit(e)} />
+                <List onChange={(e) => this.submit(e)}
+                    atualLat={this.props.LatAtual}
+                    atualLong={this.props.LongAtual} />
                 <Distance
                     ref={this.distanceRef}
                     currentLatitude={this.props.LatAtual}

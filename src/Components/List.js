@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import GeoCode from './GeoCode';
 
 export default class List extends Component {
 
     render() {
+
+        console.log('List.js - Atual Lat: ' + this.props.atualLat);
+
         return (
             <div id="List">
                 <h3>Partida: </h3>
@@ -13,7 +17,7 @@ export default class List extends Component {
                 </select>
 
                 <h3>Destino: </h3>
-                <p>Minha morada</p>
+                <GeoCode lat={this.props.atualLat} long={this.props.atualLong} />
             </div>
         );
     }

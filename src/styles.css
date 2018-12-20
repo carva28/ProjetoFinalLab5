@@ -131,6 +131,11 @@ h3 {
   padding: 10px;
 }
 
+#Morada {
+  width: auto !important;
+  padding-right: 15px !important;
+}
+
 button {
   padding: 20px 42px;
   background-color: rgb(255, 186, 59);

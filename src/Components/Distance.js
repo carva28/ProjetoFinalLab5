@@ -2,6 +2,7 @@ import React from 'react';
 import * as scriptjs from 'scriptjs';
 import autocaravana from '../imgs/autocaravana.png';
 import firebase from 'firebase';
+import GeoCode from './GeoCode';
 
 var lavandarias = [
     ['Lavandaria Wash Club', 41.061134, -8.653998, 4, "Lavandaria Wash Club - Miramar"],
@@ -137,14 +138,13 @@ export default class Distance extends React.Component {
 
     render() {
 
-        console.log('Distance.js - Atual Lat: ' + this.props.currentLatitude);
-
         return (
             <div>
                 <div id="MapaGoogle" ref={divMap => this.divMap = divMap}>
                 </div>
                 <div id="Direcoes"
                     ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
+                    <GeoCode />
             </div>
         );
     }
