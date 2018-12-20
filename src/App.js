@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 import Login from './Components/Login';
 import Home from './Components/Home';
-
+import Menu from './Components/Menu';
 
 export default class App extends React.Component {
 
@@ -14,11 +14,11 @@ export default class App extends React.Component {
     }
   }
   
-
   render() { 
 
       return(
         <div>
+          <Menu />
           {this.state.user ? (<Home />)  : (<Login />)}
         </div>
 

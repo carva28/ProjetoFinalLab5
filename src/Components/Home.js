@@ -60,7 +60,7 @@ class Home extends Component {
     
                         <Mapa />
     
-                        <Reserva ref={this.reserva}/>
+                        {/* <Reserva ref={this.reserva}/> */}
                         <button onClick={() => this.btnClicked()}>Alert test</button>
                         <button onClick={() => this.roupa()}>Reserve agora</button>
                     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import * as scriptjs from 'scriptjs';
 import autocaravana from '../imgs/autocaravana.png';
+import spot from '../imgs/spot.png';
 import firebase from 'firebase';
 import GeoCode from './GeoCode';
 
@@ -67,26 +68,27 @@ export default class Distance extends React.Component {
             }
         };
 
-        let map = new window.google.maps.Map(this.divMap, options, marker);
+        let map = new window.google.maps.Map(this.divMap, options, marker, MeuMarker);
 
         //Cria vários markers
         var image = {
-                url: autocaravana,
-                size: new window.google.maps.Size(32, 32),
-                origin: new window.google.maps.Point(0, 0),
-                anchor: new window.google.maps.Point(0, 0)
-            };
+            url: autocaravana,
+            size: new window.google.maps.Size(32, 32),
+            origin: new window.google.maps.Point(0, 0),
+            anchor: new window.google.maps.Point(0, 0)
+        };
 
-            for (let i = 0; i < lavandarias.length; i++) {
-                var marker = new window.google.maps.Marker({
-                    position: {
-                        lat: lavandarias[i][1],
-                        lng: lavandarias[i][2]
-                    },
-                    map: map,
-                    icon: image,
-                    title: lavandarias[i][0],
-                zIndex: lavandarias[i][3]
+        for (let i = 0; i < lavandarias.length; i++) {
+            var marker = new window.google.maps.Marker({
+                position: {
+                    lat: lavandarias[i][1],
+                    lng: lavandarias[i][2]
+                },
+                map: map,
+                icon: image,
+                title: lavandarias[i][0],
+                zIndex: lavandarias[i][3],
+                animation: window.google.maps.Animation.DROP
             });
 
             var content = "<h5>" + lavandarias[i][4] + "</h5>";
@@ -102,11 +104,27 @@ export default class Distance extends React.Component {
                     if (currentInfoWindow != null) {
                         currentInfoWindow.close();
                     }
+
                     infowindow.open(map, marker);
                     currentInfoWindow = infowindow;
                 };
             })(marker, content, infowindow));
         }
+
+        var imageMeuMarker = {
+            url: spot,
+        };
+
+        var MeuMarker = new window.google.maps.Marker({
+            position: {
+                lat: this.props.currentLatitude,
+                lng: this.props.currentLongitude
+            },
+            map: map,
+            animation: window.google.maps.Animation.DROP,            
+            icon: imageMeuMarker
+        });
+
 
         var trafficLayer = new window.google.maps.TrafficLayer();
         trafficLayer.setMap(map);
@@ -140,12 +158,12 @@ export default class Distance extends React.Component {
 
         return (
             <div>
-                <div id="MapaGoogle" ref={divMap => this.divMap = divMap}>
-                </div>
+                <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
                 <div id="Direcoes"
                     ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
-                    <GeoCode />
+                <GeoCode />
             </div>
         );
     }
+
 }
