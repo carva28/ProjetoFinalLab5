@@ -70,21 +70,21 @@ export default class Distance extends React.Component {
 
         //Cria vários markers
         var image = {
-            url: autocaravana,
-            size: new window.google.maps.Size(32, 32),
-            origin: new window.google.maps.Point(0, 0),
-            anchor: new window.google.maps.Point(0, 0)
-        };
+                url: autocaravana,
+                size: new window.google.maps.Size(32, 32),
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(0, 0)
+            };
 
-        for (let i = 0; i < lavandarias.length; i++) {
-            var marker = new window.google.maps.Marker({
-                position: {
-                    lat: lavandarias[i][1],
-                    lng: lavandarias[i][2]
-                },
-                map: map,
-                icon: image,
-                title: lavandarias[i][0],
+            for (let i = 0; i < lavandarias.length; i++) {
+                var marker = new window.google.maps.Marker({
+                    position: {
+                        lat: lavandarias[i][1],
+                        lng: lavandarias[i][2]
+                    },
+                    map: map,
+                    icon: image,
+                    title: lavandarias[i][0],
                 zIndex: lavandarias[i][3]
             });
 

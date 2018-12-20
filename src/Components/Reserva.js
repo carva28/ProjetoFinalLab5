@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import firebase from "firebase";
- 
- 
+
+
 export default class componentName extends Component {
- 
+  
     fazReserva = () => {
         firebase.database().ref('roupa/new2').set(
-            {
+            { 
               name:"Bali",
               marca:"A",
             }
@@ -17,15 +17,15 @@ export default class componentName extends Component {
             console.log(error);
           });
     }
- 
- 
+  
+  
     render() {
- 
- 
-       
+
+
+        
     return (
       <div>
-       
+        
       </div>
     )
   }

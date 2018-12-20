@@ -23,11 +23,11 @@ export default class Login extends Component {
   render() {
     return (
       <div id="Login">
-        <img src={homeImg} alt="ImagemHome" id="ImagemLogin" />
+          <img src={homeImg} alt="ImagemHome" id="ImagemLogin" />
 
-        <StyledFirebaseAuth
-          uiConfig={this.uiConfig}
-          firebaseAuth={firebase.auth()} />
+          <StyledFirebaseAuth
+            uiConfig={this.uiConfig}
+            firebaseAuth={firebase.auth()} />
 
       </div>
     );

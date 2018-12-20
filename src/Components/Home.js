@@ -4,7 +4,7 @@ import Login from './Login';
 import Mapa from './Mapa';
 import {geolocated} from 'react-geolocated';
 import Reserva from './Reserva';
-import { askForPermissioToReceiveNotifications } from '../push-notification';
+import { askForPermissioToReceiveNotifications } from '../push-notifcation';
 
 class Home extends Component {
     constructor(props) {
@@ -60,7 +60,9 @@ class Home extends Component {
     
                         <Mapa />
     
-                        <button>Reserve agora</button>
+                        <Reserva ref={this.reserva}/>
+                        <button onClick={() => this.btnClicked()}>Alert test</button>
+                        <button onClick={() => this.roupa()}>Reserve agora</button>
                     </div>
                 );
             }
@@ -79,6 +81,15 @@ class Home extends Component {
         })
         firebase.auth().signOut();
     }
+
+    roupa = () => {
+        this.reserva.current.fazReserva();
+    }
+ 
+    btnClicked(){
+        window.prompt();
+        askForPermissioToReceiveNotifications();
+      }
 
 }
 
