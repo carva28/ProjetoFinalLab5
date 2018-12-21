@@ -7,7 +7,8 @@ const Routes = (props) => (
     <BrowserRouter>
         <Switch>
             <Route path='/home' component={Home}/>
-            <Route path='/pedidos' component={Reserva}/>
+            <Route path='/reserva' component={Reserva}/>
+            <Route path='/pedidos' component={/*Reserva*/}/>
             <Route path='/definicoes' component={{/* Definicoes */}}/>     
         </Switch>
     </BrowserRouter>

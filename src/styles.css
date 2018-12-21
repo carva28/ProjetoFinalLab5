@@ -181,12 +181,70 @@ h3 {
   padding-right: 15px !important;
 }
 
-button {
-  padding: 20px 42px;
-  background-color: rgb(255, 186, 59);
-  color: white;
-  border-radius: 15px;
-  font-size: 1.6rem;
-  margin: auto;
+
+
+
+
+/**DIOGO CSS BUTTON Reserva.js**/
+
+#Reserva .input-number {
+  position: relative;
+  height: 40px;
+  background-color: transparent;
+  overflow: hidden;
+  border-radius: 20px;
+  margin: 2px;
+  width: 100%;
+  margin-left: 45%;
+}
+
+.input-number{
+  width: 50%;
+  margin-left: 45%;
+}
+
+.caixinha{
+  background-color:rgb(221, 221, 221);
+  width: 400px;
+  height: 300px;
+  padding-left: 130px;
+  box-shadow:0 10px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.caixinha img{
+  width: 50%;
   display: block;
+  padding-top: 25px;
+}
+#Reserva span {
+  display: inline-block;
+  height: 100%;
+  width: 60px;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 16px;
+  color: #6C6DFF;
+}
+
+#Reserva .btn_increm {
+  display: inline-block;
+  width: 40px;
+  background-color: transparent;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  background-color:rgb(155, 105, 189);
+  transition: background-color .2s ease;
+  border-radius: 15px;
+  height: 40px;
+  margin-top: 25px;
+}
+
+#Reserva .btn_increm:hover {
+  background-color: rgba(155, 105, 189, 0.493);
+}
+
+#btn_finaliza_compra {
+  display: none;
 }

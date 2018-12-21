@@ -31,20 +31,26 @@ class Home extends Component {
         if (this.state.isSignedIn === true) {
             if (this.props.coords != null) {
                 return (
-                    <div id="Home">
-                        <h1>Lavandarias próximas</h1>
-                        <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
-    
-                        {/*Botão de Sair*/}
-                        <span>
-                            <button onClick={() => this.signOut()}>Sair</button>
-                        </span>
-    
-                        <Mapa
-                            LatAtual={this.props.coords.latitude}
-                            LongAtual={this.props.coords.longitude} />
-    
-                        <button>Reserve agora</button>
+                    <div>
+                        <div id="Home">
+                            <h1>Lavandarias próximas</h1>
+                            <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
+        
+                            {/*Botão de Sair*/}
+                            <span>
+                                <button onClick={() => this.signOut()}>Sair</button>
+                            </span>
+        
+                            <Mapa
+                                LatAtual={this.props.coords.latitude}
+                                LongAtual={this.props.coords.longitude} />
+        
+                            <button>Reserve agora</button>
+                            <button onClick={() => this.btnClicked()}>Alert test</button>
+                        </div>
+
+                        <a href="/reserva">olá</a>
+                        <Reserva />
                     </div>
                 );
             } else {
@@ -61,8 +67,8 @@ class Home extends Component {
                         <Mapa />
     
                         {/* <Reserva ref={this.reserva}/> */}
-                        <button onClick={() => this.btnClicked()}>Alert test</button>
-                        <button onClick={() => this.roupa()}>Reserve agora</button>
+                        
+                        {/* <button onClick={() => this.roupa()}>Reserve agora</button> */}
                     </div>
                 );
             }
@@ -82,9 +88,10 @@ class Home extends Component {
         firebase.auth().signOut();
     }
 
-    roupa = () => {
-        this.reserva.current.fazReserva();
-    }
+    // roupa = () => {
+    //     // this.reserva.current.fazReserva();
+        
+    // }
  
     btnClicked(){
         window.prompt();
