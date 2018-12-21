@@ -28,7 +28,6 @@ export default class Login extends Component {
           <StyledFirebaseAuth
             uiConfig={this.uiConfig}
             firebaseAuth={firebase.auth()} />
-
       </div>
     );
   }
