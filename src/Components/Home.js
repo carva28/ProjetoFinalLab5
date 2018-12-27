@@ -13,10 +13,6 @@ class Home extends Component {
                     <h1>Lavandarias próximas</h1>
                     <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
 
-                    <span>
-                        <button onClick={this.click}>Sair</button>
-                    </span>
-
                     <Mapa
                         LatAtual={this.props.coords.latitude}
                         LongAtual={this.props.coords.longitude} />
@@ -29,11 +25,6 @@ class Home extends Component {
                 <div id="Home">
                     <h1>Lavandarias próximas</h1>
                     <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
-
-                    {/*Botão de Sair*/}
-                    <span>
-                        <button onClick={this.click}>Sair</button>
-                    </span>
 
                     <Mapa />
 
