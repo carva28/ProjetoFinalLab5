@@ -279,3 +279,34 @@ h3 {
 }
 
 
+#btn_pagamentos{
+  width: 100%;
+  float: left;
+  margin-left: 12%;
+  margin-top: 80px;
+}
+#bg_btn_mon {
+  background-color: gray;
+  width: 400px;
+  height: 200px;
+  padding-left: 120px;
+  padding-top: 140px;
+  border-radius: 10px;
+}
+
+#btn_monetario {
+  background-color: rgb(174, 102, 192);
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  color:white;
+}
+
+#btn_monetario:hover {
+  background-color: rgba(207, 33, 250, 0.438);
+}
+
+#btn_paypal{
+  margin-left: 100px;
+}
+

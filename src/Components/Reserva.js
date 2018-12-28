@@ -3,6 +3,8 @@ import firebase from "firebase";
 import camisa from '../imgs/camisa.png';
 import calca_img from '../imgs/calcas_img.png';
 import carrinho from '../imgs/shopp.png';
+import notas from '../imgs/pagamento.eps';
+import Paypal from './Paypal'
 var teste;
      
 
@@ -69,7 +71,7 @@ export default class componentName extends Component {
         this.setState({ value: 0});
       }
 
-      if(this.value == 0 ) {
+      if(this.value <1 ) {
         //ele limpa ao segundo clique do menos
         document.getElementById('btn_finaliza_compra').style.display="none";
       }
@@ -99,7 +101,7 @@ export default class componentName extends Component {
         this.setState({ calcas: 0});
       }
 
-      if(this.calcas == 0 ) {
+      if(this.calcas <1 ) {
         //ele limpa ao segundo clique do menos
         document.getElementById('btn_finaliza_compra').style.display="none";
       }
@@ -151,10 +153,24 @@ export default class componentName extends Component {
                 <button className="btn_increm" type="button" onClick={this.increment2}>&#43;</button>   
               </div>  
         </div>
+
+        <div id="btn_pagamentos">
+          <div id="bg_btn_mon">
+          <img src={notas} alt="monetario" />
+            <button id="btn_monetario">Pagamento Monetário</button>
+          </div>
+          <div id="bg_btn_pay">
+            
+            <div id="btn_paypal">
+              <Paypal />
+            </div>
+
+          </div>
+
+        </div>
         <div id="btn_finaliza_compra">
               <button id="btn_compra" type="button" onClick={() => this.fazReserva()}><img src={carrinho} alt="comprar" /></button>  
         </div>
-        
 
       </div>
     )
@@ -165,52 +181,43 @@ export default class componentName extends Component {
 
 
   fazReserva = () => {
-    let rand;
-    // const min = 1;
-    // const max = 2 ;
-    
-    var exists = [];
+    if(this.value>0 || this.calcas>0){
+      for(let l=teste;l < teste+1;l++) {
+        
+            firebase.database().ref("roupa/Encomenda"+teste+"").set(
+              { 
+                cliente: firebase.auth().currentUser.displayName,
+                NrCamisas:this.value,
+                NrCalças:this.calcas,
+                CoordenadaLat:this.props.reservaLati,
+                CoordenadaLong:this.props.reservaLong,
+              }
+            ).then(() => {
+              //console.log("inserido com sucesso");
+              //alert("Inserido com Sucesso");
+            }).catch((error) =>{
+              //console.log(error);
+            });
+          
+          }
+        teste++;
+        // console.log("incrementou"+teste);
+
+        firebase.database().ref("Number").set(
+          { 
+            a:teste,
+          })
+      }else{
+        alert("Selecione uma peça de roupa");
+      }
  
-    // rand = parseInt(min + Math.random() * (max - min)); 
-    // console.log(rand);
-
-  
-
-    
-
-    for(let l=teste;l < teste+1;l++) {
-      do {
-        if(this.value>0){
       
-          firebase.database().ref("roupa/Encomenda"+teste+"").set(
-            { 
-              NrCamisas:this.value,
-              NrCalças:this.calcas,
-            }
-          ).then(() => {
-            console.log("inserido com sucesso");
-            //alert("Inserido com Sucesso");
-          }).catch((error) =>{
-            console.log(error);
-          });
-        }
-      } while (exists[rand]);
-      console.log(exists);
-      exists[l]=rand;
-    }
-    teste++;
-    console.log("incrementou"+teste);
-
-    firebase.database().ref("Number").set(
-      { 
-        a:teste,
-      })
-
+    
 
     firebase.database().ref('roupa').on('value', (data) => {
         console.log(data.toJSON());
     })
 
-}
+  }
 }
 

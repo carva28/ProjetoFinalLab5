@@ -49,8 +49,10 @@ class Home extends Component {
                             <button onClick={() => this.btnClicked()}>Alert test</button>
                         </div>
 
-                        <a href="/reserva">olá</a>
-                        <Reserva />
+                        <Reserva 
+                            reservaLati={this.props.coords.latitude}
+                            reservaLong={this.props.coords.longitude}
+                        />
                     </div>
                 );
             } else {
