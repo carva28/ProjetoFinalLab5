@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Mapa from './Mapa';
+import Reserva from './Reserva';
 import { geolocated } from 'react-geolocated';
 import { askForPermissioToReceiveNotifications } from '../push-notifcation';
 import firebase from "firebase";
@@ -27,8 +28,7 @@ class Home extends Component {
                     <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
 
                     <Mapa />
-
-                    {/* <Reserva ref={this.reserva}/> */}
+                    
                     <button onClick={() => this.btnClicked()}>Alert test</button>
                     <button onClick={() => this.roupa()}>Reserve agora</button>
                 </div>

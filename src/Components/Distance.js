@@ -2,12 +2,7 @@ import React from 'react';
 import * as scriptjs from 'scriptjs';
 import autocaravana from '../imgs/autocaravana.png';
 import spot from '../imgs/spot.png';
-import firebase from 'firebase';
 import GeoCode from './GeoCode';
-
-/* var lavandarias = [
-    [41.161025, -8.647326, "Lavandaria Wash Club - Boavista"] 
-]; */
 
 export default class Distance extends React.Component {
 
@@ -35,15 +30,18 @@ export default class Distance extends React.Component {
     componentDidMount() {
         console.log(this.props.lavandarias);
 
-        scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
-            () => {
-                this.createMap();
-                this.calculateRoute();
+        this.timer = setTimeout(() => {
+            scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
+                () => {
+                    this.createMap();
+                    this.calculateRoute();
 
-                if (!this.props.disablePanel) {
-                    this.createPanel();
-                }
-            });
+                    if (!this.props.disablePanel) {
+                        this.createPanel();
+                    }
+                });
+
+        }, 1000);
     }
 
     createMap() {

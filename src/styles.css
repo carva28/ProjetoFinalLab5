@@ -196,3 +196,117 @@ button {
   margin: auto;
   display: block;
 }
+
+
+
+/**DIOGO CSS BUTTON Reserva.js**/
+
+#Reserva {
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+  border-radius: 20px;
+  width: 100%;
+  padding-bottom: 15px;
+}
+
+.caixinha {
+  border-radius: 40px;
+  background-color: rgb(221, 221, 221);
+  width: 180px;
+  overflow: hidden;
+  padding: 20px 30px;
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+  float: left;
+  margin-right: 9px;
+  margin-left: 9px;
+}
+
+.caixinha img {
+  width: 100%;
+  display: block;
+  padding-top: 5px;
+  margin: auto;
+}
+
+.caixinha h4 {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.botoesReserva {
+  width: 100%;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.botoesReserva span {
+  display: inline-block;
+  width: 52px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 1.5rem;
+  color: #6C6DFF;
+}
+
+.btn_increm {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  padding: 0;
+  display: inline-block;
+  background-color: transparent;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  background-color: rgb(155, 105, 189);
+}
+
+#btn_finaliza_compra {
+  display: none;
+  background-color: #2d2d2d;
+  width: 180px;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-top: 40px;
+  margin-left: calc(50% - 90px);
+  padding: 20px;
+}
+
+#btn_finaliza_compra img {
+  width: 45px;
+  float: left;
+}
+
+#btn_finaliza_compra p {
+  color: white;
+  float: left;
+  line-height: 45px;
+  margin: 0 0 0 20px;
+}
+
+.botoesPagamento {
+  background-color: #dddddd;
+  width: 215px;
+  overflow: hidden;
+  padding: 25px;
+  margin: auto;
+  margin-bottom: 30px;
+  border-radius: 20px;
+}
+
+.botoesPagamento img {
+  width: 50px;
+  margin: auto;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.botoesPagamento p {
+  color: #2D2D2D;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 30px;
+  line-height: 0;
+}
