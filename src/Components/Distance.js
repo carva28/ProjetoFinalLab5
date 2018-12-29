@@ -28,8 +28,6 @@ export default class Distance extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.lavandarias);
-
         this.timer = setTimeout(() => {
             scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
                 () => {
@@ -71,8 +69,6 @@ export default class Distance extends React.Component {
         };
 
         for (let i = 0; i < this.props.lavandarias.length; i++) {
-
-            console.log(this.props.lavandarias[i][1]);
             var marker = new window.google.maps.Marker({
                 position: {
                     lat: this.props.lavandarias[i][0],
@@ -149,7 +145,6 @@ export default class Distance extends React.Component {
     }
 
     render() {
-
         return (
             <div>
                 <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>

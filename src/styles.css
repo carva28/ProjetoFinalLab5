@@ -30,6 +30,10 @@ a {
   color: #2D2D2D;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 h3 {
   font-size: 1.4rem;
 }
@@ -129,6 +133,7 @@ h3 {
   font-size: 1.6rem;
   margin: auto;
   display: block;
+  margin-bottom: 50px;
 }
 
 #MapaGoogle {
@@ -198,8 +203,7 @@ button {
 }
 
 
-
-/**DIOGO CSS BUTTON Reserva.js**/
+/**RESERVA.JS E PAGAMENTO.JS**/
 
 #Reserva {
   position: relative;
@@ -218,8 +222,7 @@ button {
   padding: 20px 30px;
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
   float: left;
-  margin-right: 9px;
-  margin-left: 9px;
+  margin: 0 4%;
 }
 
 .caixinha img {

@@ -10,6 +10,7 @@ import menu03 from './imgs/menu03.png';
 import { BrowserRouter, Link, Switch } from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import Reserva from './Components/Reserva';
+import Pagamento from './Components/Pagamento';
 
 var toggle = 'fechado';
 
@@ -76,7 +77,9 @@ export default class App extends React.Component {
 
               <Switch>
                 <Route path='/' exact strict component={Home} />
-                <Route path='/pedidos' component={Reserva} />
+                <Route path='/pagamento' component={Pagamento} />
+                <Route path='/reserva' component={Reserva} />
+                {/* <Route path='/pedidos' component={} /> */}
               </Switch>
             </div>
             

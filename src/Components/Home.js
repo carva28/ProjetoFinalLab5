@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Mapa from './Mapa';
-import Reserva from './Reserva';
 import { geolocated } from 'react-geolocated';
 import { askForPermissioToReceiveNotifications } from '../push-notifcation';
 import firebase from "firebase";
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
 
@@ -18,7 +18,9 @@ class Home extends Component {
                         LatAtual={this.props.coords.latitude}
                         LongAtual={this.props.coords.longitude} />
 
-                    <button>Reserve agora</button>
+                    <Link to="/reserva">
+                        <button>Reserve agora</button>
+                    </Link>
                 </div>
             );
         } else {
@@ -27,9 +29,8 @@ class Home extends Component {
                     <h1>Lavandarias próximas</h1>
                     <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
 
-                    <Mapa />
-                    
-                    <button onClick={() => this.btnClicked()}>Alert test</button>
+                    {/* <Mapa /> */}
+
                     <button onClick={() => this.roupa()}>Reserve agora</button>
                 </div>
             );

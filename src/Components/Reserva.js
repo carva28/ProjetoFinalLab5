@@ -3,9 +3,8 @@ import firebase from "firebase";
 import camisa from '../imgs/camisa.png';
 import calca_img from '../imgs/calcas_img.png';
 import carrinho from '../imgs/shop.png';
-import notas from '../imgs/pagamento.png';
-import paypal from '../imgs/paypal.png';
-import Paypal from './Paypal';
+import { Link } from 'react-router-dom';
+
 var teste;
 
 export default class componentName extends Component {
@@ -104,89 +103,40 @@ export default class componentName extends Component {
 
   render() {
     return (
-        <div>
-          
-          <div id="Reserva">
-            <div className="caixinha">
-              <img src={camisa} alt="camisa-wash-club" />
-              <h4>Camisa</h4>
+      <div>
 
-              <div className="botoesReserva">
-                <button className="btn_increm" type="button" onClick={this.decrement} >&minus;</button>
-                <span>{this.camisas}</span>
-                <button className="btn_increm" type="button" onClick={this.increment}>&#43;</button>
-              </div>
-            </div>
+        <div id="Reserva">
+          <div className="caixinha">
+            <img src={camisa} alt="camisa-wash-club" />
+            <h4>Camisa</h4>
 
-            <div className="caixinha">
-              <img src={calca_img} alt="camisa-wash-club" />
-              <h4>Calças</h4>
-
-              <div className="botoesReserva">
-                <button className="btn_increm" type="button" onClick={this.decrement2} >&minus;</button>
-                <span>{this.calcas}</span>
-                <button className="btn_increm" type="button" onClick={this.increment2}>&#43;</button>
-              </div>
+            <div className="botoesReserva">
+              <button className="btn_increm" type="button" onClick={this.decrement} >&minus;</button>
+              <span>{this.camisas}</span>
+              <button className="btn_increm" type="button" onClick={this.increment}>&#43;</button>
             </div>
           </div>
-          
-        <div className="botoesPagamento">
-          <img src={notas} alt="monetario" />
-          <p>Dinheiro</p>
-        </div>
 
-        <div className="botoesPagamento">
-          <img src={paypal} alt="monetario" />
-          <Paypal />
-        </div>
+          <div className="caixinha">
+            <img src={calca_img} alt="camisa-wash-club" />
+            <h4>Calças</h4>
 
-        <div id="btn_finaliza_compra">
-          <img src={carrinho} alt="comprar" />
-          <p>Pagamento</p>
+            <div className="botoesReserva">
+              <button className="btn_increm" type="button" onClick={this.decrement2} >&minus;</button>
+              <span>{this.calcas}</span>
+              <button className="btn_increm" type="button" onClick={this.increment2}>&#43;</button>
+            </div>
+          </div>
         </div>
+        
+        <Link to={{ pathname: '/pagamento', state: { nrcamisas: this.value, nrcalcas: this.calcas, lat: this.props.reservaLati, long: this.props.reservaLong } }}>
+          <div id="btn_finaliza_compra">
+            <img src={carrinho} alt="comprar" />
+            <p>Pagamento</p>
+          </div>
+        </Link>
 
       </div>
     )
-  }
-
-
-  fazReserva = () => {
-    if (this.camisas > 0 || this.calcas > 0) {
-      for (let l = teste; l < teste + 1; l++) {
-
-        firebase.database().ref("roupa/Encomenda" + teste + "").set(
-          {
-            cliente: firebase.auth().currentUser.displayName,
-            NrCamisas: this.camisas,
-            NrCalças: this.calcas,
-            CoordenadaLat: this.props.reservaLati,
-            CoordenadaLong: this.props.reservaLong,
-          }
-        ).then(() => {
-          //console.log("inserido com sucesso");
-          //alert("Inserido com Sucesso");
-        }).catch((error) => {
-          //console.log(error);
-        });
-
-      }
-      teste++;
-      // console.log("incrementou"+teste);
-
-      firebase.database().ref("Number").set(
-        {
-          a: teste,
-        })
-    } else {
-      alert("Selecione uma peça de roupa");
-    }
-
-
-
-
-    firebase.database().ref('roupa').on('value', (data) => {
-      console.log(data.toJSON());
-    })
-
   }
 }

@@ -64,16 +64,32 @@ export default class Mapa extends React.Component {
 
     submit = (event) => {
         let destino;
+
         if (event.target.value === "Lavandaria1") {
             destino = {
-                destLatitude: 41.061134,
-                destLongitude: -8.653998
+                destLatitude: lavandarias[0][0],
+                destLongitude: lavandarias[0][1]
             };
 
         } else if (event.target.value === "Lavandaria2") {
             destino = {
-                destLatitude: 41.119489,
-                destLongitude: -8.64628
+                destLatitude: lavandarias[1][0],
+                destLongitude: lavandarias[1][1]
+            };
+        } else if (event.target.value === "Lavandaria3") {
+            destino = {
+                destLatitude: lavandarias[2][0],
+                destLongitude: lavandarias[2][1]
+            };
+        } else if (event.target.value === "Lavandaria4") {
+            destino = {
+                destLatitude: lavandarias[3][0],
+                destLongitude: lavandarias[3][1]
+            };
+        } else if (event.target.value === "Lavandaria5") {
+            destino = {
+                destLatitude: lavandarias[4][0],
+                destLongitude: lavandarias[4][1]
             };
         }
 
@@ -83,9 +99,7 @@ export default class Mapa extends React.Component {
     }
 
     
-
     render() {
-
         return (
             <div>
                 <List onChange={(e) => this.submit(e)}
