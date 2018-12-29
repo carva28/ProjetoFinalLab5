@@ -275,22 +275,17 @@ h3 {
 }
 
 #btn_compra img{
-  width: 45px;
+  width: 70px;
 }
 
 
-#btn_pagamentos{
-  width: 100%;
-  float: left;
-  margin-left: 12%;
-  margin-top: 80px;
-}
+
 #bg_btn_mon {
-  background-color: gray;
-  width: 400px;
-  height: 200px;
-  padding-left: 120px;
-  padding-top: 140px;
+  background-color: grey;
+    width: 35%;
+    height: 150px;
+    padding-left: 130px;
+    padding-top: 100px;
   border-radius: 10px;
 }
 
@@ -306,7 +301,15 @@ h3 {
   background-color: rgba(207, 33, 250, 0.438);
 }
 
+#pagamento_notas img{
+  width: 45px;
+}
+
 #btn_paypal{
   margin-left: 100px;
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  color:white;
 }
 

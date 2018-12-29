@@ -3,7 +3,7 @@ import firebase from "firebase";
 import camisa from '../imgs/camisa.png';
 import calca_img from '../imgs/calcas_img.png';
 import carrinho from '../imgs/shopp.png';
-import notas from '../imgs/pagamento.eps';
+import notas from '../imgs/pagamento.png';
 import Paypal from './Paypal'
 var teste;
      
@@ -132,7 +132,7 @@ export default class componentName extends Component {
       
         
     return (
-      
+      <div>
       <div >
         <div id="Reserva" className="input-number" style={this.props.style}>
               <div className="caixinha">
@@ -154,9 +154,12 @@ export default class componentName extends Component {
               </div>  
         </div>
 
-        <div id="btn_pagamentos">
+        </div>
+        <div id="pagamento_notas">
+          <img  src={notas} alt="monetario" />
+        </div>
           <div id="bg_btn_mon">
-          <img src={notas} alt="monetario" />
+          
             <button id="btn_monetario">Pagamento Monetário</button>
           </div>
           <div id="bg_btn_pay">
@@ -167,7 +170,6 @@ export default class componentName extends Component {
 
           </div>
 
-        </div>
         <div id="btn_finaliza_compra">
               <button id="btn_compra" type="button" onClick={() => this.fazReserva()}><img src={carrinho} alt="comprar" /></button>  
         </div>
