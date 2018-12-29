@@ -34,6 +34,12 @@ a:hover {
   text-decoration: none;
 }
 
+h1 {
+  color: #0A355C;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
 h3 {
   font-size: 1.4rem;
 }
@@ -119,12 +125,6 @@ h3 {
   margin: auto;
 }
 
-#Home h1 {
-  color: #0A355C;
-  text-transform: uppercase;
-  font-size: 2rem;
-}
-
 #Home button {
   padding: 20px 42px;
   background-color: #2D2D2D;
@@ -203,8 +203,8 @@ button {
 }
 
 
-/**RESERVA.JS E PAGAMENTO.JS**/
 
+/** ---- RESERVA.JS ---- **/
 #Reserva {
   position: relative;
   overflow: hidden;
@@ -289,6 +289,9 @@ button {
   margin: 0 0 0 20px;
 }
 
+
+
+/** ---- PAGAMENTO.JS ---- **/
 .botoesPagamento {
   background-color: #dddddd;
   width: 215px;
@@ -312,4 +315,45 @@ button {
   text-align: center;
   margin-top: 30px;
   line-height: 0;
+}
+
+
+/* ---- PEDIDOS.JS ---- */
+.Pedidos {
+  width: 90%;
+  margin: auto;
+}
+
+.Pedidos:last-of-type {
+  margin-bottom: 50px;
+}
+
+#Arquivo {
+  font-family: NossaFonte;
+  font-weight: 100;
+  font-size: 1.5rem;
+  padding: 10px 0;
+}
+
+#borderCima {
+  width: 100%;
+  border-top: 1px solid #F1F1F1;
+  margin-top: 30px;
+}
+
+#borderBaixo {
+  width: 100%;
+  border-bottom: 1px solid #F1F1F1;
+  margin-bottom: 30px;
+}
+
+.Ativos {
+  background-color: #F2F2F2;
+  padding: 20px;
+  margin: 0 0 20px 0;
+}
+
+.Ativos p {
+  line-height: 15px;
+  margin-bottom: 0;
 }
