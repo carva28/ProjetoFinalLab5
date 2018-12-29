@@ -3,9 +3,8 @@ import firebase from "firebase";
 import camisa from '../imgs/camisa.png';
 import calca_img from '../imgs/calcas_img.png';
 import carrinho from '../imgs/shopp.png';
-import notas from '../imgs/pagamento.png';
-import Paypal from './Paypal'
-var teste;
+import {Link} from 'react-router-dom';
+ 
      
 
 export default class componentName extends Component {
@@ -31,10 +30,6 @@ export default class componentName extends Component {
        
         })
 
-        firebase.database().ref('Number').on('value', (data) => {
-          console.log(data.toJSON().a);
-          teste=data.toJSON().a;
-      })
         
     }
     
@@ -155,71 +150,16 @@ export default class componentName extends Component {
         </div>
 
         </div>
-        <div id="pagamento_notas">
-          <img  src={notas} alt="monetario" />
-        </div>
-          <div id="bg_btn_mon">
-          
-            <button id="btn_monetario">Pagamento Monetário</button>
-          </div>
-          <div id="bg_btn_pay">
-            
-            <div id="btn_paypal">
-              <Paypal />
-            </div>
-
-          </div>
-
+        
         <div id="btn_finaliza_compra">
-              <button id="btn_compra" type="button" onClick={() => this.fazReserva()}><img src={carrinho} alt="comprar" /></button>  
+              <Link to={{ pathname: '/pagamento', state: { nrcamisas:this.value, nrcalcas: this.calcas, lat:this.props.reservaLati,long:this.props.reservaLong} }}><button id="btn_compra" type="button" ><img src={carrinho} alt="comprar" /></button></Link>
         </div>
+
+
 
       </div>
     )
   }
 
- 
-
-
-
-  fazReserva = () => {
-    if(this.value>0 || this.calcas>0){
-      for(let l=teste;l < teste+1;l++) {
-        
-            firebase.database().ref("roupa/Encomenda"+teste+"").set(
-              { 
-                cliente: firebase.auth().currentUser.displayName,
-                NrCamisas:this.value,
-                NrCalças:this.calcas,
-                CoordenadaLat:this.props.reservaLati,
-                CoordenadaLong:this.props.reservaLong,
-              }
-            ).then(() => {
-              //console.log("inserido com sucesso");
-              //alert("Inserido com Sucesso");
-            }).catch((error) =>{
-              //console.log(error);
-            });
-          
-          }
-        teste++;
-        // console.log("incrementou"+teste);
-
-        firebase.database().ref("Number").set(
-          { 
-            a:teste,
-          })
-      }else{
-        alert("Selecione uma peça de roupa");
-      }
- 
-      
-    
-
-    firebase.database().ref('roupa').on('value', (data) => {
-        console.log(data.toJSON());
-    })
-
-  }
 }
 

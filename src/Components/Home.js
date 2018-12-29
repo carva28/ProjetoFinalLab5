@@ -6,6 +6,8 @@ import {geolocated} from 'react-geolocated';
 import Reserva from './Reserva';
 import { askForPermissioToReceiveNotifications } from '../push-notifcation';
 
+//var veri_btn_noti;
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -25,9 +27,27 @@ class Home extends Component {
                 this.setState({ user: null });
             }
         })
+
+
+        //VERIFICA SE O USER JÁ RECEBE NOTIFICAÇÃO, SE SIM ENTÃO NÃO APARECE O BOTÃO
+        
+        // for(let j=0; j<1;j++){
+        //     firebase.database().ref("Users/new"+j+"").on('value', (data) => {
+        //         console.log("tou");
+        //         console.log(data.toJSON().variavel);
+        //         veri_btn_noti=data.toJSON().variavel;
+        //       })
+              
+        // }
+        // if(veri_btn_noti==1){
+        //     document.getElementById('btn_notification').innerHTML='';
+        // }
+        
+        
     }
 
     render() {
+        
         if (this.state.isSignedIn === true) {
             if (this.props.coords != null) {
                 return (
@@ -46,7 +66,9 @@ class Home extends Component {
                                 LongAtual={this.props.coords.longitude} />
         
                             <button>Reserve agora</button>
-                            <button onClick={() => this.btnClicked()}>Alert test</button>
+                            <div id="btn_notification">
+                                <button onClick={() => this.btnClicked()}>Subscreva para receber notificações</button>
+                            </div>
                         </div>
 
                         <Reserva 
@@ -68,9 +90,6 @@ class Home extends Component {
     
                         <Mapa />
     
-                        {/* <Reserva ref={this.reserva}/> */}
-                        
-                        {/* <button onClick={() => this.roupa()}>Reserve agora</button> */}
                     </div>
                 );
             }
@@ -90,15 +109,11 @@ class Home extends Component {
         firebase.auth().signOut();
     }
 
-    // roupa = () => {
-    //     // this.reserva.current.fazReserva();
-        
-    // }
- 
     btnClicked(){
-        window.prompt();
-        askForPermissioToReceiveNotifications();
+       askForPermissioToReceiveNotifications();
+        document.getElementById('btn_notification').innerHTML='';
       }
+      
 
 }
 

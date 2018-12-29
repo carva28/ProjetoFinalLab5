@@ -227,7 +227,6 @@ h3 {
 }
 #Reserva span {
   display: inline-block;
-  height: 100%;
   width: 60px;
   border-radius: 20px;
   text-align: center;
@@ -281,10 +280,10 @@ h3 {
 
 
 #bg_btn_mon {
-  background-color: grey;
-    width: 35%;
-    height: 150px;
-    padding-left: 130px;
+  background-color: grey!important;
+    width: 35%!important;
+    height: 150px!important;
+    padding-left: 130px!important;
     padding-top: 100px;
   border-radius: 10px;
 }
@@ -306,10 +305,16 @@ h3 {
 }
 
 #btn_paypal{
+  background-color: grey;
+  height: 150px;
+  width: 30%;
+  padding-top: 110px;
+}
+#zoid-paypal-button-1f8e1e3688{
   margin-left: 100px;
-  width: 150px;
-  height: 40px;
-  border-radius: 20px;
-  color:white;
+}
+
+.paypal-animation-container-expanded{
+  margin-left: 100px;
 }
 

@@ -26,6 +26,7 @@ export default class Distance extends React.Component {
             destLongitude: this.props.destinationLongitude
         }
     }
+    
 
     renderiza = () => {
         this.setState({
@@ -37,7 +38,14 @@ export default class Distance extends React.Component {
     }
 
     componentDidMount() {
-        scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
+
+        console.log('Os dados demoram muito');
+
+        this.timer = setTimeout(() => {
+
+            console.log('Os dados já carregaram');
+           
+            scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
             () => {
                 this.createMap();
                 this.calculateRoute();
@@ -46,10 +54,18 @@ export default class Distance extends React.Component {
                     this.createPanel();
                 }
             });
+        }, 5000);
+
+            
+          
 
         firebase.database().ref('Coordenadas').on('value', (data) => {
             console.log(data.toJSON());
         })
+    }
+
+    componentWillUnmount(){
+        clearTimeout(this.timer)
     }
 
     createMap() {
@@ -155,7 +171,7 @@ export default class Distance extends React.Component {
     }
 
     render() {
-
+ 
         return (
             <div>
                 <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
