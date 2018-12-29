@@ -5,13 +5,9 @@ import spot from '../imgs/spot.png';
 import firebase from 'firebase';
 import GeoCode from './GeoCode';
 
-var lavandarias = [
-    ['Lavandaria Wash Club', 41.061134, -8.653998, 4, "Lavandaria Wash Club - Miramar"],
-    ['Lavandaria Wash Club', 41.119489, -8.646283, 5, "Lavandaria Wash Club - Canidelo"],
-    ['Lavandaria Wash Club', 41.141714, -8.624456, 3, "Lavandaria Wash Club - Cais de Gaia"],
-    ['Lavandaria Wash Club', 41.161025, -8.647326, 2, "Lavandaria Wash Club - Boavista"],
-    ['Lavandaria Wash Club', 41.159010, -8.662774, 1, "Lavandaria Wash Club - Gomes da Costa"]
-];
+/* var lavandarias = [
+    [41.161025, -8.647326, "Lavandaria Wash Club - Boavista"] 
+]; */
 
 export default class Distance extends React.Component {
 
@@ -37,6 +33,8 @@ export default class Distance extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props.lavandarias);
+
         scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
             () => {
                 this.createMap();
@@ -46,10 +44,6 @@ export default class Distance extends React.Component {
                     this.createPanel();
                 }
             });
-
-        firebase.database().ref('Coordenadas').on('value', (data) => {
-            console.log(data.toJSON());
-        })
     }
 
     createMap() {
@@ -78,20 +72,22 @@ export default class Distance extends React.Component {
             anchor: new window.google.maps.Point(0, 0)
         };
 
-        for (let i = 0; i < lavandarias.length; i++) {
+        for (let i = 0; i < this.props.lavandarias.length; i++) {
+
+            console.log(this.props.lavandarias[i][1]);
             var marker = new window.google.maps.Marker({
                 position: {
-                    lat: lavandarias[i][1],
-                    lng: lavandarias[i][2]
+                    lat: this.props.lavandarias[i][0],
+                    lng: this.props.lavandarias[i][1]
                 },
                 map: map,
                 icon: image,
-                title: lavandarias[i][0],
-                zIndex: lavandarias[i][3],
+                title: this.props.lavandarias[i][2],
+                zIndex: 9999,
                 animation: window.google.maps.Animation.DROP
             });
 
-            var content = "<h5>" + lavandarias[i][4] + "</h5>";
+            var content = "<h5>" + this.props.lavandarias[i][2] + "</h5>";
 
             var infowindow = new window.google.maps.InfoWindow();
 
@@ -121,7 +117,7 @@ export default class Distance extends React.Component {
                 lng: this.props.currentLongitude
             },
             map: map,
-            animation: window.google.maps.Animation.DROP,            
+            animation: window.google.maps.Animation.DROP,
             icon: imageMeuMarker
         });
 

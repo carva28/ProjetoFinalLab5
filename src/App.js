@@ -82,8 +82,6 @@ export default class App extends React.Component {
             
           </Fragment>
         </BrowserRouter>
-
-
       )
     } else {
       return (
