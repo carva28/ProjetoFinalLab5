@@ -6,7 +6,7 @@ import {geolocated} from 'react-geolocated';
 import Reserva from './Reserva';
 import { askForPermissioToReceiveNotifications } from '../push-notifcation';
 
-//var veri_btn_noti;
+var var_user;
 
 class Home extends Component {
     constructor(props) {
@@ -17,6 +17,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        
+
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.setState({ user });
@@ -27,6 +29,7 @@ class Home extends Component {
                 this.setState({ user: null });
             }
         })
+
 
 
         //VERIFICA SE O USER JÁ RECEBE NOTIFICAÇÃO, SE SIM ENTÃO NÃO APARECE O BOTÃO
@@ -42,11 +45,11 @@ class Home extends Component {
         // if(veri_btn_noti==1){
         //     document.getElementById('btn_notification').innerHTML='';
         // }
-        
-        
     }
 
     render() {
+
+        
         
         if (this.state.isSignedIn === true) {
             if (this.props.coords != null) {

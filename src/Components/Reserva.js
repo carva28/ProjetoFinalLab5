@@ -13,13 +13,15 @@ export default class componentName extends Component {
 
 
     state = {
-      value: 0,
+      camisas: 0,
       calcas: 0,
     }
   
-    constructor() {
-    super();
+    constructor(props) {
+    super(props);
       
+      this.handleChange = this.handleChange.bind(this);
+      this.mudaData = this.mudaData.bind(this);
       this.increment = this.increment.bind(this);
       this.decrement = this.decrement.bind(this);
       this.increment2 = this.increment2.bind(this);
@@ -32,9 +34,11 @@ export default class componentName extends Component {
 
         
     }
+
     
-    get value() {
-      return this.state.value;
+    
+    get camisas() {
+      return this.state.camisas;
       
     }
 
@@ -45,28 +49,28 @@ export default class componentName extends Component {
     increment() {
       const { max } = this.props;
       
-      if (typeof max === 'number' && this.value >= max) return;
+      if (typeof max === 'number' && this.camisas >= max) return;
       document.getElementById('btn_finaliza_compra').style.display="block";
       
-      this.setState({ value: this.value + 1 });
+      this.setState({ camisas: this.camisas + 1 });
     }
   
     decrement() {
       const { min } = this.props;
 
-      if(typeof min === 'number' && this.value <= min){
-        return this.value;
+      if(typeof min === 'number' && this.camisas <= min){
+        return this.camisas;
         
       }
-      if(this.value > 0 ){
-        this.setState({ value: this.value - 1 });
+      if(this.camisas > 0 ){
+        this.setState({ camisas: this.camisas - 1 });
       }
 
-      if(this.value < 0 ) {
-        this.setState({ value: 0});
+      if(this.camisas < 0 ) {
+        this.setState({ camisas: 0});
       }
 
-      if(this.value <1 ) {
+      if(this.camisas <1 ) {
         //ele limpa ao segundo clique do menos
         document.getElementById('btn_finaliza_compra').style.display="none";
       }
@@ -122,7 +126,11 @@ export default class componentName extends Component {
 
       //}
 
-      
+       var Data     = ["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"],
+            MakeItem = function(X) {
+                return <option value={X}>{X}</option>;
+            };
+
       
       
         
@@ -134,7 +142,7 @@ export default class componentName extends Component {
                 <img src={camisa} alt="camisa-wash-club"/>
                 <h4>Camisa</h4>
                 <button className="btn_increm" type="button" onClick={this.decrement} >&minus;</button>
-                    <span>{this.value}</span>
+                    <span>{this.camisas}</span>
                 <button className="btn_increm" type="button" onClick={this.increment}>&#43;</button>   
               </div>  
         </div>
@@ -150,9 +158,29 @@ export default class componentName extends Component {
         </div>
 
         </div>
+
+        <div id="inputdata"> 
+            <input value={this.data} onChange={this.mudaData} type="date" id="data" name="meeting-time" required/>
+          </div>
+
+          <div id="inputTempo"></div>
+          <div id="selectTempo">
+          
+          <select value={this.state.value} onChange={this.handleChange}>{Data.map(MakeItem)}</select>
+            
+          </div>
+
         
         <div id="btn_finaliza_compra">
-              <Link to={{ pathname: '/pagamento', state: { nrcamisas:this.value, nrcalcas: this.calcas, lat:this.props.reservaLati,long:this.props.reservaLong} }}><button id="btn_compra" type="button" ><img src={carrinho} alt="comprar" /></button></Link>
+              <Link to={{ pathname: '/pagamento', state: { 
+                nrcamisas:this.camisas, 
+                nrcalcas: this.calcas, 
+                lat:this.props.reservaLati,
+                long:this.props.reservaLong,
+                hora:this.state.value,
+                data:this.state.data,
+                
+                } }}><button id="btn_compra" type="button" ><img src={carrinho} alt="comprar" /></button></Link>
         </div>
 
 
@@ -161,5 +189,14 @@ export default class componentName extends Component {
     )
   }
 
+  handleChange(event) {
+    this.setState({value: event.target.value});
+    //alert("Vamos buscar a sua reserva às:"+event.target.value);
+  }
+
+  mudaData(e){
+    this.setState({data:e.target.value});
+    alert("sua reserva dia:"+e.target.value);
+  }
 }
 

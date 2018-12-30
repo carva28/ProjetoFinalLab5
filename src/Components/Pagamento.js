@@ -45,8 +45,8 @@ export default class Pagamento extends Component {
 
 
     fazReserva = () => {
-        const {nrcalcas,nrcamisas,lat,long} = this.props.location.state;
-        console.log(nrcalcas,nrcamisas,lat,long);
+        const {nrcalcas,nrcamisas,lat,long,hora,data} = this.props.location.state;
+        console.log(nrcalcas,nrcamisas,lat,long,hora,data);
 
        
         for(let l=teste;l < teste+1;l++) {
@@ -58,6 +58,8 @@ export default class Pagamento extends Component {
                     NrCalças:nrcalcas,
                     CoordenadaLat:lat,
                     CoordenadaLong:long,
+                    Horas:hora,
+                    Data:data,
                     pagamento:"monetario",
                 }
                 ).then(() => {

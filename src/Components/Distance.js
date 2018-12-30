@@ -45,7 +45,7 @@ export default class Distance extends React.Component {
 
             console.log('Os dados já carregaram');
            
-            scriptjs('https:/maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&sensor=false',
+            scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
             () => {
                 this.createMap();
                 this.calculateRoute();
