@@ -7,11 +7,13 @@ import menu from './imgs/menu.png';
 import menu01 from './imgs/menu01.png';
 import menu02 from './imgs/menu02.png';
 import menu03 from './imgs/menu03.png';
+import menu04 from './imgs/menu04.png';
 import { BrowserRouter, Link, Switch } from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import Reserva from './Components/Reserva';
 import Pagamento from './Components/Pagamento';
 import Pedidos from './Components/Pedidos';
+import EstadoReserva from './Components/EstadoReserva';
 
 var toggle = 'fechado';
 
@@ -72,7 +74,7 @@ export default class App extends React.Component {
                   <img src={menu01} alt="menu1" /><li><Link to="/">Home</Link></li>
                   <img src={menu02} alt="menu2" /><li><Link to="/pedidos">Pedidos</Link></li>
                   <img src={menu03} alt="menu3" /><li>Definições</li>
-                  <li onClick={this.signOut}>Sair</li>
+                  <img src={menu04} alt="menu4" /><li onClick={this.signOut}>Sair</li>
 
                 </div>
               </div>
@@ -82,6 +84,7 @@ export default class App extends React.Component {
                 <Route path='/pagamento' component={Pagamento} />
                 <Route path='/reserva' component={Reserva} />
                 <Route path='/pedidos' component={Pedidos} />
+                <Route path='/estado_reserva' component={EstadoReserva} />
               </Switch>
             </div>
             

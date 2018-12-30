@@ -192,16 +192,6 @@ h3 {
   padding-right: 15px !important;
 }
 
-button {
-  padding: 20px 42px;
-  background-color: rgb(255, 186, 59);
-  color: white;
-  border-radius: 15px;
-  font-size: 1.6rem;
-  margin: auto;
-  display: block;
-}
-
 
 
 /** ---- RESERVA.JS ---- **/
@@ -322,6 +312,7 @@ button {
 .Pedidos {
   width: 90%;
   margin: auto;
+  overflow: hidden;
 }
 
 .Pedidos:last-of-type {
@@ -333,27 +324,52 @@ button {
   font-weight: 100;
   font-size: 1.5rem;
   padding: 10px 0;
+  float: left;
+}
+
+#divArq img {
+  width: 40px;
+  margin: 8px 15px 0;
+  float: left;
 }
 
 #borderCima {
   width: 100%;
   border-top: 1px solid #F1F1F1;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 #borderBaixo {
   width: 100%;
   border-bottom: 1px solid #F1F1F1;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .Ativos {
   background-color: #F2F2F2;
   padding: 20px;
-  margin: 0 0 20px 0;
+  margin: 0 20px 0 0;
+  float: left;
+  width: 90%;
 }
 
 .Ativos p {
   line-height: 15px;
   margin-bottom: 0;
+}
+
+.PedidosAtivos {
+  margin-bottom: 20px;
+}
+
+.PedidosAtivos img {
+  height: 25px;
+  margin: 14px 0px;
+}
+
+
+/* ---- ESTADORESERVA.JS ---- */
+#EstadoReserva {
+  width: 90%;
+  margin: auto;
 }

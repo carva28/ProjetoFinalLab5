@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import GeoCode from './GeoCode';
 import firebase from 'firebase';
 
-/* var nomesLavandarias = []; */
-
 export default class List extends Component {
 
     constructor(props) {
