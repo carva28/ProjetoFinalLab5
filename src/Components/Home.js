@@ -4,6 +4,7 @@ import { geolocated } from 'react-geolocated';
 import { askForPermissioToReceiveNotifications } from '../push-notifcation';
 import firebase from "firebase";
 import { Link } from 'react-router-dom';
+import Reserva from './Reserva';
 
 class Home extends Component {
 
@@ -18,9 +19,20 @@ class Home extends Component {
                         LatAtual={this.props.coords.latitude}
                         LongAtual={this.props.coords.longitude} />
 
-                    <Link to="/reserva">
+                    <Link to={{ pathname: '/reserva',
+                        state:{
+                            reservaLati:this.props.coords.latitude,
+                            reservaLong:this.props.coords.longitude,
+                        }
+                    }}>
                         <button>Reserve agora</button>
                     </Link>
+                    
+                    <div id="btn_notification">
+                                <button onClick={() => this.btnClicked()}>Subscreva para receber notificações</button>
+                    </div>
+
+
                 </div>
             );
         } else {
@@ -31,7 +43,7 @@ class Home extends Component {
 
                     {/* <Mapa /> */}
 
-                    <button onClick={() => this.roupa()}>Reserve agora</button>
+                    {/* <button onClick={() => this.roupa()}>Reserve agora</button> */}
                 </div>
             );
         }
@@ -41,9 +53,9 @@ class Home extends Component {
         this.props.paraSair();
     }
 
-    roupa = () => {
-        this.reserva.current.fazReserva();
-    }
+    // roupa = () => {
+    //     this.reserva.current.fazReserva();
+    // }
 
     btnClicked() {
         window.prompt();

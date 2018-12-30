@@ -26,13 +26,13 @@ export default class Pagamento extends Component {
         return (
             <div>
                 <Link to="/">
-                    <div className="botoesPagamento">
+                    <div className="botoesPagamento" onClick={() => this.fazReserva()}>
                         <img src={notas} alt="monetario" />
                         <p>Dinheiro</p>
                     </div>
                 </Link>
 
-                <div className="botoesPagamento" onClick={() => this.fazReserva()}>
+                <div className="botoesPagamento" >
                     <img src={paypal} alt="monetario" />
                     <Paypal />
                 </div>
@@ -42,36 +42,43 @@ export default class Pagamento extends Component {
 
 
     fazReserva = () => {
-        const { nrcalcas, nrcamisas, lat, long } = this.props.location.state;
-        console.log(nrcalcas, nrcamisas, lat, long);
+        const { nrcalcas, nrcamisas, lat, long, hora, data} = this.props.location.state;
+        console.log(nrcalcas, nrcamisas, lat, long,hora,data);
 
+        if(lat != null && long != null){
 
-        for (let l = teste; l < teste + 1; l++) {
-
-            firebase.database().ref("roupa/Encomenda" + teste + "").set(
-                {
-                    cliente: firebase.auth().currentUser.displayName,
-                    NrCamisas: nrcamisas,
-                    NrCalças: nrcalcas,
-                    CoordenadaLat: lat,
-                    CoordenadaLong: long,
-                    pagamento: "monetario",
-                }
+        
+        for(let l=teste;l < teste+1;l++) {
+            
+            firebase.database().ref("roupa/Encomenda"+teste+"").set(
+            { 
+                cliente: firebase.auth().currentUser.displayName,
+                NrCamisas:nrcamisas,
+                NrCalças:nrcalcas,
+                CoordenadaLat:lat,
+                CoordenadaLong:long,
+                Horas:hora,
+                Data:data,
+                pagamento:"monetario",
+            }
             ).then(() => {
-                console.log("inserido com sucesso");
-            }).catch((error) => {
-                console.log(error);
+            //console.log("inserido com sucesso");
+            //alert("Inserido com Sucesso");
+            }).catch((error) =>{
+            //console.log(error);
             });
-
+        
         }
         teste++;
+        // console.log("incrementou"+teste);
 
-        firebase.database().ref("Number/var_reserva").set({
-            a: teste,
+        firebase.database().ref("Number/var_reserva").set(
+        { 
+            a:teste,
         })
-
-        firebase.database().ref('roupa').on('value', (data) => {
-            console.log(data.toJSON());
-        })
+    }
+    firebase.database().ref('roupa').on('value', (data) => {
+        console.log(data.toJSON());
+    })
     }
 }
