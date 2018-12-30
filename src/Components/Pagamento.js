@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import firebase from "firebase";
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
 import notas from '../imgs/pagamento.png';
 import paypal from '../imgs/paypal.png';
 import Paypal from './Paypal';
@@ -24,13 +24,14 @@ export default class Pagamento extends Component {
     render() {
 
         return (
-            <div>
-                <Link to="/">
-                    <div className="botoesPagamento" onClick={() => this.fazReserva()}>
+            <div id="pagamento_main">
+            {/* <button >jose</button>
+                <Link to="/"> */}
+                    <div className="botoesPagamento" onClick={() => this.fimEncomenda()}>
                         <img src={notas} alt="monetario" />
                         <p>Dinheiro</p>
                     </div>
-                </Link>
+                {/* </Link> */}
 
                 <div className="botoesPagamento" >
                     <img src={paypal} alt="monetario" />
@@ -40,7 +41,22 @@ export default class Pagamento extends Component {
         )
     }
 
+    fimEncomenda = () =>{
+        this.fazReserva();
+        document.getElementById('pagamento_main').innerHTML="<h3>"+"Estamos a preparar a sua encomenda"+"</h3>"
+        alert("Obrigado pela sua preferência");
+        this.espera();
+    }
 
+    espera = () => {
+        this.timer = setTimeout(() => {
+            this.props.history.push('/')
+        }, 5000);
+    }
+    
+        componentWillUnmount(){
+            clearTimeout(this.timer)
+        }
     fazReserva = () => {
         const { nrcalcas, nrcamisas, lat, long, hora, data} = this.props.location.state;
         console.log(nrcalcas, nrcamisas, lat, long,hora,data);
