@@ -5,7 +5,7 @@ import { askForPermissioToReceiveNotifications } from '../push-notifcation';
 import firebase from "firebase";
 import { Link } from 'react-router-dom';
 
-var var_user,verificaemail,totalUsers,u_email;
+var var_user,verificaemail,u_email;
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -17,18 +17,8 @@ class Home extends Component {
         firebase.database().ref('Number/var_utilizadores').on('value', (data) => {
             console.log(data.toJSON().c);
             var_user=data.toJSON().c;
+            
         })   
-
-
-        //Descobrir quantos users existem
-        firebase.database().ref("Utilizadores/Normal/").on('value', function(snapshot) {
-            console.log(snapshot.val());
-            
-            //console.log(snapshotToArray(snapshot));
-            //console.log(data.numChildren())
-           
-            
-        })
         
     }
     
@@ -48,21 +38,22 @@ class Home extends Component {
             }
         })
         
-        this.esperaLoop(u_email);
+        this.esperaLoop();
 
     }
 
 
-    esperaLoop = (email) => {
+    esperaLoop = () => {
+
+       
         this.esperaloops = setTimeout(() =>{
             
-               //MUDAR O 3 PARA NUMERO TOTAL DE USERS
-                for(let v=2;v<3;v++){
+                for(let v=2;v<var_user;v++){
                     firebase.database().ref("Utilizadores/Normal/cliente"+v+"").on('value', (data) => {
                          verificaemail=data.toJSON().emailCliente;
                          console.log(verificaemail);
                          console.log("aqui");
-                         this.verificaUser(email);
+                         this.verificaUser();
     
                         })
                     }
@@ -72,15 +63,15 @@ class Home extends Component {
         }, 5000);
     } 
 
-    verificaUser = (email) =>{
+    verificaUser = () =>{
+        console.log("o que é isto "+u_email);
         this.esperaMail = setTimeout(() => {
-            if(verificaemail != email){
+            if(verificaemail != u_email){
+                this.adicionaUser();
                 
-                alert("ola sasasose");
             }else{
-                //DESCOMENTAR QUANDO FUNCIONAR
-                //this.adicionaUser();
-                alert("oi jose");
+                
+                console.log("Conta já existente");
             }
         }, 3000);
         
