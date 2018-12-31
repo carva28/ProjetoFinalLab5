@@ -19,6 +19,9 @@ class Home extends Component {
             var_user=data.toJSON().c;
             
         })   
+
+        //Falta criar uma nova variavel para estafeta e admin 
+        //e de seguida fazer o for e verificar se o user é estafeta ou admin e mudar HTML
         
     }
     
