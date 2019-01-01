@@ -39,4 +39,8 @@ https://developers.google.com/maps/documentation/javascript/examples/marker-anim
 ###### Texto dos markers
 https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko
 
+### `Falta colocar a verificação dos admin e dos estafetas`
+Mal isto esteja deveremos ter que mudar o HTML para cada user
 
++ O admin terá acesso aos estafetas e atribuí-lhes as tarefas consoante as horas e envia notificação
++ O estafeta envia notificação e vê quais são os clientes e as tarefas
