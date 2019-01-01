@@ -5,24 +5,26 @@ import { askForPermissioToReceiveNotifications } from '../push-notifcation';
 import firebase from "firebase";
 import { Link } from 'react-router-dom';
 
-var var_user,verificaemail,u_email;
+var var_user,verificaemail,u_email,cargo,var_noti;
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isSignedIn: false,
             array: [],
+            arrayestafeta: [],
         }
- 
+        firebase.database().ref('Number/var_notificacao').on('value', (data) => {
+            console.log(data.toJSON().b);
+            var_noti=data.toJSON().b;
+          }) 
 
         firebase.database().ref('Number/var_utilizadores').on('value', (data) => {
             console.log(data.toJSON().c);
             var_user=data.toJSON().c;
-             
+            cargo = 'cliente';
         })   
 
-        //Falta criar uma nova variavel para estafeta e admin 
-        //e de seguida fazer o for e verificar se o user é estafeta ou admin e mudar HTML
         
     }
     
@@ -75,7 +77,7 @@ class Home extends Component {
                     break;
                 }
             }
-
+           
             
             
         }, 3000);
@@ -110,7 +112,7 @@ class Home extends Component {
     }
 
     render() {
-        if (this.props.coords != null) {
+        if (this.props.coords != null && cargo =='cliente') {
             return (
                 <div id="Home">
                     <h1>Lavandarias próximas</h1>
@@ -136,31 +138,33 @@ class Home extends Component {
 
                 </div>
             );
-        } else {
+        } else if(cargo == 'estafeta'){
+            return (
+                <div id="Home">
+                </div>
+            );
+        }else {
             return (
                 <div id="Home">
                     <h1>Lavandarias próximas</h1>
                     <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
 
-                    {/* <Mapa /> */}
-
-                    {/* <button onClick={() => this.roupa()}>Reserve agora</button> */}
                 </div>
             );
         }
+
     }
 
     click = () => {
         this.props.paraSair();
     }
 
-    // roupa = () => {
-    //     this.reserva.current.fazReserva();
-    // }
+   
 
     btnClicked() {
-        window.prompt();
-        askForPermissioToReceiveNotifications();
+        askForPermissioToReceiveNotifications(var_noti);
+       
+        document.getElementById('btn_notification').innerHTML='';
     }
 
 }
