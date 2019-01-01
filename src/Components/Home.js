@@ -10,7 +10,8 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSignedIn: false
+            isSignedIn: false,
+            array: [],
         }
  
 
@@ -51,31 +52,32 @@ class Home extends Component {
        
         this.esperaloops = setTimeout(() =>{
             
-                for(let v=2;v<var_user;v++){
+                for(let v=1;v<var_user;v++){
                     firebase.database().ref("Utilizadores/Normal/cliente"+v+"").on('value', (data) => {
                          verificaemail=data.toJSON().emailCliente;
-                         console.log(verificaemail);
-                         console.log("aqui");
-                         this.verificaUser();
-    
+                         this.state.array.push(verificaemail)
                         })
                     }
-               
-            
-           
-        }, 5000);
+
+                    this.verificaUser();
+        }, 8000);
     } 
 
     verificaUser = () =>{
-        console.log("o que é isto "+u_email);
+
         this.esperaMail = setTimeout(() => {
-            if(verificaemail != u_email){
-                this.adicionaUser();
+            for(let u=0; u<this.state.array.length;u++){
                 
-            }else{
-                
-                console.log("Conta já existente");
+                if(this.state.array[u] != u_email){
+                    this.adicionaUser();
+                }else{
+                    console.log("Conta já existente");
+                    break;
+                }
             }
+
+            
+            
         }, 3000);
         
     }
