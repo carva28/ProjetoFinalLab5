@@ -18,7 +18,7 @@ class Home extends Component {
         firebase.database().ref('Number/var_utilizadores').on('value', (data) => {
             console.log(data.toJSON().c);
             var_user=data.toJSON().c;
-            
+             
         })   
 
         //Falta criar uma nova variavel para estafeta e admin 
