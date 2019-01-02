@@ -13,6 +13,7 @@ class Home extends Component {
             isSignedIn: false,
             array: [],
             arrayestafeta: [],
+            cargo: '',
         }
 
         firebase.database().ref('Number/var_notificacao').on('value', (data) => {
@@ -38,8 +39,6 @@ class Home extends Component {
     
     
     componentDidMount() {
-        this.fazPausa();
-        
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.setState({ user });
@@ -73,23 +72,24 @@ class Home extends Component {
                         
                         if( EstafEmail == u_email){
                     
-                            cargo='estafeta';
+                            this.setState({
+                                cargo: 'estafeta'
+                            })
+                            
                             
                         }else{
                             
-                            cargo = 'cliente';
-                            
+                            //cargo = 'cliente';
+                            this.setState({
+                                cargo: 'cliente'
+                            })
                             this.esperaLoop();
                            
                         }
 
-
-                        this.fazPausa();
-
                         })
                     }
-
-                    
+     
         }, 4000);
     } 
 
@@ -110,23 +110,27 @@ class Home extends Component {
 
 
     verificaUser = () =>{
-        this.esperaMail = setTimeout(() => {
+
+        this.verifica = setTimeout(() =>{
+
+        
             for(let u=0; u<this.state.array.length;u++){
                 
                 if(this.state.array[u] != u_email){
                     this.adicionaUser();
+                    break;
                 }else{
                     console.log("Conta já existente");
                     break;
                 }
-            }  
-        }, 2000);
+            } 
+            
+        }, 4000);
         
     }
 
     adicionaUser = () => {
 
-        this.espera = setTimeout(() => {
             for(let l=var_user;l < var_user+1;l++) {
                 firebase.database().ref("Utilizadores/Normal/cliente"+var_user+"").set(
                     { 
@@ -142,25 +146,15 @@ class Home extends Component {
             { 
                 c:var_user,
             })
-        }, 7000);
 
         
     }
    
     
-    fazPausa = () => {
-       
-        this.esperaloops = setTimeout(() =>{
-            console.log("CARGO ⬇️");
-            console.log(cargo);
-            var jos=cargo
-            this.render();
-            return jos;
-        }, 5000);
-    } 
+   
 
     componentWillUnmount(){
-        clearTimeout(this.espera,this.esperaMail,this.esperaloops,this.estafetaLoop,this.esperaEstafMail,this.estaloops,this.atrasa,this.fazPausa)
+        clearTimeout(this.estaloops,this.verifica,this.esperaloops)
     }
     
    
@@ -169,12 +163,9 @@ class Home extends Component {
     
     render() {
 
-        this.fazPausa();
-        console.log('dentro do render'+ cargo);
-
-        
-            if (this.props.coords != null && cargo =='cliente') {
-                
+        console.log('dentro do render'+ this.state.cargo);
+            if (this.props.coords != null && this.state.cargo =='cliente') {
+                console.log(this.state.cargo)
                 return (
                     <div id="Home">
                         <h1>Lavandarias próximas</h1>
@@ -199,8 +190,8 @@ class Home extends Component {
 
                     </div>
                 );
-            } if (this.props.coords != null && cargo =='estafeta') {
-
+            } if (this.props.coords != null && this.state.cargo =='estafeta') {
+                
                 return(
                     <div id="Home">
                         <h1>Estafeta</h1>
