@@ -204,7 +204,7 @@ class Home extends Component {
                 return(
                     <div id="Home">
                         <h1>Estafeta</h1>
-                        <p>Olá estafeta{firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
+                        <p>Olá estafeta {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
 
                         <Mapa
                             LatAtual={this.props.coords.latitude}
