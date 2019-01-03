@@ -4,6 +4,7 @@ import { geolocated } from 'react-geolocated';
 import { askForPermissioToReceiveNotifications } from '../push-notifcation';
 import firebase from "firebase";
 import { Link } from 'react-router-dom';
+import ClientesReservas from './ClientesReservas';
 
 var var_user,verificaemail,u_email,cargo,var_noti,var_estafeta,EstafEmail;
 class Home extends Component {
@@ -14,6 +15,8 @@ class Home extends Component {
             array: [],
             arrayestafeta: [],
             cargo: '',
+            coordEstafLat:'',
+            coordEstafLong:'',
         }
 
         firebase.database().ref('Number/var_notificacao').on('value', (data) => {
@@ -65,15 +68,15 @@ class Home extends Component {
         this.estaloops = setTimeout(() =>{
                 for(let est=1;est<=var_estafeta;est++){
                     firebase.database().ref("Utilizadores/Estafeta/estafeta0"+est+"").on('value', (data) => {
-                        console.log(data.toJSON());
                         EstafEmail=data.toJSON().emailestafeta;
-                        console.log(EstafEmail);
                         this.state.arrayestafeta.push(EstafEmail)
                         
                         if( EstafEmail == u_email){
                     
                             this.setState({
-                                cargo: 'estafeta'
+                                cargo: 'estafeta',
+                                coordEstafLat:data.toJSON().coordEstafetaLat,
+                                coordEstafLong:data.toJSON().coordEstafetaLong
                             })
                             
                             
@@ -90,7 +93,7 @@ class Home extends Component {
                         })
                     }
      
-        }, 4000);
+        }, 2000);
     } 
 
    
@@ -105,7 +108,7 @@ class Home extends Component {
                         })
                     }
                     this.verificaUser();
-        }, 4000);
+        }, 2000);
     } 
 
 
@@ -125,7 +128,7 @@ class Home extends Component {
                 }
             } 
             
-        }, 4000);
+        }, 3000);
         
     }
 
@@ -169,9 +172,10 @@ class Home extends Component {
                 return (
                     <div id="Home">
                         <h1>Lavandarias próximas</h1>
-                        <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
+                        <p>Olá {firebase.auth().currentUser.displayName}! Veja os clientes no Mapa.</p>
 
                         <Mapa 
+                            carg_esta={this.state.cargo}
                             LatAtual={this.props.coords.latitude}
                             LongAtual={this.props.coords.longitude} />
 
@@ -198,11 +202,12 @@ class Home extends Component {
                         <p>Olá estafeta {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
 
                         <Mapa
-                            LatAtual={this.props.coords.latitude}
-                            LongAtual={this.props.coords.longitude} />
+                            carg_esta={this.state.cargo}
+                            LatAtual={this.state.coordEstafLat}
+                            LongAtual={this.state.coordEstafLong} />
 
                         
-
+                        <ClientesReservas />
                     </div>
                 );
 

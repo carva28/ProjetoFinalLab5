@@ -128,7 +128,7 @@ export default class componentName extends Component {
 
        var Data     = ["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"],
             MakeItem = function(X) {
-                return <option key={X.id} value={X}>{X}</option>;
+                return <option key={X} value={X}>{X}</option>;
             };
 
             const { reservaLati, reservaLong} = this.props.location.state;

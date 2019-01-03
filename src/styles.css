@@ -392,3 +392,55 @@ h3 {
   color: #0a355c;
   font-weight: 800;
 }
+
+
+
+/***  CSS TABLE ESTAFETA  ****/
+
+ /* The Grid */
+
+ .grid {
+  width: 100%;
+  display: table;
+  border-collapse:separate;
+  border-spacing:5px;
+}
+
+.grid-row {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  margin:0 0 -15px 0;
+  background: #ABB5E8;
+  color:white
+}
+
+.item {
+  display: table-cell;
+  color: black;
+  padding: 2%;
+  text-align: center;
+
+}
+
+.grid hr{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-top: 4px solid #eee;
+}
+@media screen and (max-width: 480px) {
+
+  .grid-row {
+     display: block;
+     width: 100%;
+     margin:0;
+  }
+   
+  .item {
+   display: block;
+   width: 100%;
+   margin: 0 0 5px 0;
+  }  
+  
+ }
+ 

@@ -5,18 +5,20 @@ import autocaravana from '../imgs/autocaravana.png';
 import spot from '../imgs/spot.png';
 import GeoCode from './GeoCode';
 
+var cargo;
 export default class Distance extends React.Component {
 
     divMap;
     divDirectionsPanel;
     directionsDisplay;
-
     constructor(props) {
         super(props);
         this.state = {
             destLatitude: this.props.destinationLatitude,
             destLongitude: this.props.destinationLongitude
         }
+
+        cargo = this.props.carguito;
     }
 
     renderiza = () => {
@@ -146,14 +148,24 @@ export default class Distance extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
-                <div id="Direcoes"
-                    ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
-                <GeoCode />
-            </div>
-        );
+        if(cargo == 'estafeta'){
+            
+            return (
+                <div>
+                    <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
+                    <div id="Direcoes"
+                        ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
+                    <GeoCode />
+                </div>
+            );
+        }else if(cargo == 'cliente'){
+            return(
+                <div>
+                    <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
+                    <GeoCode />
+                </div>
+            );
+        }
     }
 
 }

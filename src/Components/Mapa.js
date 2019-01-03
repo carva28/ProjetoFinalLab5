@@ -3,6 +3,7 @@ import Distance from './Distance';
 import List from './List';
 import firebase from 'firebase';
 
+var cargo;
 var lavandarias = [];
 
 export default class Mapa extends React.Component {
@@ -13,9 +14,8 @@ export default class Mapa extends React.Component {
             destLatitude: null,
             destLongitude: null,
             currentLat: null,
-            currentLong: null
+            currentLong: null,
         }
-
         this.distanceRef = React.createRef();
     }
 
@@ -106,6 +106,7 @@ export default class Mapa extends React.Component {
                     atualLat={this.props.LatAtual}
                     atualLong={this.props.LongAtual} />
                 <Distance
+                    carguito = {this.props.carg_esta}
                     ref={this.distanceRef}
                     currentLatitude={this.props.LatAtual}
                     currentLongitude={this.props.LongAtual}
