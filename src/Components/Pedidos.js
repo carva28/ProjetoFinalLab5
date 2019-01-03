@@ -12,7 +12,7 @@ export default class Pedidos extends React.Component {
         return (
             <div>
                 <div className="Pedidos">
-                    <h1>Reservas</h1>
+                    <h1>Pedidos</h1>
                     <p>Pode consultar aqui os seus pedidos feitos anteriormente, assim como, as suas reservas ativas.</p>
                 </div>
 

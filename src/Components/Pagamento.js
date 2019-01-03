@@ -1,37 +1,30 @@
 import React, { Component } from 'react'
 import firebase from "firebase";
-import { Link,Redirect } from 'react-router-dom';
 import notas from '../imgs/pagamento.png';
 import paypal from '../imgs/paypal.png';
 import Paypal from './Paypal';
+import logo from '../imgs/logo.png';
 var teste;
 
 
 export default class Pagamento extends Component {
 
     constructor(props) {
-
         super(props);
         firebase.database().ref('Number/var_reserva').on('value', (data) => {
             console.log(data.toJSON().a);
             teste = data.toJSON().a;
         })
-
-
-
     }
 
     render() {
 
         return (
             <div id="pagamento_main">
-            {/* <button >jose</button>
-                <Link to="/"> */}
-                    <div className="botoesPagamento" onClick={() => this.fimEncomenda()}>
-                        <img src={notas} alt="monetario" />
-                        <p>Dinheiro</p>
-                    </div>
-                {/* </Link> */}
+                <div className="botoesPagamento" onClick={() => this.fimEncomenda()}>
+                    <img src={notas} alt="monetario" />
+                    <p>Dinheiro</p>
+                </div>
 
                 <div className="botoesPagamento" >
                     <img src={paypal} alt="monetario" />
@@ -41,60 +34,65 @@ export default class Pagamento extends Component {
         )
     }
 
-    fimEncomenda = () =>{
+    fimEncomenda = () => {
         this.fazReserva();
-        document.getElementById('pagamento_main').innerHTML="<h3>"+"Estamos a preparar a sua encomenda"+"</h3>"
-        alert("Obrigado pela sua preferência");
+        document.getElementById('pagamento_main').innerHTML = `<div id='AposEncomenda'><img src=${logo} alt='carrinha' /><h5>Obrigada pela sua reserva, um estafeta está a caminho!</h5></div>`;
         this.espera();
     }
 
-    espera = () => {
+    espera = () => {
         this.timer = setTimeout(() => {
             this.props.history.push('/')
         }, 5000);
     }
-    
-        componentWillUnmount(){
-            clearTimeout(this.timer)
-        }
-    fazReserva = () => {
-        const { nrcalcas, nrcamisas, lat, long, hora, data} = this.props.location.state;
-        console.log(nrcalcas, nrcamisas, lat, long,hora,data);
 
-        if(lat != null && long != null){
-
-        
-        for(let l=teste;l < teste+1;l++) {
-            
-            firebase.database().ref("roupa/Encomenda"+teste+"").set(
-            { 
-                cliente: firebase.auth().currentUser.displayName,
-                NrCamisas:nrcamisas,
-                NrCalças:nrcalcas,
-                CoordenadaLat:lat,
-                CoordenadaLong:long,
-                Horas:hora,
-                Data:data,
-                pagamento:"monetario",
-            }
-            ).then(() => {
-            //console.log("inserido com sucesso");
-            //alert("Inserido com Sucesso");
-            }).catch((error) =>{
-            //console.log(error);
-            });
-        
-        }
-        teste++;
-        // console.log("incrementou"+teste);
-
-        firebase.database().ref("Number/var_reserva").set(
-        { 
-            a:teste,
-        })
+    componentWillUnmount() {
+        clearTimeout(this.timer);
     }
-    firebase.database().ref('roupa').on('value', (data) => {
-        console.log(data.toJSON());
-    })
+
+    fazReserva = () => {
+        const {
+            nrcalcas, nrcamisas, nrcamisolas, nrcasacos, nrdesporto, nrinterior, nrla, nrpijama, nrvestido, lat, long, hora, data, tlmv
+        } = this.props.location.state;
+
+        if (lat != null && long != null) {
+
+            for (let l = teste; l < teste + 1; l++) {
+
+                firebase.database().ref("roupa/Encomenda" + teste + "").set({
+                    cliente: firebase.auth().currentUser.displayName,
+                    NrCamisas: nrcamisas,
+                    NrCalças: nrcalcas,
+                    NrCamisolas: nrcamisolas,
+                    NrCasacos: nrcasacos,
+                    NrDesporto: nrdesporto,
+                    NrInterior: nrinterior,
+                    NrLa: nrla,
+                    NrPijama: nrpijama,
+                    NrVestido: nrvestido,
+                    CoordenadaLat: lat,
+                    CoordenadaLong: long,
+                    Horas: hora,
+                    Data: data,
+                    Telemovel: tlmv,
+                    pagamento: "monetario",
+                    estado: '0'
+                }).then(() => {
+                    console.log("inserido com sucesso");
+                }).catch((error) => {
+                    console.log(error);
+                });
+
+            }
+            teste++;
+
+            firebase.database().ref("Number/var_reserva").set({
+                a: teste,
+            })
+        }
+        
+        firebase.database().ref('roupa').on('value', (data) => {
+            console.log(data.toJSON());
+        })
     }
 }

@@ -3,9 +3,9 @@ import estado01 from '../imgs/estado01.png';
 
 export default class EstadoReserva extends React.Component {
 
-    constructor(props) {
+   /*  constructor(props) {
         super(props);
-    }
+    } */
 
     render() {
         return (
