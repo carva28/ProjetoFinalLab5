@@ -13,7 +13,8 @@ import Route from 'react-router-dom/Route';
 import Reserva from './Components/Reserva';
 import Pagamento from './Components/Pagamento';
 import Pedidos from './Components/Pedidos';
-import EstadoReserva from './Components/EstadoReserva';
+import Estado0 from './Components/Estados/Estado0';
+import Estado1 from './Components/Estados/Estado1';
 
 var toggle = 'fechado';
 
@@ -49,8 +50,8 @@ export default class App extends React.Component {
         this.setState({
           isSignedIn: !!user
         })
-        console.log("user", user)
-        console.log("email", user.email)
+        /* console.log("user", user)
+        console.log("email", user.email) */
       } else {
         this.setState({
           user: null
@@ -84,7 +85,8 @@ export default class App extends React.Component {
                 <Route path='/pagamento' component={Pagamento} />
                 <Route path='/reserva' component={Reserva} />
                 <Route path='/pedidos' component={Pedidos} />
-                <Route path='/estado_reserva' component={EstadoReserva} />
+                <Route path='/estado0' component={Estado0} />
+                <Route path='/estado1' component={Estado1} />
               </Switch>
             </div>
             

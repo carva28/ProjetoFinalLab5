@@ -4,8 +4,8 @@ import notas from '../imgs/pagamento.png';
 import paypal from '../imgs/paypal.png';
 import Paypal from './Paypal';
 import logo from '../imgs/logo.png';
-var teste;
 
+var teste;
 
 export default class Pagamento extends Component {
 

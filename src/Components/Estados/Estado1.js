@@ -1,11 +1,8 @@
 import React from 'react';
-import estado01 from '../imgs/estado01.png';
+import estado1 from '../../imgs/estado01.png';
+import est1 from '../../imgs/est1.png';
 
-export default class EstadoReserva extends React.Component {
-
-   /*  constructor(props) {
-        super(props);
-    } */
+export default class Estado1 extends React.Component {
 
     render() {
         return (
@@ -16,9 +13,9 @@ export default class EstadoReserva extends React.Component {
 
                 <p className="EstadoP">Pedido #123dsa</p>
 
-                {/* falta aqui uma cena bonito que está no Xd */}
+                <img src={est1} alt="estado 0" id="estadoImg" />
 
-                <img src={estado01} alt="primeiro estado" />
+                <img src={estado1} alt="primeiro estado" />
 
                 <h3>EM PROGRESSO...</h3>
                 <p className="EstadoP">A sua roupa está a ser lavada.</p>
