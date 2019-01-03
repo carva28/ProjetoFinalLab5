@@ -18,7 +18,6 @@ export default class Pagamento extends Component {
     }
 
     render() {
-
         return (
             <div id="pagamento_main">
                 <div className="botoesPagamento" onClick={() => this.fimEncomenda()}>
@@ -60,7 +59,7 @@ export default class Pagamento extends Component {
             for (let l = teste; l < teste + 1; l++) {
 
                 firebase.database().ref("roupa/Encomenda" + teste + "").set({
-                    cliente: firebase.auth().currentUser.displayName,
+                    cliente: firebase.auth().currentUser.email,
                     NrCamisas: nrcamisas,
                     NrCalças: nrcalcas,
                     NrCamisolas: nrcamisolas,
