@@ -53,13 +53,13 @@ export default class App extends React.Component {
           for(let est=1;est<=var_estafeta;est++){
             firebase.database().ref("Utilizadores/Estafeta/estafeta0"+est+"").on('value', (data) => {
               //emailteste=data.toJSON().emailestafeta;
-              if(user.email == data.toJSON().emailestafeta){
+              if(user.email === data.toJSON().emailestafeta){
                 alert('I found it')
                 this.setState({
                   cargo:'estafeta'
                 })
                 alert(this.state.cargo)
-              }else if(user.email != data.toJSON().emailestafeta){
+              }else if(user.email !== data.toJSON().emailestafeta){
                 this.setState({
                   cargo:'cliente'
                 })

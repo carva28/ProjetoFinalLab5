@@ -33,7 +33,7 @@ export default class VerificaUser extends React.Component  {
         
     }
   render() {
-    if(this.state.car == 'cliente'){
+    if(this.state.car === 'cliente'){
     return(
         <BrowserRouter>
           <Fragment>
@@ -63,7 +63,7 @@ export default class VerificaUser extends React.Component  {
           </Fragment>
         </BrowserRouter>
     )
-    }else if(this.state.car=='estafeta'){
+    }else if(this.state.car === 'estafeta'){
         return(
             <BrowserRouter>
             <Fragment>
