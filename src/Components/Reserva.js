@@ -107,24 +107,7 @@ export default class componentName extends Component {
     }
 
     render() {
-      // for(let i = 0; i<5;i++){
-
-  //       document.getElementById('reservas').innerHTML +="<div id='reserva"+i+"' className='input-number' style={this.props.style}>"+
-  //       "<div className='caixinha"+i+"'>"+
-  //         "<img src={camisa} alt='camisa-wash-club'/>"+
-  //         "<h4>Camisa</h4>"+
-  //         "<button className='btn_increm"+i+"' type='button' onClick={this.decrement} >&minus;</button>"+
-  //             "<span>{this.value}</span>"+
-  //         "<button className='btn_increm' type='button' onClick={this.increment}>&#43;</button>"+   
-  //       "</div>"+
-  // "</div>"+
-  // "<div id='btn_finaliza_compra'>"+
-  //       "<button id='btn_compra' type='button'><img src={carrinho} alt='comprar' /></button>"+  
-  // "</div>";
-        
-  //       document.getElementById('reserva'+i).style.marginLeft += 10 + "px";
-
-      //}
+     
 
        var Data     = ["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"],
             MakeItem = function(X) {

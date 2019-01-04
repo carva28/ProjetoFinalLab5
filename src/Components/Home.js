@@ -93,7 +93,7 @@ class Home extends Component {
                         })
                     }
      
-        }, 2000);
+        }, 1000);
     } 
 
    
@@ -108,7 +108,7 @@ class Home extends Component {
                         })
                     }
                     this.verificaUser();
-        }, 2000);
+        }, 1000);
     } 
 
 
@@ -128,7 +128,7 @@ class Home extends Component {
                 }
             } 
             
-        }, 3000);
+        }, 1000);
         
     }
 
@@ -167,6 +167,7 @@ class Home extends Component {
     render() {
 
         console.log('dentro do render'+ this.state.cargo);
+        var car_again = this.state.cargo;
             if (this.props.coords != null && this.state.cargo =='cliente') {
                 console.log(this.state.cargo)
                 return (
@@ -175,7 +176,6 @@ class Home extends Component {
                         <p>Olá {firebase.auth().currentUser.displayName}! Veja os clientes no Mapa.</p>
 
                         <Mapa 
-                            carg_esta={this.state.cargo}
                             LatAtual={this.props.coords.latitude}
                             LongAtual={this.props.coords.longitude} />
 
@@ -200,14 +200,12 @@ class Home extends Component {
                     <div id="Home">
                         <h1>Estafeta</h1>
                         <p>Olá estafeta {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
-
-                        <Mapa
-                            carg_esta={this.state.cargo}
-                            LatAtual={this.state.coordEstafLat}
-                            LongAtual={this.state.coordEstafLong} />
-
                         
-                        <ClientesReservas />
+                        <ClientesReservas 
+                            LatAtual={this.state.coordEstafLat}
+                            LongAtual={this.state.coordEstafLong} 
+
+                        />
                     </div>
                 );
 
@@ -216,8 +214,8 @@ class Home extends Component {
                         <div id="Home">
                             <h1>Lavandarias próximas</h1>
                             <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
-                            <button onClick ={() => this.attencion()}>Problemas? Clique aqui</button>
-                            
+                            <button onClick ={() => this.attencion(car_again)}>Problemas? Clique aqui</button>
+                            <h4>Carregando</h4>
                         </div>
                     );
                 }
@@ -228,9 +226,12 @@ class Home extends Component {
         this.props.paraSair();
     }
 
-    attencion = () => {
+    attencion = (carguito) => {
         this.timerzito = setTimeout(() => {
-            alert('atao')
+            alert(carguito)
+            this.setState({
+                cargo: carguito,
+            })
             this.render();
         }, 1000);
     }

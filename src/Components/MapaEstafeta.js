@@ -1,9 +1,7 @@
 
 import React from 'react';
 import * as scriptjs from 'scriptjs';
-import autocaravana from '../imgs/autocaravana.png';
 import spot from '../imgs/spot.png';
-import GeoCode from './GeoCode';
 
 
 export default class Distance extends React.Component {
@@ -61,53 +59,11 @@ export default class Distance extends React.Component {
             }
         };
 
-        let map = new window.google.maps.Map(this.divMap, options, marker, MeuMarker);
-
-        //Cria vários markers
-        var image = {
-            url: autocaravana,
-            size: new window.google.maps.Size(32, 32),
-            origin: new window.google.maps.Point(0, 0),
-            anchor: new window.google.maps.Point(0, 0)
-        };
-
-        for (let i = 0; i < this.props.lavandarias.length; i++) {
-            var marker = new window.google.maps.Marker({
-                position: {
-                    lat: this.props.lavandarias[i][0],
-                    lng: this.props.lavandarias[i][1]
-                },
-                map: map,
-                icon: image,
-                title: this.props.lavandarias[i][2],
-                zIndex: 9999,
-                animation: window.google.maps.Animation.DROP
-            });
-
-            var content = "<h5>" + this.props.lavandarias[i][2] + "</h5>";
-
-            var infowindow = new window.google.maps.InfoWindow();
-
-            var currentInfoWindow = null;
-
-            window.google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
-                return function () {
-                    infowindow.setContent(content);
-
-                    if (currentInfoWindow != null) {
-                        currentInfoWindow.close();
-                    }
-
-                    infowindow.open(map, marker);
-                    currentInfoWindow = infowindow;
-                };
-            })(marker, content, infowindow));
-        }
+        let map = new window.google.maps.Map(this.divMap, options, MeuMarker);
 
         var imageMeuMarker = {
             url: spot,
         };
-
         var MeuMarker = new window.google.maps.Marker({
             position: {
                 lat: this.props.currentLatitude,
@@ -129,9 +85,10 @@ export default class Distance extends React.Component {
         this.directionsDisplay.setPanel(this.divDirectionsPanel);
     }
 
-    calculateRoute(lat1, long1) {
+    calculateRoute(lat1,long1) {
         let directionsService = new window.google.maps.DirectionsService();
         let start = new window.google.maps.LatLng(this.props.currentLatitude, this.props.currentLongitude);
+        //let end = new window.google.maps.LatLng(this.props.destinationLatitude, this.props.destinationLongitude);
         let end = new window.google.maps.LatLng(lat1, long1);
 
         let request = {
@@ -148,11 +105,12 @@ export default class Distance extends React.Component {
     }
 
     render() {
-        
-            return(
+            
+            return (
                 <div>
                     <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
-                    <GeoCode />
+                    <div id="Direcoes"
+                        ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
                 </div>
             );
         
