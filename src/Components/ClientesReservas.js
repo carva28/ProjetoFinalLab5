@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from "firebase";
 import MapaEstafeta from './MapaEstafeta';
-var varreserva,varestado;
+var varreserva;
 export default class ClientesReservas extends Component {
     
     constructor(props){
@@ -41,10 +41,6 @@ export default class ClientesReservas extends Component {
             this.loops(varreserva);
         })
 
-        firebase.database().ref('Number/var_estado').on('value', (data) => {
-            console.log(data.toJSON().f);
-            varestado = data.toJSON().f;
-        })
     }
 
     loops = (varreserva) => {
@@ -52,6 +48,10 @@ export default class ClientesReservas extends Component {
             for(let est=1;est<varreserva;est++){
                 firebase.database().ref("roupa/Encomenda"+est).on('value', (data) => {
 
+                    var estado = data.toJSON().estado;
+                    if(estado == 0){
+                        this.state.estado.push(estado);   
+                    
                     var nrEncomenda = '#Pedido' + est;
                     this.state.nrEncomenda.push(nrEncomenda);
                     
@@ -91,8 +91,10 @@ export default class ClientesReservas extends Component {
                     var nrVestido = data.toJSON().NrVestido;
                     this.state.nrVestido.push(nrVestido);
 
-                    var estado = data.toJSON().estado;
-                    this.state.estado.push(estado);              
+                    }else{
+                        console.log('não faz');
+                    }
+                               
 
                 })
             
@@ -108,7 +110,6 @@ export default class ClientesReservas extends Component {
             for(let it=0; it<this.state.nrEncomenda.length; it++){
                 
                 document.getElementById('selectmain').innerHTML+=`
-                    
                     <option value=${it}>${this.state.nrEncomenda[it]}</option>`;   
 
             }
@@ -145,10 +146,8 @@ export default class ClientesReservas extends Component {
     return(
         <div>
              <select value={this.state.value} onChange={this.handleChange} id="selectmain"></select>
-             <div id="btn_vou"></div>
             <div id="main_info"></div>
             <div id="roupa"></div>
-
             <MapaEstafeta 
                     ref={this.distanceRef}
                     currentLatitude={this.props.LatAtual}
@@ -156,7 +155,7 @@ export default class ClientesReservas extends Component {
                     destinationLatitude={this.state.crdLat}
                     destinationLongitude={this.state.crdLong}
             />
-            <button onClick={() => this.irBuscar()}id="vou2">Vou</button>
+            <button onClick={() => this.irBuscar()} id="vou2">Vou</button>
         </div>
     );
         
@@ -173,9 +172,6 @@ export default class ClientesReservas extends Component {
 
     for(let show=0; show<this.state.mailcliente.length; show++){
         if(valor == show){
-            document.getElementById('btn_vou').innerHTML=`
-                <button id="vou">Vou</button>
-            `;
             document.getElementById('main_info').innerHTML=`
             <div id='clienteInfo'>
                 <h4>Nr Encomenda:<h5>${this.state.nrEncomenda[show]}</h5></h4>
@@ -185,30 +181,6 @@ export default class ClientesReservas extends Component {
                 <h4>Coordenada Long:<h6>${this.state.coordLong[show]}</h6></h4>
             </div>`;
 
-            // this.irBuscar = (varestado) =>{
-            //     //alert(this.state.nrEncomenda[show])
-            //     console.log(varestado);
-            //     firebase.database().ref("roupa/Encomenda"+est).update('value', (data) => {
-            //     // for(let l=varestado;l < varestado+1;l++) {
-            
-            //     //     firebase.database().ref("EstadoEncomenda/estado"+varestado).set(
-            //     //     { 
-            //     //         cliente:this.state.mailcliente[show],
-            //     //         nrEncomenda:this.state.nrEncomenda,
-            //     //         CoordenadaLat:this.state.coordLAT[show],
-            //     //         CoordenadaLong:this.state.coordLong[show],
-            //     //         estado:1,
-            //     //         estafeta:firebase.auth().currentUser.displayName,
-            //     //     });
-            //     // }
-            //     // varestado++;
-        
-            //     // firebase.database().ref("Number/var_estado").set(
-            //     // { 
-            //     //     a:varestado,
-            //     // })
-            
-            // }
 
             this.setState({
                 buscaReserva:this.state.nrEncomenda[show],
@@ -230,67 +202,37 @@ export default class ClientesReservas extends Component {
             });
 
             console.log(this.state.crdLat)
-
+            
+            
             
         }else{
 
         }
  
     }
+
+    
     }
     roupaInfo = (valor) => {
-        for(let roupa=0; roupa<this.state.nrCamisas.length; roupa++){
-            if(valor == roupa){
-            document.getElementById('roupa').innerHTML=`
-                <div id='roupaInfo'>
-                    <h4>Peças:<h5>${this.state.nrCamisas[roupa]}</h5></h4>
-                    <h4>Tipo:<h5>${this.state.nrCalcas[roupa]}</h5></h4>
-                </div>`;
-            }
-            // if(valor == roupa){
-            //     let totalroupa=this.state.nrCalcas[roupa] +this.state.nrCamisas[roupa] + this.state.nrCamisolas[roupa] + this.state.nrCasacos[roupa] + this.state.nrDesporto[roupa] + this.state.nrInterior[roupa] + this.state.nrLa[roupa] + this.state.nrVestido[roupa] + this.state.nrPijama[roupa];
-            //     let veri_completo=[
-            //         [this.state.nrCalcas[roupa],'Calças'],
-            //         [this.state.nrCamisas[roupa],'Camisas'], 
-            //         [this.state.nrCamisolas[roupa],'Camisolas'], 
-            //         [this.state.nrCasacos[roupa],'Casacos'], 
-            //         [this.state.nrDesporto[roupa],'Desporto'], 
-            //         [this.state.nrInterior[roupa],'Interior'],
-            //         [this.state.nrLa[roupa],'La'],
-            //         [this.state.nrVestido[roupa],'Vestido'], 
-            //         [this.state.nrPijama[roupa],'Pijama']
-            //     ];
-            //     console.log(veri_completo)  
+        //ROUPA
 
-            //         // loop the outer array
-            //         for (var i = 0; i < veri_completo.length; i++) {
-            //             // get the size of the inner array
-            //             var innerArrayLength = veri_completo[i].length;
-            //             // loop the inner array
-            //             for (var j = 0; j < innerArrayLength; j++) {
-            //                 console.log('[' + i + ',' + j + '] = ' + veri_completo[i][j]);
-            //                 if(veri_completo[i][j] == 0){
-            //                     //alert("non"+veri_completo[i][j] +"nome"+ veri_completo[i][j+1])
-            //                 }else{
-            //                     //alert("Senhora tonieta"+veri_completo[i][j])
-            //                     if("Senhora tonieta"+veri_completo[i][j+1] != null)
-            //                     document.getElementById('roupa').innerHTML=`
-            //                         <div id='roupaInfo'>
-            //                             <h4>Peças:<h5>${veri_completo[i][j]}</h5></h4>
-            //                             <h4>Tipo:<h5>${veri_completo[i][j+1]}</h5></h4>
-            //                         </div>`;
-            //                 }
-            //                }
-            //             }
-            break;
-                     
-                
-               
-            // }else{
-    
-            // }
-     
+    for(let roupa=0; roupa<this.state.nrCamisas.length; roupa++){
+        if(valor == roupa){
+        let totalroupa=this.state.nrCalcas[roupa] +this.state.nrCamisas[roupa] + this.state.nrCamisolas[roupa] + this.state.nrCasacos[roupa] + this.state.nrDesporto[roupa] + this.state.nrInterior[roupa] + this.state.nrLa[roupa] + this.state.nrVestido[roupa] + this.state.nrPijama[roupa];
+
+        document.getElementById('roupa').innerHTML=`
+            <div id='roupaInfo'>
+                <h3>Número total de peças:${totalroupa}</h3>
+                <h4>Peças:<h5>${this.state.nrCamisas[roupa]}</h5></h4>
+                <h4>Tipo:<h5>${this.state.nrCalcas[roupa]}</h5></h4>
+                <h4>Tipo:<h5>${this.state.nrLa[roupa]}</h5></h4>
+            </div>`;
         }
+      
+        break;
+               
+ 
+    }
          
     }
 

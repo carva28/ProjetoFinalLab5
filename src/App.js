@@ -1,29 +1,20 @@
 import React, { Fragment } from 'react';
 import './styles.css';
 import Login from './Components/Login';
-import Home from './Components/Home';
 import firebase from "firebase";
-import menu from './imgs/menu.png';
-import menu01 from './imgs/menu01.png';
-import menu02 from './imgs/menu02.png';
-import menu03 from './imgs/menu03.png';
-import menu04 from './imgs/menu04.png';
-import { BrowserRouter, Link, Switch } from 'react-router-dom';
-import Route from 'react-router-dom/Route';
-import Reserva from './Components/Reserva';
-import Pagamento from './Components/Pagamento';
-import Pedidos from './Components/Pedidos';
-import EstadoReserva from './Components/EstadoReserva';
+import VerificaUser from './Components/VerifcaUser';
 
 var toggle = 'fechado';
-
+var var_estafeta;
 export default class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       user: {},
-      isSignedIn: false
+      isSignedIn: false,
+      cargo:'',
+      arrayestafeta:[],
     }
   }
 
@@ -51,6 +42,42 @@ export default class App extends React.Component {
         })
         console.log("user", user)
         console.log("email", user.email)
+
+        firebase.database().ref('Number/var_estafeta').on('value', (data) => {
+          console.log(data.toJSON().d);
+          var_estafeta=data.toJSON().d;
+         
+        }) 
+        
+        this.estaloops = setTimeout(() =>{
+          for(let est=1;est<=var_estafeta;est++){
+            firebase.database().ref("Utilizadores/Estafeta/estafeta0"+est+"").on('value', (data) => {
+              //emailteste=data.toJSON().emailestafeta;
+              if(user.email == data.toJSON().emailestafeta){
+                alert('I found it')
+                this.setState({
+                  cargo:'estafeta'
+                })
+                alert(this.state.cargo)
+              }else if(user.email != data.toJSON().emailestafeta){
+                this.setState({
+                  cargo:'cliente'
+                })
+                alert('try again estafeta')
+              }
+            })
+            
+            
+          }
+            
+              
+            
+            
+          
+
+        }, 1000);
+
+
       } else {
         this.setState({
           user: null
@@ -60,38 +87,18 @@ export default class App extends React.Component {
   }
 
   render() {
-
+    console.log(this.state.cargo)
     if (this.state.isSignedIn === true) {
-      return (
-        <BrowserRouter>
-          <Fragment>
-            
-            <div>
-              <div id="Menu">
-                <h2>washClub</h2>
-                <img src={menu} alt="menu" onClick={() => this.toggleLista()} />
-                <div id="ListaMenu">
-                  <img src={menu01} alt="menu1" /><li><Link to="/">Home</Link></li>
-                  <img src={menu02} alt="menu2" /><li><Link to="/pedidos">Pedidos</Link></li>
-                  <img src={menu03} alt="menu3" /><li>Definições</li>
-                  <img src={menu04} alt="menu4" /><li onClick={this.signOut}>Sair</li>
-
-                </div>
-              </div>
-
-              <Switch>
-                <Route path='/' exact strict component={Home} />
-                <Route path='/pagamento' component={Pagamento} />
-                <Route path='/reserva' component={Reserva} />
-                <Route path='/pedidos' component={Pedidos} />
-                <Route path='/estado_reserva' component={EstadoReserva} />
-              </Switch>
-            </div>
-            
-          </Fragment>
-        </BrowserRouter>
-      )
-    } else {
+      
+      return(
+      <div> 
+        <VerificaUser 
+          ola={this.state.cargo}
+        />
+      </div>
+      );
+     
+    }else {
       return (
         <div>
           <Login />
