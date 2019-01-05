@@ -3,10 +3,10 @@ import firebase from "firebase";
 import MapaEstafeta from './MapaEstafeta';
 var varreserva;
 export default class ClientesReservas extends Component {
-    
-    constructor(props){
+
+    constructor(props) {
         super(props);
-        this.state= {
+        this.state = {
             nrEncomenda: [],
             mailcliente: [],
             coordLAT: [],
@@ -21,22 +21,21 @@ export default class ClientesReservas extends Component {
             nrPijama: [],
             nrVestido: [],
             estado: [],
-            crdLat:'',
-            crdLong:'',
-            buscaReserva:'',
-            var_reserva:''
+            crdLat: '',
+            crdLong: '',
+            buscaReserva: '',
+            var_reserva: ''
         }
         this.distanceRef = React.createRef();
-      
     }
-    
-    componentDidMount(){
-        
+
+    componentDidMount() {
+
         firebase.database().ref('Number/var_reserva').on('value', (data) => {
             console.log(data.toJSON().a);
             varreserva = data.toJSON().a;
             this.setState({
-                var_reserva:varreserva,
+                var_reserva: varreserva,
             })
             this.loops(varreserva);
         })
@@ -44,19 +43,18 @@ export default class ClientesReservas extends Component {
     }
 
     loops = (varreserva) => {
-        alert('entra')
-            for(let est=1;est<varreserva;est++){
-                firebase.database().ref("roupa/Encomenda"+est).on('value', (data) => {
+        for (let est = 1; est < varreserva; est++) {
+            firebase.database().ref("roupa/Encomenda" + est).on('value', (data) => {
 
-                    var estado = data.toJSON().estado;
-                    if(estado == 0){
-                        this.state.estado.push(estado);   
-                    
+                var estado = data.toJSON().estado;
+                if (estado == 0) {
+                    this.state.estado.push(estado);
+
                     var nrEncomenda = '#Pedido' + est;
                     this.state.nrEncomenda.push(nrEncomenda);
-                    
+
                     var ecliente = data.toJSON().cliente;
-                    this.state.mailcliente.push(ecliente);  
+                    this.state.mailcliente.push(ecliente);
 
                     var nrLat = data.toJSON().CoordenadaLat;
                     this.state.coordLAT.push(nrLat);
@@ -91,88 +89,88 @@ export default class ClientesReservas extends Component {
                     var nrVestido = data.toJSON().NrVestido;
                     this.state.nrVestido.push(nrVestido);
 
-                    }else{
-                        console.log('não faz');
-                    }
-                               
+                } else {
+                    console.log('não faz');
+                }
 
-                })
-            
-                
-            }
+
+            })
+
+
+        }
 
         this.srh();
     }
 
     srh = () => {
-        this.verifica = setTimeout(() =>{
-            
-            for(let it=0; it<this.state.nrEncomenda.length; it++){
-                
-                document.getElementById('selectmain').innerHTML+=`
-                    <option value=${it}>${this.state.nrEncomenda[it]}</option>`;   
+        this.verifica = setTimeout(() => {
+
+            for (let it = 0; it < this.state.nrEncomenda.length; it++) {
+
+                document.getElementById('selectmain').innerHTML += `
+                    <option value=${it}>${this.state.nrEncomenda[it]}</option>`;
 
             }
-            
+
         }, 500);
-    } 
-
-
-    irBuscar = () =>{
-            console.log(this.state.buscaReserva); 
-            console.log(this.state.var_reserva)         
-            for(let est=1;est<this.state.var_reserva;est++){
-                let pedido = '#Pedido'+est;
-                console.log(pedido)
-                    if(pedido == this.state.buscaReserva){
-                        firebase.database().ref("roupa/Encomenda"+est).update(
-                        { 
-                                estado:1,
-                                estafeta:firebase.auth().currentUser.displayName,           
-                        }
-                        );
-                        
-                    }else{
-                    }
-                
-            }
-        
     }
-    
-  render() {
-  
-   
 
-    return(
-        <div>
-             <select value={this.state.value} onChange={this.handleChange} id="selectmain"></select>
-            <div id="main_info"></div>
-            <div id="roupa"></div>
-            <MapaEstafeta 
+
+    irBuscar = () => {
+        console.log(this.state.buscaReserva);
+        console.log(this.state.var_reserva)
+        for (let est = 1; est < this.state.var_reserva; est++) {
+            let pedido = '#Pedido' + est;
+            console.log(pedido)
+            if (pedido == this.state.buscaReserva) {
+                firebase.database().ref("roupa/Encomenda" + est).update(
+                    {
+                        estado: 1,
+                        estafeta: firebase.auth().currentUser.displayName,
+                    }
+                );
+
+            } else {
+            }
+
+        }
+
+    }
+
+    render() {
+
+
+
+        return (
+            <div>
+                <select value={this.state.value} onChange={this.handleChange} id="selectmain"></select>
+                <div id="main_info"></div>
+                <div id="roupa"></div>
+                <MapaEstafeta
                     ref={this.distanceRef}
                     currentLatitude={this.props.LatAtual}
                     currentLongitude={this.props.LongAtual}
                     destinationLatitude={this.state.crdLat}
                     destinationLongitude={this.state.crdLong}
-            />
-            <button onClick={() => this.irBuscar()} id="vou2">Vou</button>
-        </div>
-    );
-        
-  }
+                />
+                <button onClick={() => this.irBuscar()} id="vou2">Vou</button>
+            </div>
+        );
 
-  handleChange = (event) => {
-    this.setState({value: event.target.value});
-    this.forInfo(event.target.value)
-    this.roupaInfo(event.target.value)
-  }
+    }
 
-  forInfo = (valor) => {
-    let destino;
+    handleChange = (event) => {
+        this.setState({ value: event.target.value });
+        this.forInfo(event.target.value)
+        this.roupaInfo(event.target.value)
+    }
 
-    for(let show=0; show<this.state.mailcliente.length; show++){
-        if(valor == show){
-            document.getElementById('main_info').innerHTML=`
+    forInfo = (valor) => {
+        let destino;
+
+        for (let show = 0; show < this.state.mailcliente.length; show++) {
+            if (valor == show) {
+                document.getElementById('main_info').innerHTML = `
             <div id='clienteInfo'>
                 <h4>Nr Encomenda:<h5>${this.state.nrEncomenda[show]}</h5></h4>
                 <h4>Cliente:<h6>${this.state.mailcliente[show]}</h6></h4>
@@ -182,58 +180,58 @@ export default class ClientesReservas extends Component {
             </div>`;
 
 
-            this.setState({
-                buscaReserva:this.state.nrEncomenda[show],
-            })
+                this.setState({
+                    buscaReserva: this.state.nrEncomenda[show],
+                })
 
 
-            this.setState({
-                crdLat:this.state.coordLAT[show],
-                crdLong:this.state.coordLong[show],
-           
-            })
-            destino = {
-                destLatitude: this.state.coordLAT[show],
-                destLongitude: this.state.coordLong[show],
-            };
+                this.setState({
+                    crdLat: this.state.coordLAT[show],
+                    crdLong: this.state.coordLong[show],
 
-            this.setState(destino, () => {
-                this.distanceRef.current.renderiza();
-            });
+                })
+                destino = {
+                    destLatitude: this.state.coordLAT[show],
+                    destLongitude: this.state.coordLong[show],
+                };
 
-            console.log(this.state.crdLat)
-            
-            
-            
-        }else{
+                this.setState(destino, () => {
+                    this.distanceRef.current.renderiza();
+                });
+
+                console.log(this.state.crdLat)
+
+
+
+            } else {
+
+            }
 
         }
- 
-    }
 
-    
+
     }
     roupaInfo = (valor) => {
         //ROUPA
 
-    for(let roupa=0; roupa<this.state.nrCamisas.length; roupa++){
-        if(valor == roupa){
-        let totalroupa=this.state.nrCalcas[roupa] +this.state.nrCamisas[roupa] + this.state.nrCamisolas[roupa] + this.state.nrCasacos[roupa] + this.state.nrDesporto[roupa] + this.state.nrInterior[roupa] + this.state.nrLa[roupa] + this.state.nrVestido[roupa] + this.state.nrPijama[roupa];
+        for (let roupa = 0; roupa < this.state.nrCamisas.length; roupa++) {
+            if (valor == roupa) {
+                let totalroupa = this.state.nrCalcas[roupa] + this.state.nrCamisas[roupa] + this.state.nrCamisolas[roupa] + this.state.nrCasacos[roupa] + this.state.nrDesporto[roupa] + this.state.nrInterior[roupa] + this.state.nrLa[roupa] + this.state.nrVestido[roupa] + this.state.nrPijama[roupa];
 
-        document.getElementById('roupa').innerHTML=`
+                document.getElementById('roupa').innerHTML = `
             <div id='roupaInfo'>
                 <h3>Número total de peças:${totalroupa}</h3>
                 <h4>Peças:<h5>${this.state.nrCamisas[roupa]}</h5></h4>
                 <h4>Tipo:<h5>${this.state.nrCalcas[roupa]}</h5></h4>
                 <h4>Tipo:<h5>${this.state.nrLa[roupa]}</h5></h4>
             </div>`;
+            }
+
+            break;
+
+
         }
-      
-        break;
-               
- 
-    }
-         
+
     }
 
 
