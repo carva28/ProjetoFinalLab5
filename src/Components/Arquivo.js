@@ -1,12 +1,11 @@
 import React from 'react';
-import arquivo from '../imgs/arquivo.png';
 import verMais from '../imgs/verReserva.png';
 import { Link } from 'react-router-dom';
 import firebase from "firebase";
 
 var varreserva;
 
-export default class Pedidos extends React.Component {
+export default class Arquivo extends React.Component {
 
     constructor(props) {
         super(props);
@@ -88,22 +87,11 @@ export default class Pedidos extends React.Component {
 
             for (let e = 0; e < this.state.cliente.length; e++) {
 
-                if (this.state.cliente[e] === firebase.auth().currentUser.email && this.state.estado[e] < 4) {
-                    document.getElementById('Enc').innerHTML += `
-                        <div class="PedidosAtivos">
-                            <div class="Ativos">
-                                <p>${this.state.nrEncomenda[e]}</p>
-                                <span>Calças: ${this.state.nrCalcas[e]}</span>
-                                <span>Camisas: ${this.state.nrCamisas[e]}</span>
-                                <span>Camisolas: ${this.state.nrCamisolas[e]}</span>
-                                <span>Casacos: ${this.state.nrCasacos[e]}</span>
-                                <span>Roupas de Desporto: ${this.state.nrDesporto[e]}</span>
-                                <span>Roupas Interiores: ${this.state.nrInterior[e]}</span>
-                                <span>Roupas de Lã: ${this.state.nrLa[e]}</span>
-                                <span>Pijamas: ${this.state.nrPijama[e]}</span>
-                                <span>Vestidos: ${this.state.nrVestido[e]}</span>
-                            </div>
-                            <a href="/estado${this.state.estado[e]}"><img src=${verMais} alt="Botão para ver detalhes da reserva" /></a>
+                if (this.state.cliente[e] === firebase.auth().currentUser.email && this.state.estado[e] > 3) {
+                    document.getElementById('divArq').innerHTML += `
+                        <div class="PedidosArquivados">
+                            <p>${this.state.nrEncomenda[e]}</p>
+                            <button>Ver mais</button>
                         </div>`;
                 }
 
@@ -113,34 +101,13 @@ export default class Pedidos extends React.Component {
     }
 
     render() {
-
         return (
-            <div>
-
-                <div id="ola"></div>
-
-                <div className="Pedidos">
-                    <h1>Pedidos</h1>
-                    <p>Pode consultar aqui os seus pedidos feitos anteriormente, assim como, as suas reservas ativas.</p>
-                </div>
-
-                <div id="borderCima"></div>
-
-                <div className="Pedidos">
-                    <Link to="/arquivo">
-                        <div id="divArq">
-                            <img src={arquivo} alt="Imagem de um arquivo" />
-                            <h4 id="Arquivo">Arquivo</h4>
-                        </div>
-                    </Link>
-                </div>
-
-                <div id="borderBaixo"></div>
-
-                <div className="Pedidos" id="Enc">
-                    <div id="Carrega">A carregar os seus pedidos...</div>
-                </div>
-
+            <div id="ArquivoPag">
+                <h1>Arquivo</h1>
+                <p>Aqui pode visualizar encomendas efetuadas anteriormente.</p>
+                <div id="Carrega">A carregar as suas reservas arquivadas...</div>
+                
+                <div id="divArq"></div>
             </div>
         )
     }

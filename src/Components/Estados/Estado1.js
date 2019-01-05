@@ -13,7 +13,7 @@ export default class Estado1 extends React.Component {
 
                 <p className="EstadoP">Pedido #123dsa</p>
 
-                <img src={est1} alt="estado 0" id="estadoImg" />
+                <img src={est1} alt="estado 1" id="estadoImg" />
 
                 <img src={estado1} alt="primeiro estado" />
 

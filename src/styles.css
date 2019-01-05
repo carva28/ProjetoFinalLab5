@@ -401,11 +401,13 @@ input#numTlmv::placeholder {
 }
 
 .Ativos {
-  background-color: #F2F2F2;
+  width: 90%;
   padding: 20px;
   margin: 0 20px 0 0;
+  background-color: #F2F2F2;
   float: left;
-  width: 90%;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 10px;
 }
 
 .Ativos p {
@@ -413,13 +415,27 @@ input#numTlmv::placeholder {
   margin-bottom: 0;
 }
 
+.Ativos span {
+  color: grey;
+  line-height: 30px;
+  margin-left: 20px;
+  float: left;
+  clear: both;
+}
+
+.Ativos span:first-of-type {
+  margin-top: 10px;
+}
+
 .PedidosAtivos {
   margin-bottom: 20px;
+  overflow: hidden;
+  padding: 10px;
 }
 
 .PedidosAtivos img {
   height: 25px;
-  margin: 14px 0px;
+  margin: 150px 0 0 0;
 }
 
 
@@ -433,6 +449,7 @@ input#numTlmv::placeholder {
   color: #A4A4A4;
   text-align: center;
   font-weight: 100;
+  margin-bottom: 50px;
 }
 
 #EstadoReserva img {
@@ -469,4 +486,42 @@ input#numTlmv::placeholder {
   font-size: 2rem;
   text-align: center;
   line-height: 40px;
+}
+
+
+/* ---- ARQUIVO.JS ---- */
+#ArquivoPag {
+  width: 90%;
+  margin: auto;
+}
+
+#divArq {
+  overflow: hidden;
+}
+
+.PedidosArquivados {
+  width: 165px;
+  background-color: #F2F2F2;
+  padding: 40px;
+  margin: 30px 6px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 10px;
+  float: left;
+}
+
+.PedidosArquivados p {
+  line-height: normal;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.PedidosArquivados button {
+  background-color: #D493C5;
+  margin: auto;
+  display: block;
+  margin: 15px auto 0 auto;
+  padding: 10px 15px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 10px;
+  color: white;
 }
