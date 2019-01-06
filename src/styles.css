@@ -102,6 +102,7 @@ input[type=date] {
   display: none;
   background-color: #F2F2F2;
   width: 100%;
+  position: absolute;
 }
 
 #ListaMenu li {
@@ -145,8 +146,15 @@ input[type=date] {
   margin: 25px auto;
 }
 
+#btn_notification button {
+  background-color: #abb5e8;
+  font-size: 1.5rem;
+  padding: 15px 20px;
+  color: #2d2d2d;
+}
+
 #MapaGoogle {
-  width: 90%;
+  width: 100%;
   height: 450px;
   overflow: scroll;
   margin: auto;
@@ -161,7 +169,6 @@ input[type=date] {
 
 /* ---- LIST.JS ---- */
 #List {
-  width: 90%;
   margin: 20px auto;
   overflow: hidden;
 }
@@ -177,7 +184,7 @@ input[type=date] {
 }
 
 #List select {
-  width: 250px;
+  width: 280px;
   height: 40px;
   background-color: #F2F2F2;
   margin-left: 2px;
@@ -323,6 +330,7 @@ input#numTlmv::placeholder {
 #selectTempo {
   overflow: hidden;
   clear: both;
+  margin-bottom: 50px;
 }
 
 #selectTempo select {
@@ -337,6 +345,15 @@ input#numTlmv::placeholder {
 
 
 /** ---- PAGAMENTO.JS ---- **/
+#Pagamento {
+  width: 90%;
+  margin: auto;
+}
+
+#escolhaOp {
+  margin-bottom: 40px;
+}
+
 .botoesPagamento {
   background-color: #dddddd;
   width: 215px;
@@ -500,28 +517,47 @@ input#numTlmv::placeholder {
 }
 
 .PedidosArquivados {
-  width: 165px;
+  width: 96%;
+  overflow: hidden;
   background-color: #F2F2F2;
-  padding: 40px;
+  padding: 30px;
   margin: 30px 6px;
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 10px;
+}
+
+.pArquivo {
   float: left;
+  overflow: hidden;
 }
 
 .PedidosArquivados p {
-  line-height: normal;
-  margin-bottom: 0;
-  text-align: center;
-}
-
-.PedidosArquivados button {
   background-color: #D493C5;
-  margin: auto;
   display: block;
-  margin: 15px auto 0 auto;
+  margin: 100px 10px 0 0;
   padding: 10px 15px;
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 10px;
   color: white;
+}
+
+.dataArq {
+  background-color: transparent !important;
+  color: #2d2d2d !important;
+  clear: both;
+  margin: 0 !important;
+  box-shadow: none !important;
+  padding: 10px !important;
+}
+
+.RoupasPedidos {
+  float: left;
+}
+
+.PedidosArquivados span {
+  color: grey;
+  line-height: 30px;
+  margin-left: 20px;
+  float: left;
+  clear: both;
 }

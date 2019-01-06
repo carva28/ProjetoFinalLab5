@@ -21,7 +21,9 @@ export default class Arquivo extends React.Component {
             nrLa: [],
             nrPijama: [],
             nrVestido: [],
-            estado: []
+            estado: [],
+            data: [],
+            horas: []
         }
     }
 
@@ -73,6 +75,9 @@ export default class Arquivo extends React.Component {
 
                 var estado = data.toJSON().estado;
                 this.state.estado.push(estado);
+
+                var data = data.toJSON().Data;
+                this.state.data.push(data);
             })
         }
 
@@ -90,8 +95,21 @@ export default class Arquivo extends React.Component {
                 if (this.state.cliente[e] === firebase.auth().currentUser.email && this.state.estado[e] > 3) {
                     document.getElementById('divArq').innerHTML += `
                         <div class="PedidosArquivados">
-                            <p>${this.state.nrEncomenda[e]}</p>
-                            <button>Ver mais</button>
+                            <div class="pArquivo">
+                                <p>${this.state.nrEncomenda[e]}</p>
+                                <p class="dataArq">${this.state.data[e]}</p>
+                            </div>
+                            <div class="RoupasPedidos">
+                                <span>Calças: ${this.state.nrCalcas[e]}</span>
+                                <span>Camisas: ${this.state.nrCamisas[e]}</span>
+                                <span>Camisolas: ${this.state.nrCamisolas[e]}</span>
+                                <span>Casacos: ${this.state.nrCasacos[e]}</span>
+                                <span>Roupas de Desporto: ${this.state.nrDesporto[e]}</span>
+                                <span>Roupas Interiores: ${this.state.nrInterior[e]}</span>
+                                <span>Roupas de Lã: ${this.state.nrLa[e]}</span>
+                                <span>Pijamas: ${this.state.nrPijama[e]}</span>
+                                <span>Vestidos: ${this.state.nrVestido[e]}</span>
+                            </div>
                         </div>`;
                 }
 
@@ -106,7 +124,7 @@ export default class Arquivo extends React.Component {
                 <h1>Arquivo</h1>
                 <p>Aqui pode visualizar encomendas efetuadas anteriormente.</p>
                 <div id="Carrega">A carregar as suas reservas arquivadas...</div>
-                
+
                 <div id="divArq"></div>
             </div>
         )

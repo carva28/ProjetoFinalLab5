@@ -19,7 +19,10 @@ export default class Pagamento extends Component {
 
     render() {
         return (
-            <div id="pagamento_main">
+            <div id="Pagamento">
+                <h1>Pagamento</h1>
+                <p id="escolhaOp">Escolha a opção de pagamento.</p>
+
                 <div className="botoesPagamento" onClick={() => this.fimEncomenda()}>
                     <img src={notas} alt="monetario" />
                     <p>Dinheiro</p>
@@ -35,7 +38,7 @@ export default class Pagamento extends Component {
 
     fimEncomenda = () => {
         this.fazReserva();
-        document.getElementById('pagamento_main').innerHTML = `<div id='AposEncomenda'><img src=${logo} alt='carrinha' /><h5>Obrigada pela sua reserva, um estafeta está a caminho!</h5></div>`;
+        document.getElementById('Pagamento').innerHTML = `<div id='AposEncomenda'><img src=${logo} alt='carrinha' /><h5>Obrigada pela sua reserva, um estafeta está a caminho!</h5></div>`;
         this.espera();
     }
 
