@@ -38,10 +38,19 @@ h1 {
   color: #0A355C;
   text-transform: uppercase;
   font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
 h3 {
   font-size: 1.4rem;
+}
+
+input[type=date] {
+  line-height: 18px;
+  width: 250px;
+  background-color: #F2F2F2;
+  padding: 10px 20px;
 }
 
 
@@ -69,7 +78,7 @@ h3 {
   overflow: hidden;
   background-color: #ABB5E8;
   margin-bottom: 40px;
-  box-shadow:  0px 10px 37px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 #Menu h2 {
@@ -93,6 +102,8 @@ h3 {
   display: none;
   background-color: #F2F2F2;
   width: 100%;
+  position: absolute;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 4px 20px 0;
 }
 
 #ListaMenu li {
@@ -132,13 +143,19 @@ h3 {
   color: white;
   border-radius: 15px;
   font-size: 1.6rem;
-  margin: auto;
   display: block;
-  margin-bottom: 50px;
+  margin: 25px auto;
+}
+
+#btn_notification button {
+  background-color: #abb5e8;
+  font-size: 1.5rem;
+  padding: 15px 20px;
+  color: #2d2d2d;
 }
 
 #MapaGoogle {
-  width: 90%;
+  width: 100%;
   height: 450px;
   overflow: scroll;
   margin: auto;
@@ -153,7 +170,6 @@ h3 {
 
 /* ---- LIST.JS ---- */
 #List {
-  width: 90%;
   margin: 20px auto;
   overflow: hidden;
 }
@@ -169,7 +185,7 @@ h3 {
 }
 
 #List select {
-  width: 250px;
+  width: 280px;
   height: 40px;
   background-color: #F2F2F2;
   margin-left: 2px;
@@ -197,36 +213,62 @@ h3 {
 
 /** ---- RESERVA.JS ---- **/
 #Reserva {
-  position: relative;
-  overflow: hidden;
+  width: 90%;
   margin: auto;
-  border-radius: 20px;
-  width: 100%;
-  padding-bottom: 15px;
+  overflow: hidden;
+}
+
+#Reserva h3 {
+  background-color: #F2F2F2;
+  width: 95px;
+  padding: 12px;
+  float: left;
+  margin: 0 10px 40px 0;
+}
+
+.inputReserva {
+  background-color: #F2F2F2;
+  padding: 8px 15px;
+  width: 20%;
+  line-height: 25px;
+  float: left;
+  margin-right: 4px;
+}
+
+#numTlmv {
+  background-color: #F2F2F2;
+  padding: 10px 25px;
+  width: 350px;
+  margin-bottom: 40px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 12px;
+}
+
+input#numTlmv::placeholder {
+  color: #2D2D2D;
 }
 
 .caixinha {
   border-radius: 40px;
   background-color: rgb(221, 221, 221);
-  width: 180px;
+  width: 164px;
   overflow: hidden;
-  padding: 20px 30px;
+  padding: 20px 20px;
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
   float: left;
-  margin: 0 4%;
+  margin: 0 2% 30px 2%;
 }
 
 .caixinha img {
-  width: 100%;
+  width: 83%;
   display: block;
-  padding-top: 5px;
   margin: auto;
 }
 
 .caixinha h4 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
-  margin-top: 25px;
+  margin-top: 20px;
 }
 
 .botoesReserva {
@@ -237,9 +279,9 @@ h3 {
 
 .botoesReserva span {
   display: inline-block;
-  width: 52px;
+  width: 56px;
   text-align: center;
-  line-height: 40px;
+  line-height: 30px;
   font-size: 1.5rem;
   color: #6C6DFF;
 }
@@ -257,14 +299,20 @@ h3 {
   background-color: rgb(155, 105, 189);
 }
 
+#Roupas {
+  clear: both;
+  overflow: hidden;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+}
+
 #btn_finaliza_compra {
   display: none;
   background-color: #2d2d2d;
   width: 180px;
   overflow: hidden;
   border-radius: 20px;
-  margin-top: 40px;
-  margin-left: calc(50% - 90px);
+  margin: 40px auto 50px calc(50% - 90px);
   padding: 20px;
 }
 
@@ -280,9 +328,33 @@ h3 {
   margin: 0 0 0 20px;
 }
 
+#selectTempo {
+  overflow: hidden;
+  clear: both;
+  margin-bottom: 50px;
+}
+
+#selectTempo select {
+  width: 75%;
+  background-color: #F2F2F2;
+  padding: 12.5px 16px;
+}
+
+#data {
+  width: 75%;
+}
 
 
 /** ---- PAGAMENTO.JS ---- **/
+#Pagamento {
+  width: 90%;
+  margin: auto;
+}
+
+#escolhaOp {
+  margin-bottom: 40px;
+}
+
 .botoesPagamento {
   background-color: #dddddd;
   width: 215px;
@@ -347,11 +419,13 @@ h3 {
 }
 
 .Ativos {
-  background-color: #F2F2F2;
+  width: 90%;
   padding: 20px;
   margin: 0 20px 0 0;
+  background-color: #F2F2F2;
   float: left;
-  width: 90%;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 10px;
 }
 
 .Ativos p {
@@ -359,13 +433,27 @@ h3 {
   margin-bottom: 0;
 }
 
+.Ativos span {
+  color: grey;
+  line-height: 30px;
+  margin-left: 20px;
+  float: left;
+  clear: both;
+}
+
+.Ativos span:first-of-type {
+  margin-top: 10px;
+}
+
 .PedidosAtivos {
   margin-bottom: 20px;
+  overflow: hidden;
+  padding: 10px;
 }
 
 .PedidosAtivos img {
   height: 25px;
-  margin: 14px 0px;
+  margin: 150px 0 0 0;
 }
 
 
@@ -379,6 +467,7 @@ h3 {
   color: #A4A4A4;
   text-align: center;
   font-weight: 100;
+  margin-bottom: 50px;
 }
 
 #EstadoReserva img {
@@ -393,30 +482,128 @@ h3 {
   font-weight: 800;
 }
 
+#EstafetaCaminho {
+  margin-bottom: 50px;
+}
+
+#estadoImg {
+  width: 38% !important;
+  margin: 30px auto 50px auto !important;
+}
 
 
-/***  CSS TABLE ESTAFETA  ****/
+/* ---- APOSENCOMENDA.JS ---- */
+#AposEncomenda {
+  width: 65%;
+  margin: auto;
+}
+
+#AposEncomenda img {
+  width: 100%;
+  display: block;
+  margin: 80px auto 30px auto;
+}
+
+#AposEncomenda h5 {
+  font-size: 2rem;
+  text-align: center;
+  line-height: 40px;
+}
 
 
+/* ---- ARQUIVO.JS ---- */
+#ArquivoPag {
+  width: 90%;
+  margin: auto;
+}
+
+#divArq {
+  overflow: hidden;
+}
+
+.PedidosArquivados {
+  width: 96%;
+  overflow: hidden;
+  background-color: #F2F2F2;
+  padding: 30px;
+  margin: 30px 6px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 10px;
+}
+
+.pArquivo {
+  float: left;
+  overflow: hidden;
+}
+
+.PedidosArquivados p {
+  background-color: #D493C5;
+  display: block;
+  margin: 100px 10px 0 0;
+  padding: 10px 15px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 10px;
+  color: white;
+}
+
+.dataArq {
+  background-color: transparent !important;
+  color: #2d2d2d !important;
+  clear: both;
+  margin: 0 !important;
+  box-shadow: none !important;
+  padding: 10px !important;
+}
+
+.RoupasPedidos {
+  float: left;
+}
+
+.PedidosArquivados span {
+  color: grey;
+  line-height: 30px;
+  margin-left: 20px;
+  float: left;
+  clear: both;
+}
+
+
+/* ---- TABLE ESTAFETA ---- */
 #selectmain {
   margin-top: 50px;
   background-color: #ABB5E8;
   width: 50%;
   height: 50px;
   color: white;
-
 }
- #clienteInfo{
+
+#clienteInfo {
   float: left;
   width: 40%;
- }
+}
 
- #roupa{
+#roupa {
   float: left;
   width: 50%;
- }
+}
 
- .adp-summary{
-    font-size: 50px;
- }
- 
+.adp-summary {
+  font-size: 50px;
+}
+
+
+/* ---- LOADINGSCREEN.JS ---- */
+#Loading {
+  margin: auto;
+  width: 80%;
+}
+
+#Loading img {
+  width: 80%;
+  margin: 180px auto 50px auto;
+  display: block;
+}
+
+#Loading h1 {
+  text-align: center;
+}

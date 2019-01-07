@@ -21,8 +21,22 @@ https://developers.google.com/maps/documentation/javascript/examples/marker-anim
 ###### Texto dos markers
 https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko
 
-### `Falta colocar a verificação dos admin e dos estafetas`
-Mal isto esteja deveremos ter que mudar o HTML para cada user
 
-+ O admin terá acesso aos estafetas e atribuí-lhes as tarefas consoante as horas e envia notificação
-+ O estafeta envia notificação e vê quais são os clientes e as tarefas
+### `Falta `
+|   TRABALHO     | ESTADO           | 
+| ------------- |:-------------:|
+| Falta colocar a verificação dos admin e dos estafetas     | ✅
+| O estafeta envia notificação e vê quais são os clientes e as tarefas(erro a mostrar quais tarefas)    | Progresso 👨🏻‍💻   Notificação works 🛎 moreless  | 
+|Ao enviar as reservas acresentar uma variável para a notificação varnotificacao:0| ❌|
+| Falta a cena do Facebook, por o link    | ❌|
+| Falta a cena da route do mapa no estafeta  | ✅|
+| O admin terá acesso aos estafetas e atribuí-lhes as tarefas consoante as horas e envia notificação | ⚠️   Facultativo   | 
+| Speech Regconition    | ⚠️   Facultativo ✅
+
+
+
+|links|
+| ------ |
+| https://www.npmjs.com/package/react-speech-recognition |
+| https://www.youtube.com/watch?v=0mJC0A72Fnw |
+| https://www.npmjs.com/package/react-speech-recognition-status |

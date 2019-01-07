@@ -1,8 +1,6 @@
-
 import React from 'react';
 import * as scriptjs from 'scriptjs';
 import spot from '../imgs/spot.png';
-
 
 export default class Distance extends React.Component {
 
@@ -15,7 +13,6 @@ export default class Distance extends React.Component {
             destLatitude: this.props.destinationLatitude,
             destLongitude: this.props.destinationLongitude
         }
-
 
     }
 
@@ -30,7 +27,7 @@ export default class Distance extends React.Component {
 
     componentDidMount() {
         this.timer = setTimeout(() => {
-            scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
+            scriptjs('https:/maps.googleapis.com/maps/api/js?key=API_KEY&sensor=false',
                 () => {
                     this.createMap();
                     this.calculateRoute();
@@ -85,7 +82,7 @@ export default class Distance extends React.Component {
         this.directionsDisplay.setPanel(this.divDirectionsPanel);
     }
 
-    calculateRoute(lat1,long1) {
+    calculateRoute(lat1, long1) {
         let directionsService = new window.google.maps.DirectionsService();
         let start = new window.google.maps.LatLng(this.props.currentLatitude, this.props.currentLongitude);
         //let end = new window.google.maps.LatLng(this.props.destinationLatitude, this.props.destinationLongitude);
@@ -105,15 +102,13 @@ export default class Distance extends React.Component {
     }
 
     render() {
-            
-            return (
-                <div>
-                    <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
-                    <div id="Direcoes"
-                        ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
-                </div>
-            );
-        
+        return (
+            <div>
+                <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
+                <div id="Direcoes"
+                    ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
+            </div>
+        );
     }
 
 }

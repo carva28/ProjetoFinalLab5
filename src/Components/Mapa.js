@@ -15,6 +15,7 @@ export default class Mapa extends React.Component {
             destLongitude: null,
             currentLat: null,
             currentLong: null,
+            arraydistance:[]
         }
         this.distanceRef = React.createRef();
     }
@@ -50,6 +51,12 @@ export default class Mapa extends React.Component {
                 data.toJSON().Lavandaria5.longitude,
                 data.toJSON().Lavandaria5.nome
             ]);
+
+            lavandarias.push([
+                data.toJSON().Lavandaria6.latitude,
+                data.toJSON().Lavandaria6.longitude,
+                data.toJSON().Lavandaria6.nome
+            ]);
         })
 
         fetch('https://api.ipdata.co/?api-key=test').then(
@@ -60,7 +67,12 @@ export default class Mapa extends React.Component {
                 currentLong: data.longitude
             })
         );
+        
+        
     }
+
+
+   
 
     submit = (event) => {
         let destino;
@@ -70,7 +82,6 @@ export default class Mapa extends React.Component {
                 destLatitude: lavandarias[0][0],
                 destLongitude: lavandarias[0][1]
             };
-
         } else if (event.target.value === "Lavandaria2") {
             destino = {
                 destLatitude: lavandarias[1][0],
@@ -90,6 +101,11 @@ export default class Mapa extends React.Component {
             destino = {
                 destLatitude: lavandarias[4][0],
                 destLongitude: lavandarias[4][1]
+            };
+        }else if (event.target.value === "Lavandaria6") {
+            destino = {
+                destLatitude: lavandarias[5][0],
+                destLongitude: lavandarias[5][1]
             };
         }
 

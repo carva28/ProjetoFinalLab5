@@ -20,7 +20,8 @@ export default class List extends Component {
                     data.toJSON().Lavandaria2.nome,
                     data.toJSON().Lavandaria3.nome,
                     data.toJSON().Lavandaria4.nome,
-                    data.toJSON().Lavandaria5.nome
+                    data.toJSON().Lavandaria5.nome,
+                    data.toJSON().Lavandaria6.nome
                 ]
             })
         })
@@ -42,6 +43,7 @@ export default class List extends Component {
                         <option value="Lavandaria3">{this.state.nomesLavandarias[2]}</option>
                         <option value="Lavandaria4">{this.state.nomesLavandarias[3]}</option>
                         <option value="Lavandaria5">{this.state.nomesLavandarias[4]}</option>
+                        <option value="Lavandaria6">{this.state.nomesLavandarias[5]}</option>
                     </select>
                 </div>
             );
