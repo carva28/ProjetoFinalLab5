@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import firebase from "firebase";
 import MapaEstafeta from './MapaEstafeta';
+import { Link } from 'react-router-dom';
 var varreserva;
 export default class ClientesReservas extends Component {
 
@@ -24,7 +25,7 @@ export default class ClientesReservas extends Component {
             crdLat: '',
             crdLong: '',
             buscaReserva: '',
-            var_reserva: ''
+            var_reserva: '',
         }
         this.distanceRef = React.createRef();
     }
@@ -39,6 +40,8 @@ export default class ClientesReservas extends Component {
             })
             this.loops(varreserva);
         })
+
+
 
     }
 
@@ -105,6 +108,9 @@ export default class ClientesReservas extends Component {
     srh = () => {
         this.verifica = setTimeout(() => {
 
+            document.getElementById('selectmain').innerHTML += `
+                <option>Selecione um pedido</option>`;
+
             for (let it = 0; it < this.state.nrEncomenda.length; it++) {
 
                 document.getElementById('selectmain').innerHTML += `
@@ -121,11 +127,11 @@ export default class ClientesReservas extends Component {
         console.log(this.state.var_reserva)
         for (let est = 1; est < this.state.var_reserva; est++) {
             let pedido = '#Pedido' + est;
-            console.log(pedido)
             if (pedido == this.state.buscaReserva) {
                 firebase.database().ref("roupa/Encomenda" + est).update(
                     {
                         estado: 1,
+                        estafetaID: firebase.auth().currentUser.uid,
                         estafeta: firebase.auth().currentUser.displayName,
                     }
                 );
@@ -138,31 +144,42 @@ export default class ClientesReservas extends Component {
     }
 
     render() {
+        if (this.props.LatAtual != null && this.props.LongAtual) {
+            return (
+                <div>
+                    <select value={this.state.value} onChange={this.handleChange} id="selectmain"></select>
+                    <div id="main_info"></div>
+                    <div id="roupa"></div>
 
-
-
-        return (
-            <div>
-                <select value={this.state.value} onChange={this.handleChange} id="selectmain"></select>
-                <div id="main_info"></div>
-                <div id="roupa"></div>
-                <MapaEstafeta
-                    ref={this.distanceRef}
-                    currentLatitude={this.props.LatAtual}
-                    currentLongitude={this.props.LongAtual}
-                    destinationLatitude={this.state.crdLat}
-                    destinationLongitude={this.state.crdLong}
-                />
-                <button onClick={() => this.irBuscar()} id="vou2">Vou</button>
-            </div>
-        );
+                    <MapaEstafeta
+                        ref={this.distanceRef}
+                        currentLatitude={this.props.LatAtual}
+                        currentLongitude={this.props.LongAtual}
+                        destinationLatitude={this.state.crdLat}
+                        destinationLongitude={this.state.crdLong}
+                    />
+                    
+                    <Link to='/encomendas'>
+                        <button onClick={() => this.irBuscar()} id="vou2">Vou</button>
+                    </Link>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <select value={this.state.value} onChange={this.handleChange} id="selectmain"></select>
+                    <div id="main_info"></div>
+                    <div id="roupa"></div>
+                    A carregar...
+        </div>
+            );
+        }
 
     }
 
     handleChange = (event) => {
         this.setState({ value: event.target.value });
         this.forInfo(event.target.value)
-        this.roupaInfo(event.target.value)
     }
 
     forInfo = (valor) => {
@@ -170,6 +187,8 @@ export default class ClientesReservas extends Component {
 
         for (let show = 0; show < this.state.mailcliente.length; show++) {
             if (valor == show) {
+                let totalroupa = this.state.nrCalcas[show] + this.state.nrCamisas[show] + this.state.nrCamisolas[show] + this.state.nrCasacos[show] + this.state.nrDesporto[show] + this.state.nrInterior[show] + this.state.nrLa[show] + this.state.nrVestido[show] + this.state.nrPijama[show];
+
                 document.getElementById('main_info').innerHTML = `
             <div id='clienteInfo'>
                 <h4>Nr Encomenda:<h5>${this.state.nrEncomenda[show]}</h5></h4>
@@ -177,6 +196,10 @@ export default class ClientesReservas extends Component {
                 <h4>Estado da encomenda:<h6>${this.state.estado[show]}</h6></h4>
                 <h4>Coordenada Lat:<h6>${this.state.coordLAT[show]}</h6></h4>
                 <h4>Coordenada Long:<h6>${this.state.coordLong[show]}</h6></h4>
+                <h2>Número total de peças:${totalroupa}</h2>
+                <h4>Camisas:<h5>${this.state.nrCamisas[show]}</h5></h4>
+                <h4>Roupa Interior:<h5>${this.state.nrInterior[show]}</h5></h4>
+                <h4>Lã:<h5>${this.state.nrLa[show]}</h5></h4>
             </div>`;
 
 
@@ -211,29 +234,5 @@ export default class ClientesReservas extends Component {
 
 
     }
-    roupaInfo = (valor) => {
-        //ROUPA
-
-        for (let roupa = 0; roupa < this.state.nrCamisas.length; roupa++) {
-            if (valor == roupa) {
-                let totalroupa = this.state.nrCalcas[roupa] + this.state.nrCamisas[roupa] + this.state.nrCamisolas[roupa] + this.state.nrCasacos[roupa] + this.state.nrDesporto[roupa] + this.state.nrInterior[roupa] + this.state.nrLa[roupa] + this.state.nrVestido[roupa] + this.state.nrPijama[roupa];
-
-                document.getElementById('roupa').innerHTML = `
-            <div id='roupaInfo'>
-                <h3>Número total de peças:${totalroupa}</h3>
-                <h4>Peças:<h5>${this.state.nrCamisas[roupa]}</h5></h4>
-                <h4>Tipo:<h5>${this.state.nrCalcas[roupa]}</h5></h4>
-                <h4>Tipo:<h5>${this.state.nrLa[roupa]}</h5></h4>
-            </div>`;
-            }
-
-            break;
-
-
-        }
-
-    }
-
-
 
 }
