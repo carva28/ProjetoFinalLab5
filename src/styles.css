@@ -696,7 +696,7 @@ input#numTlmv::placeholder {
 }
 
 #encomAtr {
-  display: none;
+  overflow: hidden;
 }
 
 #encomAtr h4 {
@@ -714,8 +714,8 @@ input#numTlmv::placeholder {
 }
 
 
-/* ---- HOMEADMIN.JS ---- */
 
+/* ---- HOMEADMIN.JS ---- */
 #HomeAdmin {
   width: 90%;
   margin: auto;
@@ -729,4 +729,30 @@ input#numTlmv::placeholder {
 #HomeAdmin ul {
   width: 90%;
   margin-left: 30px;
+}
+
+
+
+/* ---- VERIFICANOTIFICACAO.JS ---- */
+#Notificacao {
+  background-color: #D493C5;
+  width: 200px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 4px 10px 3px;
+  position: absolute;
+  top: 80px;
+  left: calc(50% - 100px);
+  border-radius: 15px;
+}
+
+#Notificacao p {
+  color: white;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+#Notificacao img {
+  width: 25px;
+  margin: 0 auto 10px auto;
+  display: block;
 }

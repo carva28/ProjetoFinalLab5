@@ -74,12 +74,10 @@ export default class App extends React.Component {
         })
 
         firebase.database().ref('Number/var_estafeta').on('value', (data) => {
-          console.log(data.toJSON().d);
           var_estafeta = data.toJSON().d;
         })
 
         firebase.database().ref('Number/var_admin').on('value', (data) => {
-          console.log(data.toJSON().e);
           var_admin = data.toJSON().e;
         })
 

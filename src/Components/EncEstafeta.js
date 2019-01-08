@@ -6,6 +6,12 @@ var varreserva;
 export default class EncEstafeta extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            done: false,
+            pedidos: []
+        }
+
         this.waitVar();
     }
 
@@ -13,36 +19,54 @@ export default class EncEstafeta extends Component {
         this.varwait = setTimeout(() => {
             firebase.database().ref('Number/var_reserva').on('value', (data) => {
                 varreserva = data.toJSON().a;
-                this.mostraEncomendas(varreserva);
+
+                for (let est = 1; est < varreserva; est++) {
+                    firebase.database().ref("roupa/Encomenda" + est).on('value', (data) => {
+                        if (data.toJSON().estado == 1 && data.toJSON().estafetaID == firebase.auth().currentUser.uid) {
+                            var pedido = '#Pedido' + est;
+                            this.state.pedidos.push(pedido);
+                        }
+                    })
+                }
+
             })
-        }, 1000);
+            this.mostraEncomendas();
+        }, 800);
     }
 
-    mostraEncomendas = (varreserva) => {
+    mostraEncomendas = () => {
         this.tempo = setTimeout(() => {
-            for (let est = 1; est < varreserva; est++) {
-                firebase.database().ref("roupa/Encomenda" + est).on('value', (data) => {
-                    if (data.toJSON().estado == 1 && data.toJSON().estafetaID == firebase.auth().currentUser.uid) {
-                        document.getElementById('Carrega').style.display = 'none';
+            
+            this.setState({
+                done: true
+            })
 
-                        var pedido = '#Pedido' + est;
-                        document.getElementById('encomAtr').style.display = 'block';
-                        document.getElementById('encomAtr').innerHTML += `<h4>${pedido}</h4>`;
-                    }
-                })
+            for (var d = 0; d < this.state.pedidos.length; d++) {
+                document.getElementById('encomAtr').innerHTML += `<h4>${this.state.pedidos[d]}</h4>`;
             }
-        }, 1000);
+        }, 500);
     }
 
     render() {
-        return (
-            <div id="EncomendaEstafeta">
-                <h1>Encomendas atribuídas</h1>
-                <p>Aqui pode consultar a referência das encomendas que lhe foram designadas.</p>
-                
-                <div id="Carrega">A carregar as suas encomendas...</div>
-                <div id="encomAtr"></div>
-            </div>
-        );
+        if (this.state.done === false) {
+            return (
+                <div id="EncomendaEstafeta">
+                    <h1>Encomendas atribuídas</h1>
+                    <p>Aqui pode consultar a referência das encomendas que lhe foram designadas.</p>
+                    
+                    <div id="Carrega">A carregar as suas encomendas...</div>
+                </div>
+            );
+        } else {
+            return (
+                <div id="EncomendaEstafeta">
+                    <h1>Encomendas atribuídas</h1>
+                    <p>Aqui pode consultar a referência das encomendas que lhe foram designadas.</p>
+                    
+                    <div id="encomAtr"></div>
+                </div>
+            );
+        }
+        
     }
 }

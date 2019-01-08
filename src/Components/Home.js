@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Mapa from './Mapa';
 import { geolocated } from 'react-geolocated';
-import { askForPermissioToReceiveNotifications } from '../push-notifcation';
 import firebase from "firebase";
 import { Link } from 'react-router-dom';
-import Noti_verificacao from './Noti_verificacao';
+import Noti_verificacao from './VerificaNotificacao';
 import Speech from './Speech';
 
 class Home extends Component {
@@ -35,7 +34,6 @@ class Home extends Component {
 
     verificarUser = () => {
         firebase.database().ref("Utilizadores/Normal/cliente" + firebase.auth().currentUser.uid).on('value', (data) => {
-
             if (data.toJSON().emailCliente == firebase.auth().currentUser.email) {
                 console.log('Esta conta já existe.')
             } else {
