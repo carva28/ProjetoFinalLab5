@@ -244,11 +244,7 @@ class Speech extends React.Component {
         } else if (this.state.mostra === 1 && this.state.pedidos === true) {
             return (
                 <div>
-
-
                     <Redirect push to="/pedidos" />;
-
-
                 </div>
             );
         } else {
@@ -272,23 +268,21 @@ class Speech extends React.Component {
                         </DictateButton>
                     </div>
                     {this.verificaWords(this.state.falas)}
-                    <div>
+                    {/* <div>
                         <h4>O que pode dizer:</h4>
                         <ul>
-                            <li>Direções lavandaria <b>sua lavandaria</b></li>
-                            <li>Mapa</li>
+                            <li>Direções lavandaria <b>lavandaria pretendida</b></li>
+                            <li>Mapa / Mostrar mapa</li>
                             <li>Pedidos</li>
+                            <li>Voltar</li>
                         </ul>
-                    </div>
+                    </div> */}
 
                 </div>
             );
         }
 
     }
-
-
-
 
 
     verificaWords = (palavras) => {
@@ -385,8 +379,8 @@ class Speech extends React.Component {
 
         }, 500);
     }
-
 }
+
 export default geolocated({
     positionOptions: {
         enableHighAccuracy: true,

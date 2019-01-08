@@ -1,7 +1,6 @@
 import React from 'react';
-import verMais from '../imgs/verReserva.png';
+import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import firebase from "firebase";
 
 var varreserva;
 
@@ -88,7 +87,7 @@ export default class Arquivo extends React.Component {
 
         this.tempo = setTimeout(() => {
 
-            document.getElementById('Carrega').style.display = "none";
+            document.getElementById('CarregaArq').style.display = "none";
 
             for (let e = 0; e < this.state.cliente.length; e++) {
 
@@ -123,7 +122,12 @@ export default class Arquivo extends React.Component {
             <div id="ArquivoPag">
                 <h1>Arquivo</h1>
                 <p>Aqui pode visualizar encomendas efetuadas anteriormente.</p>
-                <div id="Carrega">A carregar as suas reservas arquivadas...</div>
+            
+                <Link to="/pedidos">
+                    <h2>Voltar</h2>
+                </Link>
+
+                <div id="CarregaArq">A carregar as suas reservas arquivadas...</div>
 
                 <div id="divArq"></div>
             </div>

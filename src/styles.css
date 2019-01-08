@@ -137,6 +137,12 @@ input[type=date] {
   margin: auto;
 }
 
+#Home ul {
+  width: 90%;
+  margin: auto;
+  font-weight: light;
+}
+
 #Home button {
   padding: 20px 42px;
   background-color: #2D2D2D;
@@ -147,11 +153,11 @@ input[type=date] {
   margin: 25px auto;
 }
 
-#btn_notification button {
-  background-color: #abb5e8;
-  font-size: 1.5rem;
-  padding: 15px 20px;
-  color: #2d2d2d;
+#vaiConduzir {
+  width: 280px;
+  height: 40px;
+  background-color: #F2F2F2;
+  padding: 0 0 0 10px;
 }
 
 #MapaGoogle {
@@ -164,7 +170,35 @@ input[type=date] {
 #Direcoes {
   width: 90%;
   font-family: NossaFonte;
-  margin: auto;
+  margin: 40px auto;
+}
+
+.adp-summary {
+  text-align: center;
+  font-size: 2rem;
+  font-family: NossaFonte;
+  margin: 30px auto;
+}
+
+img.adp-marker2 {
+  width: 55px !important;
+  height: 60px !important;
+  padding: 10px !important;
+}
+
+.adp,
+.adp table {
+  font-family: NossaFonte !important;
+  font-weight: 100 !important;
+  color: #2D2D2D !important;
+  border: 0 !important;
+  width: 100% !important;
+}
+
+.adp-details,
+.adp-legal {
+  color: #B2B2B2 !important;
+  text-align: center !important;
 }
 
 
@@ -400,6 +434,10 @@ input#numTlmv::placeholder {
   float: left;
 }
 
+#CarregaArq {
+  margin-top: 20px;
+}
+
 #divArq img {
   width: 40px;
   margin: 8px 15px 0;
@@ -517,6 +555,14 @@ input#numTlmv::placeholder {
   margin: auto;
 }
 
+#ArquivoPag h2 {
+  font-size: 1.5rem;
+  color: #D493C5;
+  padding: 10px 0 0 0;
+  margin: 0;
+  text-align: center;
+}
+
 #divArq {
   overflow: hidden;
 }
@@ -568,27 +614,61 @@ input#numTlmv::placeholder {
 }
 
 
-/* ---- TABLE ESTAFETA ---- */
+/* ---- CLIENTESRESERVA.JS ---- */
 #selectmain {
-  margin-top: 50px;
-  background-color: #ABB5E8;
-  width: 50%;
+  margin: 15px 0 35px 0;
+  background-color: #f2f2f2;
+  width: 100%;
   height: 50px;
-  color: white;
+  color: #2D2D2D;
+  padding-left: 10px;
+}
+
+#selectmain option {
+  padding: 20px;
 }
 
 #clienteInfo {
-  float: left;
-  width: 40%;
+  width: 100%;
+  overflow: hidden;
 }
 
-#roupa {
+#clienteInfo h4 {
+  font-size: 1.8rem;
+  line-height: 2rem;
   float: left;
-  width: 50%;
+  clear: both;
 }
 
-.adp-summary {
-  font-size: 50px;
+#clienteInfo p {
+  float: left;
+  line-height: 4rem;
+  margin: 0 0 0 10px;
+}
+
+#infosEncomenda {
+  width: 100%;
+  overflow: hidden;
+}
+
+#infosEncomenda h2 {
+  text-align: center;
+  color: #7f8eda;
+}
+
+#roupaEncomenda {
+  width: 100%;
+  overflow: hidden;
+  margin: 20px 0 30px 0;
+}
+
+#roupaEncomenda h3 {
+  font-size: 2rem;
+}
+
+#roupaEncomenda h4 {
+  margin-left: 20px;
+  font-size: 1.6rem;
 }
 
 
@@ -606,4 +686,47 @@ input#numTlmv::placeholder {
 
 #Loading h1 {
   text-align: center;
+}
+
+
+/* ---- ENCOMENDAESTAFETA.JS ---- */
+#EncomendaEstafeta {
+  width: 90%;
+  margin: auto;
+}
+
+#encomAtr {
+  display: none;
+}
+
+#encomAtr h4 {
+  background-color: #D493C5;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  width: 60%;
+}
+
+#encomAtr h4:first-of-type {
+  margin-top: 30px;
+}
+
+
+/* ---- HOMEADMIN.JS ---- */
+
+#HomeAdmin {
+  width: 90%;
+  margin: auto;
+}
+
+#HomeAdmin h2 {
+  font-size: 1.6rem;
+  color: #7282d2;
+}
+
+#HomeAdmin ul {
+  width: 90%;
+  margin-left: 30px;
 }

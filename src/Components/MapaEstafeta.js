@@ -106,7 +106,8 @@ export default class Distance extends React.Component {
             <div>
                 <div id="MapaGoogle" ref={divMap => this.divMap = divMap}></div>
                 <div id="Direcoes"
-                    ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}></div>
+                    ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}>
+                </div>
             </div>
         );
     }

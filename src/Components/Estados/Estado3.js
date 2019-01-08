@@ -1,6 +1,6 @@
 import React from 'react';
-import estado3 from '../../imgs/estado03.png';
-import est3 from '../../imgs/est3.png';
+import estado3 from '../../imgs/estado3.png';
+import est2 from '../../imgs/est2.png';
 
 export default class Estado3 extends React.Component {
 
@@ -11,14 +11,12 @@ export default class Estado3 extends React.Component {
 
                 <p>Veja aqui o estado do seu pedido.</p>
 
-                <p className="EstadoP">Pedido #123dsa</p>
+                <img src={est2} alt="estado 2" id="estadoImg" />
 
-                <img src={est3} alt="estado 3" id="estadoImg" />
+                <img src={estado3} alt="terceiro estado" />
 
-                <img src={estado3} alt="teceiro estado" />
-
-                <h3>JÁ ESTÁ!</h3>
-                <p className="EstadoP">A sua roupa já foi entregue, esperemos que tenha ficado satisfeito com o serviço. Volte sempre!</p>
+                <h3>ESTÁ QUASE!</h3>
+                <p className="EstadoP">A sua roupa está lavada, seca e pronta a ser entregue por um estafeta.</p>
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React from 'react';
-import estado2 from '../../imgs/estado02.png';
-import est2 from '../../imgs/est2.png';
+import estado2 from '../../imgs/estado2.png';
+import est1 from '../../imgs/est1.png';
 
 export default class Estado2 extends React.Component {
 
@@ -11,14 +11,12 @@ export default class Estado2 extends React.Component {
 
                 <p>Veja aqui o estado do seu pedido.</p>
 
-                <p className="EstadoP">Pedido #123dsa</p>
-
-                <img src={est2} alt="estado 2" id="estadoImg" />
+                <img src={est1} alt="estado 2" id="estadoImg" />
 
                 <img src={estado2} alt="segundo estado" />
 
-                <h3>ESTÁ QUASE!</h3>
-                <p className="EstadoP">A sua roupa está lavada, seca e pronta a ser entregue por um estafeta.</p>
+                <h3>EM PROGRESSO...</h3>
+                <p className="EstadoP">A sua roupa está a ser lavada.</p>
             </div>
         )
     }

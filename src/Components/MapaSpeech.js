@@ -1,3 +1,4 @@
+
 import React from 'react';
 import * as scriptjs from 'scriptjs';
 import autocaravana from '../imgs/autocaravana.png';
@@ -16,8 +17,8 @@ export default class Distance extends React.Component {
             destLatitude: this.props.destinationLatitude,
             destLongitude: this.props.destinationLongitude
         }
-        console.log("atual" + this.props.currentLatitude + "|" + this.props.currentLongitude)
-        console.log("Lavandaria" + this.state.destLatitude + "|" + this.state.destLongitude)
+        console.log("atual"+this.props.currentLatitude+"|"+ this.props.currentLongitude)
+        console.log("Lavandaria"+this.state.destLatitude+"|"+ this.state.destLongitude)
 
         this.Wait4Map();
 
@@ -56,7 +57,7 @@ export default class Distance extends React.Component {
 
         let map = new window.google.maps.Map(this.divMap, options, MeuMarker);
 
-
+        
 
         var imageMeuMarker = {
             url: spot,
@@ -101,17 +102,17 @@ export default class Distance extends React.Component {
     }
 
     render() {
-
-        return (
-            <div>
-                <div id="MapaGoogleSpeech" style={{ display: 'none' }} ref={divMap => this.divMap = divMap}></div>
-                <GeoCode />
-                <div id="Direcoes"
-                    ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}>
+        
+            return(
+                <div>
+                    <div id="MapaGoogleSpeech" style={{display:'none'}}ref={divMap => this.divMap = divMap}></div>
+                    <GeoCode />
+                    <div id="Direcoes"
+                        ref={divDirectionsPanel => this.divDirectionsPanel = divDirectionsPanel}>
+                    </div>
                 </div>
-            </div>
-        );
-
+            );
+        
     }
 
 }

@@ -33,13 +33,14 @@ export default class ClientesReservas extends Component {
     componentDidMount() {
 
         firebase.database().ref('Number/var_reserva').on('value', (data) => {
-            console.log(data.toJSON().a);
             varreserva = data.toJSON().a;
             this.setState({
                 var_reserva: varreserva,
             })
             this.loops(varreserva);
         })
+
+
 
 
 
@@ -92,14 +93,8 @@ export default class ClientesReservas extends Component {
                     var nrVestido = data.toJSON().NrVestido;
                     this.state.nrVestido.push(nrVestido);
 
-                } else {
-                    console.log('não faz');
                 }
-
-
             })
-
-
         }
 
         this.srh();
@@ -123,24 +118,18 @@ export default class ClientesReservas extends Component {
 
 
     irBuscar = () => {
-        console.log(this.state.buscaReserva);
-        console.log(this.state.var_reserva)
         for (let est = 1; est < this.state.var_reserva; est++) {
             let pedido = '#Pedido' + est;
+            
             if (pedido == this.state.buscaReserva) {
-                firebase.database().ref("roupa/Encomenda" + est).update(
-                    {
-                        estado: 1,
-                        estafetaID: firebase.auth().currentUser.uid,
-                        estafeta: firebase.auth().currentUser.displayName,
-                    }
-                );
-
-            } else {
+                firebase.database().ref("roupa/Encomenda" + est).update({
+                    estado: 1,
+                    estafetaID: firebase.auth().currentUser.uid,
+                    estafeta: firebase.auth().currentUser.displayName,
+                });
             }
 
         }
-
     }
 
     render() {
@@ -149,7 +138,6 @@ export default class ClientesReservas extends Component {
                 <div>
                     <select value={this.state.value} onChange={this.handleChange} id="selectmain"></select>
                     <div id="main_info"></div>
-                    <div id="roupa"></div>
 
                     <MapaEstafeta
                         ref={this.distanceRef}
@@ -158,7 +146,7 @@ export default class ClientesReservas extends Component {
                         destinationLatitude={this.state.crdLat}
                         destinationLongitude={this.state.crdLong}
                     />
-                    
+
                     <Link to='/encomendas'>
                         <button onClick={() => this.irBuscar()} id="vou2">Vou</button>
                     </Link>
@@ -169,7 +157,6 @@ export default class ClientesReservas extends Component {
                 <div>
                     <select value={this.state.value} onChange={this.handleChange} id="selectmain"></select>
                     <div id="main_info"></div>
-                    <div id="roupa"></div>
                     A carregar...
         </div>
             );
@@ -190,17 +177,22 @@ export default class ClientesReservas extends Component {
                 let totalroupa = this.state.nrCalcas[show] + this.state.nrCamisas[show] + this.state.nrCamisolas[show] + this.state.nrCasacos[show] + this.state.nrDesporto[show] + this.state.nrInterior[show] + this.state.nrLa[show] + this.state.nrVestido[show] + this.state.nrPijama[show];
 
                 document.getElementById('main_info').innerHTML = `
-            <div id='clienteInfo'>
-                <h4>Nr Encomenda:<h5>${this.state.nrEncomenda[show]}</h5></h4>
-                <h4>Cliente:<h6>${this.state.mailcliente[show]}</h6></h4>
-                <h4>Estado da encomenda:<h6>${this.state.estado[show]}</h6></h4>
-                <h4>Coordenada Lat:<h6>${this.state.coordLAT[show]}</h6></h4>
-                <h4>Coordenada Long:<h6>${this.state.coordLong[show]}</h6></h4>
-                <h2>Número total de peças:${totalroupa}</h2>
-                <h4>Camisas:<h5>${this.state.nrCamisas[show]}</h5></h4>
-                <h4>Roupa Interior:<h5>${this.state.nrInterior[show]}</h5></h4>
-                <h4>Lã:<h5>${this.state.nrLa[show]}</h5></h4>
-            </div>`;
+                    <div id="clienteInfo">
+                        <div id="infosEncomenda">
+                            <h2>${this.state.nrEncomenda[show]}</h2>
+                            <h4>Cliente: </h4><p>${this.state.mailcliente[show]}</p>
+                            <h4>Estado da encomenda: </h4><p>${this.state.estado[show]}</p>
+                            <h4>Coordenada Lat: </h4><p>${this.state.coordLAT[show]}</p>
+                            <h4>Coordenada Long: </h4><p>${this.state.coordLong[show]}</p>
+                        </div>
+
+                        <div id="roupaEncomenda">
+                            <h3>Número total de peças: ${totalroupa}</h2>
+                            <h4>Camisas: </h4><p>${this.state.nrCamisas[show]}</p>
+                            <h4>Roupa Interior: </h4><p>${this.state.nrInterior[show]}</p>
+                            <h4>Lã: </h4><p>${this.state.nrLa[show]}</p>
+                        </div>
+                    </div>`;
 
 
                 this.setState({
@@ -221,18 +213,9 @@ export default class ClientesReservas extends Component {
                 this.setState(destino, () => {
                     this.distanceRef.current.renderiza();
                 });
-
-                console.log(this.state.crdLat)
-
-
-
-            } else {
-
             }
 
         }
-
-
     }
 
 }

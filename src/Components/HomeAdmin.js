@@ -20,6 +20,7 @@ export default class HomeAdmin extends Component {
         firebase.database().ref('Number/var_admin').on('value', (data) => {
             var_admin = data.toJSON().e;
         })
+
         firebase.database().ref('Number/var_estafeta').on('value', (data) => {
             var_estaf = data.toJSON().d;
         })
@@ -67,46 +68,57 @@ export default class HomeAdmin extends Component {
                 firebase.database().ref("Utilizadores/Estafeta/estafeta0" + ad).on('value', (data) => {
                     var email = data.toJSON().emailestafeta;
                     var nome = data.toJSON().nome;
+
                     this.state.arrayemail.push(email);
                     this.state.arraynomes.push(nome);
                 })
             }
-            firebase.database().ref("Utilizadores/Normal").on('value', (data) => {
-                console.log(data.toJSON().clienteX3NwUpRcD5Reb0ROF54z9MEEkUv2)
-                this.setState({
-                    clientes: data.toJSON().clienteX3NwUpRcD5Reb0ROF54z9MEEkUv2.cliente
-                })
 
-            })
-        }, 3000);
+            this.mostrarRender();
+
+        }, 1000);
+
     }
 
-    foorInfo = () => {
-        for (let show = 0; show <= this.state.var_lavan; show++) {
-            document.getElementById('tabelalavandarias').innerHTML += `
-                <h6>Nome: ${this.state.arrayNomeLav[show]}</h6>
-                <h6>Email: ${this.state.arrayLatLav[show]}</h6>
-                <h6>Email: ${this.state.arrayLongLav[show]}</h6>
-            `;
-        }
+    mostrarRender = () => {
+        this.tempo = setTimeout(() => {
+            document.getElementById("Carrega").style.display = 'none';
+            document.getElementById("CarregaLav").style.display = 'none';
+
+            for (var s = 0; s < this.state.arraynomes.length; s++) {
+                document.getElementById("MostraEstafetas").innerHTML += `
+                    <li>${this.state.arraynomes[s]}: ${this.state.arrayemail[s]}</li>
+                `;
+            }            
+
+            for (var b = 0; b < this.state.arrayNomeLav.length; b++) {
+                document.getElementById("TabelaLavandarias").innerHTML += `
+                    <li>${this.state.arrayNomeLav[s]}</li>
+                `;
+            }
+
+        }, 800);
     }
 
 
     render() {
         return (
-            <div>
-                <div>
-                    <h2>{this.state.clientes}</h2>
-                </div>
-                <div>
-                    <button onClick={() => this.foorInfo()}>his</button>
-                    <div id='tabelalavandarias'></div>
-                    <h2>Adicionar Lavandarias</h2>
-                    Nome:
-                <input type="text" value="" />
-                    Localização:
-                <input type="text" />
+            <div id="HomeAdmin">
+                <h1>Administrador</h1>
+                <p>Olá administrador {firebase.auth().currentUser.displayName}! Aqui pode visualizar os estafetas e lavandarias guardadas na base de dados.</p>
 
+                <div>
+                    <h2>Estafetas</h2>
+                    <p>Estes são os estafetas associados à sua <i>app</i> washClub.</p>
+                    <div id="Carrega">A carregar estafetas...</div>
+                    <ul id="MostraEstafetas"></ul>
+                </div>
+
+                <div>
+                    <h2>Lavandarias</h2>
+                    <p>Estes são as lavandarias que constam na base de dados.</p>
+                    <div id="CarregaLav">A carregar lavandarias...</div>
+                    <ul id='TabelaLavandarias'></ul>
                 </div>
             </div>
         );

@@ -3,7 +3,6 @@ import Distance from './Distance';
 import List from './List';
 import firebase from 'firebase';
 
-var cargo;
 var lavandarias = [];
 
 export default class Mapa extends React.Component {

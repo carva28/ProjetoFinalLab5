@@ -14,11 +14,12 @@ import Route from 'react-router-dom/Route';
 import Reserva from './Components/Reserva';
 import Pagamento from './Components/Pagamento';
 import Pedidos from './Components/Pedidos';
-import EncomendaEstafeta from './Components/EncomendaEstafeta';
+import EncEstafeta from './Components/EncEstafeta';
 import Estado0 from './Components/Estados/Estado0';
 import Estado1 from './Components/Estados/Estado1';
 import Estado2 from './Components/Estados/Estado2';
 import Estado3 from './Components/Estados/Estado3';
+import Estado4 from './Components/Estados/Estado4';
 import Arquivo from './Components/Arquivo';
 import Loading from './LoadingScreen';
 
@@ -66,6 +67,7 @@ export default class App extends React.Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+
         this.setState({
           user: user,
           isSignedIn: !!user
@@ -84,7 +86,6 @@ export default class App extends React.Component {
         this.estaloopsadmin = setTimeout(() => {
           for (let adm = 1; adm <= var_admin; adm++) {
             firebase.database().ref("Utilizadores/Administrador/Admin0" + adm).on('value', (data) => {
-
               if (user.email === data.toJSON().emailadmin) {
                 this.setState({
                   cargo: 'administrador'
@@ -135,9 +136,9 @@ export default class App extends React.Component {
                     <h2>washClub</h2>
                     <img src={menu} alt="menu" onClick={() => this.toggleLista()} />
                     <div id="ListaMenu">
-                      <img src={menu01} alt="menu1" /><li onClick={this.toogleMenu}><Link to="/">Home</Link></li>
-                      <img src={menu02} alt="menu2" /><li onClick={this.toogleMenu}><Link to="/pedidos">Pedidos</Link></li>
-                      <img src={menu03} alt="menu3" /><li onClick={this.signOut}>Sair</li>
+                      <Link to="/"><img src={menu01} alt="menu1" /><li onClick={this.toogleMenu}>Home</li></Link>
+                      <Link to="/pedidos"><img src={menu02} alt="menu2" /><li onClick={this.toogleMenu}>Pedidos</li></Link>
+                      <img src={menu03} alt="menu3" onClick={this.signOut} /><li onClick={this.signOut}>Sair</li>
 
                     </div>
                   </div>
@@ -151,6 +152,7 @@ export default class App extends React.Component {
                     <Route path='/estado1' component={Estado1} />
                     <Route path='/estado2' component={Estado2} />
                     <Route path='/estado3' component={Estado3} />
+                    <Route path='/estado4' component={Estado4} />
                     <Route path='/arquivo' component={Arquivo} />
                   </Switch>
                 </div>
@@ -170,15 +172,15 @@ export default class App extends React.Component {
                     <h2>washClub</h2>
                     <img src={menu} alt="menu" onClick={() => this.toggleLista()} />
                     <div id="ListaMenu">
-                      <img src={menu01} alt="menu1" /><li onClick={this.toogleMenu}><Link to="/">Home</Link></li>
-                      <img src={menu02} alt="menu2" /><li onClick={this.toogleMenu}><Link to="/encomendas">Ver Encomendas</Link></li>
-                      <img src={menu03} alt="menu3" /><li onClick={this.signOut}>Sair</li>
+                      <Link to="/"><img src={menu01} alt="menu1" /><li onClick={this.toogleMenu}>Home</li></Link>
+                      <Link to="/encomendas"><img src={menu02} alt="menu2" /><li onClick={this.toogleMenu}>Encomendas</li></Link>
+                      <img src={menu03} alt="menu3" onClick={this.signOut} /><li onClick={this.signOut}>Sair</li>
 
                     </div>
                   </div>
                   <Switch>
                     <Route path='/' exact strict component={HomeEstafeta} />
-                    <Route path='/encomendas' component={EncomendaEstafeta} />
+                    <Route path='/encomendas' component={EncEstafeta} />
                   </Switch>
                 </div>
 
@@ -197,8 +199,8 @@ export default class App extends React.Component {
                     <h2>washClub</h2>
                     <img src={menu} alt="menu" onClick={() => this.toggleLista()} />
                     <div id="ListaMenu">
-                      <img src={menu01} alt="menu1" /><li><Link to="/">Principal</Link></li>
-                      <img src={menu03} alt="menu4" /><li onClick={this.signOut}>Sair</li>
+                      <Link to="/"><img src={menu01} alt="menu1" /><li>Home</li></Link>
+                      <img src={menu03} alt="menu4" onClick={this.signOut} /><li onClick={this.signOut}>Sair</li>
                     </div>
                   </div>
 
@@ -223,6 +225,7 @@ export default class App extends React.Component {
           <Login />
         </div>
       )
+
     }
   }
 

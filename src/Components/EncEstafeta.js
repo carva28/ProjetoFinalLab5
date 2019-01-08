@@ -3,7 +3,7 @@ import firebase from "firebase";
 
 var varreserva;
 
-export default class EncomendaEstafeta extends Component {
+export default class EncEstafeta extends Component {
     constructor(props) {
         super(props);
         this.waitVar();
@@ -23,9 +23,11 @@ export default class EncomendaEstafeta extends Component {
             for (let est = 1; est < varreserva; est++) {
                 firebase.database().ref("roupa/Encomenda" + est).on('value', (data) => {
                     if (data.toJSON().estado == 1 && data.toJSON().estafetaID == firebase.auth().currentUser.uid) {
-                        var pedido = '#Pedido' + est;
+                        document.getElementById('Carrega').style.display = 'none';
 
-                        document.getElementById('main').innerHTML += `<h4>${pedido}</h4>`;
+                        var pedido = '#Pedido' + est;
+                        document.getElementById('encomAtr').style.display = 'block';
+                        document.getElementById('encomAtr').innerHTML += `<h4>${pedido}</h4>`;
                     }
                 })
             }
@@ -34,8 +36,12 @@ export default class EncomendaEstafeta extends Component {
 
     render() {
         return (
-            <div>
-                <div id='main'></div>
+            <div id="EncomendaEstafeta">
+                <h1>Encomendas atribuídas</h1>
+                <p>Aqui pode consultar a referência das encomendas que lhe foram designadas.</p>
+                
+                <div id="Carrega">A carregar as suas encomendas...</div>
+                <div id="encomAtr"></div>
             </div>
         );
     }

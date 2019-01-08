@@ -72,11 +72,6 @@ class Home extends Component {
                     }}>
                         <button>Reserve agora</button>
                     </Link>
-
-                    <div id="btn_notification">
-                        <button onClick={() => this.btnClicked()}>Ativar notificações</button>
-                    </div>
-
                 </div>
             );
         }
@@ -85,8 +80,16 @@ class Home extends Component {
             return (
                 <div id="Home">
                     <h1>Lavandarias próximas</h1>
-                    <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
+                    <p>Olá {firebase.auth().currentUser.displayName}! Experimente dizer um dos seguinte comandos:</p>
                     <Noti_verificacao />
+
+                    <ul>
+                        <li>Direções lavandaria <b>lavandaria pretendida</b></li>
+                        <li>Mapa / Mostrar mapa</li>
+                        <li>Pedidos</li>
+                        <li>Voltar</li>
+                    </ul>
+
                     <Speech />
                 </div>
             );
@@ -94,9 +97,8 @@ class Home extends Component {
             return (
                 <div id="Home">
                     <h1>Lavandarias próximas</h1>
-                    <p>Olá {firebase.auth().currentUser.displayName}! Veja no seguinte mapa as lavandarias mais próximas de si.</p>
-                    <h6>Vai conduzir?</h6>
-                    <select value={this.state.value} onChange={this.handleChange} required>
+                    <p>Olá {firebase.auth().currentUser.displayName}, vai conduzir?</p>
+                    <select onChange={this.handleChange} required id="vaiConduzir">
                         <option value="resposta">Selecione uma opção</option>
                         <option value="true">Sim</option>
                         <option value="false">Não</option>
@@ -114,11 +116,6 @@ class Home extends Component {
         this.setState({
             Switch: event.target.value
         });
-    }
-
-    btnClicked() {
-        askForPermissioToReceiveNotifications();
-        document.getElementById('btn_notification').innerHTML = '';
     }
 }
 
