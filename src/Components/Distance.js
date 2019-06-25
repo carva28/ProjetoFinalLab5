@@ -31,7 +31,7 @@ export default class Distance extends React.Component {
 
     componentDidMount() {
         this.timer = setTimeout(() => {
-            scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyD2NUMP4Asu36pENcaLD9ZDPbxCU0Xt-ig&sensor=false',
+            scriptjs('https:/maps.googleapis.com/maps/api/js?key=API_KEY&sensor=false',
                 () => {
                     this.createMap();
                     this.calculateRoute();
