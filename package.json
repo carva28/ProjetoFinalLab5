@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^5.7.0",
+    "firebase": "^10.9.0",
     "firebaseui": "^3.4.1",
     "google-map-react": "^1.1.2",
     "react": "^16.6.3",
